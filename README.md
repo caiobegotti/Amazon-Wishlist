@@ -8,7 +8,6 @@ This is my first attempt in writing a Python module so bear with me as you find 
 TODO
 ====
 
-* Decide whether I'll use classes and objects for real or not
 * Write a scrapper using only someone's e-mail address
 * Write a method or function that returns the total of prices
 * Make the config parsing generic, avoid calling it twice
