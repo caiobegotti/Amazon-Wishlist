@@ -17,7 +17,7 @@ class Profile():
         return tree
 
     def basicInfo(self, page):
-        name = page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='profileInfo']/table/tbody/tr[1]/td[@id='profile-name-Field']")
+        name = page.xpath("//td[@id='profile-name-Field']")
         photo = page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[1]/img/@src")
         return name, photo
 
