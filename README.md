@@ -12,3 +12,8 @@ TODO
 * Normalize all returns to the same type, if possible
 * Add a minimal documentation to every function/method/class
 * Shorten the longest xpaths (minor, just prettyfication)
+
+License
+=======
+
+All files in this repository is under GPLv2, please see the LICENSE file for details.
