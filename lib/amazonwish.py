@@ -90,7 +90,10 @@ class Wishlist():
     def via(self, page):
         """Returns the original web page from which the wished item was pulled, only for Universal items not from Amazon directly."""
         via = page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/strong[2]")
-        return via
+        ret = []
+        for v in via:
+            ret.append(to_text(v).replace('www.',''))
+        return ret
     
     def covers(self, page):
         """Returns the addresses of items pictures (e.g. book covers, albums pictures)."""
