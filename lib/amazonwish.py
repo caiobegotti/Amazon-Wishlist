@@ -24,14 +24,19 @@ class Profile():
         return tree
 
     def basicInfo(self, page):
+        """Returns the name of the wishlist owner and, if available, the address of its profile picture."""
+        ret = []
         name = page.xpath("//td[@id='profile-name-Field']")
-        for x in name:
-            n = to_text(x)
+        # wishlists are supposed to show a first name, so it's safe to assume it will never be null
+        for string in name:
+            ret.append(to_text(string))
         photo = page.xpath("//div[@id='profile']/div/img/@src")
-        p = photo[0]
-        return n, p
+        if photo:
+            ret.append(photo[0])
+        return ret
 
     def wishlists(self, page):
+        """Returns a list of wishlists codes for a given person"""
         lists = page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/h3/a")
         return lists
 
