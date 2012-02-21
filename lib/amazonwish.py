@@ -2,6 +2,35 @@ from config import Config
 
 from lxml import etree
 
+class Profile():
+    def readConfig(self, country):
+        config = Config()
+        params = config.countryParams(country)
+        return params
+
+    def downloadPage(self, params, id):
+        domain = params['domain']
+        userid = id
+        url = 'http://www.amazon' + domain + '/wishlist/' + userid
+        parser = etree.HTMLParser()
+        tree = etree.parse(url, parser)
+        return tree
+
+    def basicInfo(self, page):
+        name = page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='profileInfo']/table/tbody/tr[1]/td[@id='profile-name-Field']")
+        photo = page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[1]/img/@src")
+        return name, photo
+
+    def wishlists(self, page):
+        lists = page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/h3/a")
+        return lists
+
+    def wishlistsDetails(self, page):
+        codes = page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/@id")
+        size = page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/div/span[1]")
+        return codes, sizes
+
+
 class Wishlist():
     def readConfig(self, country):
         config = Config()
