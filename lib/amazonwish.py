@@ -43,9 +43,16 @@ class Profile():
         return lists
 
     def wishlistsDetails(self, page):
+        """Returns a tuple of lists, the first with all wishlists codes and the second with their total number of items (i.e. wishlist size)"""
+        retcodes = []
+        retsizes = []
         codes = page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/@id")
+        for c in codes:
+            retcodes.append(c.replace('regListsList',''))
         sizes = page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/div/span[1]")
-        return codes, sizes
+        for s in sizes:
+            retsizes.append(to_text(s))
+        return retcodes, retsizes
 
 
 class Wishlist():
