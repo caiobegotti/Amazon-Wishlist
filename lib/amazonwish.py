@@ -17,39 +17,42 @@ class Profile():
         params = config.countryParams(country)
         return params
 
-    def downloadPage(self, params, id):
+    def __init__(self, id, country):
+        params = self.readConfig(country)
+        self._download(params, id)
+
+    def _download(self, params, id):
         domain = params['domain']
         userid = id
         url = 'http://www.amazon' + domain + '/wishlist/' + userid
         parser = etree.HTMLParser()
-        tree = etree.parse(url, parser)
-        return tree
+        self.page = etree.parse(url, parser)
 
-    def basicInfo(self, page):
+    def basicInfo(self):
         """Returns the name of the wishlist owner and, if available, the address of its profile picture."""
         # wishlists are supposed to show a first name, so it's safe to assume it will never be null
-        name = page.xpath("//td[@id='profile-name-Field']")
+        name = self.page.xpath("//td[@id='profile-name-Field']")
         ret = []
         for string in name:
             ret.append(to_text(string))
-        photo = page.xpath("//div[@id='profile']/div/img/@src")
+        photo = self.page.xpath("//div[@id='profile']/div/img/@src")
         if photo:
             ret.append(photo[0])
         return ret
 
-    def wishlists(self, page):
+    def wishlists(self):
         """Returns a list of wishlists codes for a given person."""
-        lists = page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/h3/a")
+        lists = self.page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/h3/a")
         return lists
 
-    def wishlistsDetails(self, page):
+    def wishlistsDetails(self):
         """Returns a tuple with lists, the first with all wishlists codes and the second with their total number of items (i.e. wishlist size)."""
         retcodes = []
         retsizes = []
-        codes = page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/@id")
+        codes = self.page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/@id")
         for c in codes:
             retcodes.append(c.replace('regListsList',''))
-        sizes = page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/div/span[1]")
+        sizes = self.page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/div/span[1]")
         for s in sizes:
             retsizes.append(to_text(s))
         return retcodes, retsizes
@@ -61,49 +64,52 @@ class Wishlist():
         params = config.countryParams(country)
         return params
 
-    def downloadPage(self, params, id):
+    def __init__(self, id, country):
+        params = self.readConfig(country)
+        self._download(params, id)
+        
+    def _download(self, params, id):
         domain = params['domain']
         userid = id
         url = 'http://www.amazon' + domain + '/wishlist/' + userid + '/ref=cm_wl_act_print_o?' + '_encoding=UTF8&layout=standard-print&disableNav=1&visitor-view=1&items-per-page=1000'
         parser = etree.HTMLParser()
-        tree = etree.parse(url, parser)
-        return tree
+        self.page = etree.parse(url, parser)
 
-    def authors(self, page):
+    def authors(self):
         """Returns the authors names and co-writers for every item."""
-        authors = page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[1]/td[3]/div/span")
+        authors = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[1]/td[3]/div/span")
         ret = []
         for a in authors:
             ret.append(to_text(a).replace(' by ','').strip())
         return ret
     
-    def titles(self, page):
+    def titles(self):
         """Returns items titles, even if they are pretty long ones (like academic books or journals)."""
-        titles = page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/div/strong")
+        titles = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/div/strong")
         ret = []
         for t in titles:
             ret.append(to_text(t).strip())
         return ret
     
-    def prices(self, page):
+    def prices(self):
         """Returns the price tags for every item in a wishlist."""
-        prices = page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[@class='pPrice']/span/strong")
+        prices = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[@class='pPrice']/span/strong")
         ret = []
         for p in prices:
             ret.append(to_text(p).replace('$',''))
         return ret
     
-    def via(self, page):
+    def via(self):
         """Returns the original web page from which the wished item was pulled, only for Universal items not from Amazon directly."""
-        via = page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/strong[2]")
+        via = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/strong[2]")
         ret = []
         for v in via:
             ret.append(to_text(v).replace('www.',''))
         return ret
     
-    def covers(self, page):
+    def covers(self):
         """Returns the addresses of items pictures (e.g. book covers, albums pictures)."""
-        covers = page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/div[@class='pImage']/img/@src")
+        covers = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/div[@class='pImage']/img/@src")
         ret = []
         for c in covers:
             ret.append(c)

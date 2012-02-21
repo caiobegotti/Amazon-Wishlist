@@ -11,16 +11,13 @@ from lxml.html import tostring
 
 class Main:
     def __init__(self):
-        country = 'us'
-        wl = Wishlist()
-        params = wl.readConfig(country)
-        page = wl.downloadPage(params,'3MCYFXCFDH4FA')
+        wl = Wishlist('3MCYFXCFDH4FA', country='us')
 
-        titles = wl.titles(page)
-        authors = wl.authors(page)
-        covers = wl.covers(page)
-        prices = wl.prices(page)
-        via = wl.via(page)
+        titles = wl.titles()
+        authors = wl.authors()
+        covers = wl.covers()
+        prices = wl.prices()
+        via = wl.via()
 
         print 'Your titles are:'
         for entry in titles: 
@@ -42,15 +39,13 @@ class Main:
         for entry in via: 
             print '\t' + entry
 
-        p = Profile()
-        params = p.readConfig(country)
-        page = p.downloadPage(params,'3MCYFXCFDH4FA')
+        p = Profile('3MCYFXCFDH4FA', country='us')
 
-        info = p.basicInfo(page)
+        info = p.basicInfo()
         print 'Your name and avatar:'
         print info
 
-        lists = p.wishlistsDetails(page)
+        lists = p.wishlistsDetails()
         print 'Your lists and their sizes:'
         print lists
 
