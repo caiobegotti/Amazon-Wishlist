@@ -24,7 +24,7 @@ class Main:
 
         for entry in titles: 
             res = tostring(entry, encoding='utf-8', method='text', pretty_print=True).strip()
-            #print res
+            print res
 
         p = Profile()
         params = p.readConfig(country)
@@ -32,6 +32,9 @@ class Main:
 
         info = p.basicInfo(page)
         print info
+
+        lists = p.wishlistsDetails(page)
+        print lists
 
 if __name__ == "__main__":
     Main()
