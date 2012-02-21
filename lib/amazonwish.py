@@ -4,11 +4,11 @@ from lxml import etree
 from lxml.html import tostring
 
 def to_text(t):
-    """Returns a plain text string from an element tree"""
+    """Returns a plain text string from an element tree."""
     return tostring(t, encoding='utf-8', method='text', pretty_print=True) 
 
 def to_html(t):
-    """Returns a HTML string from an element tree"""
+    """Returns a HTML string from an element tree."""
     return tostring(t, encoding='utf-8', method='html', pretty_print=True) 
 
 class Profile():
@@ -38,12 +38,12 @@ class Profile():
         return ret
 
     def wishlists(self, page):
-        """Returns a list of wishlists codes for a given person"""
+        """Returns a list of wishlists codes for a given person."""
         lists = page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/h3/a")
         return lists
 
     def wishlistsDetails(self, page):
-        """Returns a tuple with lists, the first with all wishlists codes and the second with their total number of items (i.e. wishlist size)"""
+        """Returns a tuple with lists, the first with all wishlists codes and the second with their total number of items (i.e. wishlist size)."""
         retcodes = []
         retsizes = []
         codes = page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/@id")
@@ -70,22 +70,27 @@ class Wishlist():
         return tree
 
     def authors(self, page):
+        """Returns the authors names and co-writers for every item."""
         authors = page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[1]/td[3]/div/span")
         return authors
     
     def titles(self, page):
+        """Returns items titles, even if they are pretty long ones (like academic books or journals)."""
         titles = page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/div/strong")
         return titles
     
     def prices(self, page):
+        """Returns the price tags for every item in a wishlist."""
         prices = page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[@class='pPrice']/span/strong")
         return prices
     
     def via(self, page):
+        """Returns the original web page from which the wished item was pulled, only for Universal items not from Amazon directly."""
         via = page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/strong[2]")
         return via
     
     def covers(self, page):
+        """Returns the addresses of items pictures (e.g. book covers, albums pictures)."""
         ret = []
         covers = page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/div[@class='pImage']/img/@src")
         for img in covers:
