@@ -77,7 +77,10 @@ class Wishlist():
     def titles(self, page):
         """Returns items titles, even if they are pretty long ones (like academic books or journals)."""
         titles = page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/div/strong")
-        return titles
+        ret = []
+        for t in titles:
+            ret.append(to_text(t))
+        return ret
     
     def prices(self, page):
         """Returns the price tags for every item in a wishlist."""
