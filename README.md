@@ -16,4 +16,4 @@ TODO
 License
 =======
 
-All files in this repository is under GPLv2, please see the LICENSE file for details.
+All files in this repository are under GPLv2, please see the LICENSE file for details.
