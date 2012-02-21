@@ -86,5 +86,8 @@ class Wishlist():
         return via
     
     def covers(self, page):
+        ret = []
         covers = page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/div[@class='pImage']/img/@src")
-        return covers
+        for img in covers:
+            ret.append(img)
+        return ret
