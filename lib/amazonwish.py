@@ -115,7 +115,8 @@ class Wishlist():
     
     def total_expenses(self):
         """Returns the total sum of all prices, without currency symbols, might excluse unavailable items or items without price tags"""
-        ret = []
+        tags = []
         for p in self.prices():
-            ret.append(float(p))
-        return sum(ret)
+            tags.append(float(p))
+        ret = sum(tags)
+        return str(ret)
