@@ -27,9 +27,9 @@ class Profile():
 
     def basicInfo(self, page):
         """Returns the name of the wishlist owner and, if available, the address of its profile picture."""
-        ret = []
-        name = page.xpath("//td[@id='profile-name-Field']")
         # wishlists are supposed to show a first name, so it's safe to assume it will never be null
+        name = page.xpath("//td[@id='profile-name-Field']")
+        ret = []
         for string in name:
             ret.append(to_text(string))
         photo = page.xpath("//div[@id='profile']/div/img/@src")
@@ -82,7 +82,10 @@ class Wishlist():
     def prices(self, page):
         """Returns the price tags for every item in a wishlist."""
         prices = page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[@class='pPrice']/span/strong")
-        return prices
+        ret = []
+        for p in prices:
+            ret.append(to_text(p).replace('$',''))
+        return ret
     
     def via(self, page):
         """Returns the original web page from which the wished item was pulled, only for Universal items not from Amazon directly."""
@@ -91,8 +94,8 @@ class Wishlist():
     
     def covers(self, page):
         """Returns the addresses of items pictures (e.g. book covers, albums pictures)."""
-        ret = []
         covers = page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/div[@class='pImage']/img/@src")
+        ret = []
         for img in covers:
             ret.append(img)
         return ret
