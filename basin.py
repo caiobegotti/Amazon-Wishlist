@@ -18,6 +18,7 @@ class Main:
         covers = wl.covers()
         prices = wl.prices()
         via = wl.via()
+        total = wl.total_expenses()
 
         print 'Your titles are:'
         for entry in titles: 
@@ -48,6 +49,8 @@ class Main:
         lists = p.wishlistsDetails()
         print 'Your lists and their sizes:'
         print lists
+
+        print 'How much would you need to buy all these? ' + total
 
 if __name__ == "__main__":
     Main()
