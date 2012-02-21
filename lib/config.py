@@ -13,32 +13,32 @@ COUNTRY_CONFIGS = {
       'currency': 'CAD',
       'domain'  : '.ca',
       'symbol'  : ur'\u0024'
-    }
+    },
     'fr': {
       'currency': 'EUR',
       'domain'  : '.fr',
       'symbol'  : ur'\u20ac'
-    }
+    },
     'it': {
       'currency': 'EUR',
       'domain'  : '.it',
       'symbol'  : ur'\u20ac'
-    }
+    },
     'es': {
       'currency': 'EUR',
       'domain'  : '.es',
       'symbol'  : ur'\u20ac'
-    }
+    },
     'de': {
       'currency': 'EUR',
       'domain'  : '.de',
       'symbol'  : ur'\u20ac'
-    }
+    },
     'jp': {
       'currency': 'JPY',
       'domain'  : '.jp',
       'symbol'  : ur'\u00a5'
-    }
+    },
     'cn': {
       'currency': 'CNY',
       'domain'  : '.ca',
