@@ -41,7 +41,7 @@ COUNTRY_CONFIGS = {
     },
     'cn': {
       'currency': 'CNY',
-      'domain'  : '.ca',
+      'domain'  : '.cn',
       'symbol'  : ur'\uffe5'
     }
 }
