@@ -4,9 +4,11 @@ from lxml import etree
 from lxml.html import tostring
 
 def to_text(t):
+    """Returns a plain text string from an element tree"""
     return tostring(t, encoding='utf-8', method='text', pretty_print=True) 
 
 def to_html(t):
+    """Returns a HTML string from an element tree"""
     return tostring(t, encoding='utf-8', method='html', pretty_print=True) 
 
 class Profile():
