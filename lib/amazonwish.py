@@ -105,6 +105,6 @@ class Wishlist():
         """Returns the addresses of items pictures (e.g. book covers, albums pictures)."""
         covers = page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/div[@class='pImage']/img/@src")
         ret = []
-        for img in covers:
-            ret.append(img)
+        for c in covers:
+            ret.append(c)
         return ret
