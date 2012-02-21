@@ -1,0 +1,32 @@
+# pretty much the same idea, but less hackish, if possible:
+# lynx --dump --nolist 'http://www.amazon.com/wishlist/3MCYFXCFDH4FA/ref=cm_wl_act_print_o?_encoding=UTF8&layout=standard-print&disableNav=1&visitor-view=1&items-per-page=1000'
+# | sed '/\$/!d;s/^.*\$//g' | tr '\n' '+' | sed 's/+$//' | bc
+
+# US
+boto = 'CJ9SMX69NW27'
+caio = '3MCYFXCFDH4FA'
+claudio = '2QFV8ADUUJOZ8'
+
+# CA
+renata = '2OO8G9NM4QYQJ'
+
+# UK
+tony = '25LUEB8ZTW0YD'
+
+# FR
+blino = '377PE49C4Y7UC'
+
+# DE
+zuck = '1JZ9TLZEUZHZX'
+
+# ES
+juan = '58GCAE5DT41X'
+
+# IT
+luigi = 'Y0P9HTJILVLW'
+
+# JP
+saori = '3DHOXWEP71O'
+
+# CN
+ming = '3BNMGCLGH93KY'
