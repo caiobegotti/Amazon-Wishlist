@@ -11,14 +11,13 @@ from lxml.html import tostring
 
 class Main:
     def __init__(self):
-        wl = Wishlist('3MCYFXCFDH4FA', country='us')
+        wl = Wishlist('3BNMGCLGH93KY', country='cn')
 
         titles = wl.titles()
         authors = wl.authors()
         covers = wl.covers()
         prices = wl.prices()
         via = wl.via()
-        total = wl.total_expenses()
 
         print 'Your titles are:'
         for entry in titles: 
@@ -40,7 +39,7 @@ class Main:
         for entry in via: 
             print '\t' + entry
 
-        p = Profile('3MCYFXCFDH4FA', country='us')
+        p = Profile('3BNMGCLGH93KY', country='cn')
 
         info = p.basicInfo()
         print 'Your name and avatar:'
@@ -50,7 +49,8 @@ class Main:
         print 'Your lists and their sizes:'
         print lists
 
-        print 'How much would you need to buy all these? ' + total
+        #total = wl.total_expenses()
+        #print 'How much would you need to buy all these? ' + total
 
 if __name__ == "__main__":
     Main()

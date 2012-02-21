@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from config import *
 
 from lxml import etree
@@ -113,7 +115,7 @@ class Wishlist():
         prices = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[@class='pPrice']/span/strong")
         ret = []
         for p in prices:
-            ret.append(to_text(p).replace('$',''))
+            ret.append(to_text(p))
         return ret
     
     def via(self):
