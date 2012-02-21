@@ -12,6 +12,7 @@ TODO
 * Normalize all returns to the same type, if possible
 * Add a minimal documentation to every function/method/class
 * Shorten the longest xpaths (minor, just prettyfication)
+* Some coded tests would be good...
 
 License
 =======
