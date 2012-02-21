@@ -1,6 +1,13 @@
 from config import Config
 
 from lxml import etree
+from lxml.html import tostring
+
+def to_text(t):
+    return tostring(t, encoding='utf-8', method='text', pretty_print=True) 
+
+def to_html(t):
+    return tostring(t, encoding='utf-8', method='html', pretty_print=True) 
 
 class Profile():
     def readConfig(self, country):
@@ -18,8 +25,11 @@ class Profile():
 
     def basicInfo(self, page):
         name = page.xpath("//td[@id='profile-name-Field']")
+        for x in name:
+            n = to_text(x)
         photo = page.xpath("//div[@id='profile']/div/img/@src")
-        return name, photo
+        p = photo[0]
+        return n, p
 
     def wishlists(self, page):
         lists = page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/h3/a")
