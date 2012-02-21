@@ -4,22 +4,22 @@
 from sys import exit
 
 from lib.config import Config
-from lib.amazonwish import Scrapper
+from lib.amazonwish import Wishlist
 
 from lxml.html import tostring
 
 class Main:
     def __init__(self):
         country = 'us'
-        scrapy = Scrapper()
-        params = scrapy.readConfig(country)
-        page = scrapy.downloadPage(params,'3MCYFXCFDH4FA')
+        wl = Wishlist()
+        params = wl.readConfig(country)
+        page = wl.downloadPage(params,'3MCYFXCFDH4FA')
 
-        titles = scrapy.titles(page)
-        covers = scrapy.covers(page)
-        authors = scrapy.authors(page)
-        prices = scrapy.prices(page)
-        via = scrapy.via(page)
+        titles = wl.titles(page)
+        covers = wl.covers(page)
+        authors = wl.authors(page)
+        prices = wl.prices(page)
+        via = wl.via(page)
 
         for entry in titles: 
             res = tostring(entry, encoding='utf-8', method='text', pretty_print=True).strip()

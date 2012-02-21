@@ -2,7 +2,7 @@ from config import Config
 
 from lxml import etree
 
-class Scrapper():
+class Wishlist():
     def readConfig(self, country):
         config = Config()
         params = config.countryParams(country)
