@@ -3,6 +3,8 @@ Amazon Wishlist
 
 Python version of the old and buggy Perl module WWW::Amazon::Wishlist.
 
+This is my first attempt in writing a Python module so bear with me as you find something not really looking pythonic. It supports the Amazon stores in the US, UK, France, Spain, Italy, Germany, Japan and China. I'm still behind testing them all, though.
+
 TODO
 ====
 
