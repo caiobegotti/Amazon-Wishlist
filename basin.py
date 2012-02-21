@@ -3,7 +3,7 @@
 
 from sys import exit
 
-from lib.config import Config
+from lib.config import *
 from lib.amazonwish import Wishlist
 from lib.amazonwish import Profile
 

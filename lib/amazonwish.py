@@ -1,4 +1,4 @@
-from config import Config
+from config import *
 
 from lxml import etree
 from lxml.html import tostring
@@ -13,8 +13,7 @@ def to_html(t):
 
 class Profile():
     def readConfig(self, country):
-        config = Config()
-        params = config.countryParams(country)
+        params = countryParams(country)
         return params
 
     def __init__(self, id, country):
@@ -60,8 +59,7 @@ class Profile():
 
 class Wishlist():
     def readConfig(self, country):
-        config = Config()
-        params = config.countryParams(country)
+        params = countryParams(country)
         return params
 
     def __init__(self, id, country):
