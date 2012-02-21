@@ -1,5 +1,5 @@
 class Config:
-    def getCountryParams(self, country=None):
+    def countryParams(self, country=None):
         if 'us' in country:
             config = {
                       'currency': 'USD',
