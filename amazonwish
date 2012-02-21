@@ -5,6 +5,7 @@ from sys import exit
 
 from lib.config import Config
 from lib.amazonwish import Wishlist
+from lib.amazonwish import Profile
 
 from lxml.html import tostring
 
@@ -22,6 +23,16 @@ class Main:
         via = wl.via(page)
 
         for entry in titles: 
+            res = tostring(entry, encoding='utf-8', method='text', pretty_print=True).strip()
+            print res
+
+        p = Profile()
+        params = p.readConfig(country)
+        page = p.downloadPage(params,'3MCYFXCFDH4FA')
+
+        lists = p.wishlists(page)
+
+        for entry in lists:
             res = tostring(entry, encoding='utf-8', method='text', pretty_print=True).strip()
             print res
 
