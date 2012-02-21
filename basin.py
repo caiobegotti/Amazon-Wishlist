@@ -24,17 +24,14 @@ class Main:
 
         for entry in titles: 
             res = tostring(entry, encoding='utf-8', method='text', pretty_print=True).strip()
-            print res
+            #print res
 
         p = Profile()
         params = p.readConfig(country)
         page = p.downloadPage(params,'3MCYFXCFDH4FA')
 
-        lists = p.wishlists(page)
-
-        for entry in lists:
-            res = tostring(entry, encoding='utf-8', method='text', pretty_print=True).strip()
-            print res
+        info = p.basicInfo(page)
+        print info
 
 if __name__ == "__main__":
     Main()
