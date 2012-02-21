@@ -3,9 +3,9 @@
 
 from sys import exit
 
-from lib.config import *
-from lib.amazonwish import Wishlist
-from lib.amazonwish import Profile
+from amazonwish.config import *
+from amazonwish.amazonwish import Wishlist
+from amazonwish.amazonwish import Profile
 
 from lxml.html import tostring
 
