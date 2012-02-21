@@ -18,7 +18,7 @@ class Profile():
 
     def basicInfo(self, page):
         name = page.xpath("//td[@id='profile-name-Field']")
-        photo = page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[1]/img/@src")
+        photo = page.xpath("//div[@id='profile']/div/img/@src")
         return name, photo
 
     def wishlists(self, page):
