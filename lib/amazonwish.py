@@ -112,3 +112,10 @@ class Wishlist():
         for c in covers:
             ret.append(c)
         return ret
+    
+    def total_expenses(self):
+        """Returns the total sum of all prices, without currency symbols, might excluse unavailable items or items without price tags"""
+        ret = []
+        for p in self.prices():
+            ret.append(float(p))
+        return sum(ret)
