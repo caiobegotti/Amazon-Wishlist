@@ -82,7 +82,7 @@ class Wishlist():
         titles = page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/div/strong")
         ret = []
         for t in titles:
-            ret.append(to_text(t))
+            ret.append(to_text(t).strip())
         return ret
     
     def prices(self, page):
