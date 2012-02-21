@@ -12,6 +12,12 @@ def to_html(t):
     return tostring(t, encoding='utf-8', method='html', pretty_print=True) 
 
 class Profile():
+    """
+    The Profile() class is the one responsible for retrieving
+    information about a given user, such as name, profile photo,
+    existing wishlists and their names and size.
+    """
+
     def readConfig(self, country):
         params = countryParams(country)
         return params
@@ -21,6 +27,7 @@ class Profile():
         self._download(params, id)
 
     def _download(self, params, id):
+        """Retrieves and stores the profile page (i.e. first wishlist page plus user's information and other wishlists details)."""
         domain = params['domain']
         userid = id
         url = 'http://www.amazon' + domain + '/wishlist/' + userid
@@ -58,6 +65,16 @@ class Profile():
 
 
 class Wishlist():
+    """
+    The Wishlist() class is the main class of Amazon Wishlist as
+    it's here where the magic happens. This class will retrieve
+    through XPATH expressions the titles of all items inside a
+    wishlist, their authors and co-writers, price tags, covers
+    (if books) or items picture, list which external sources your
+    wishlist uses and even the total amount necessary if you were
+    to buy all the items at once.
+    """
+
     def readConfig(self, country):
         params = countryParams(country)
         return params
@@ -67,6 +84,7 @@ class Wishlist():
         self._download(params, id)
         
     def _download(self, params, id):
+        """Retrieves and stores the printable version of the wishlist for later usage."""
         domain = params['domain']
         userid = id
         url = 'http://www.amazon' + domain + '/wishlist/' + userid + '/ref=cm_wl_act_print_o?' + '_encoding=UTF8&layout=standard-print&disableNav=1&visitor-view=1&items-per-page=1000'
@@ -114,7 +132,7 @@ class Wishlist():
         return ret
     
     def total_expenses(self):
-        """Returns the total sum of all prices, without currency symbols, might excluse unavailable items or items without price tags"""
+        """Returns the total sum of all prices, without currency symbols, might excluse unavailable items or items without price tags."""
         tags = []
         for p in self.prices():
             tags.append(float(p))
