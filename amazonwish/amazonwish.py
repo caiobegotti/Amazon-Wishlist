@@ -61,6 +61,7 @@ class Profile():
         sizes = self.page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/div/span[1]")
         for s in sizes:
             retsizes.append(to_text(s))
+        #TODO: i don't really know why but sometimes these guys show up empty, and only them... debug pending
         return retcodes, retsizes
 
 
