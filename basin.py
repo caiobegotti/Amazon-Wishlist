@@ -32,7 +32,7 @@ class Main:
             print '\t' + entry
 
         print 'Their prices:'
-        for entry in prices: 
+        for entry in prices:
             print '\t' + entry
 
         print 'Some external sources:'
