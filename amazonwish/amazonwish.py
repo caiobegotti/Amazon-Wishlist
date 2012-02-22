@@ -33,7 +33,7 @@ class Profile():
         domain = params['domain']
         userid = id
         url = 'http://www.amazon' + domain + '/wishlist/' + userid
-        parser = etree.HTMLParser()
+        parser = etree.HTMLParser(encoding='utf-8')
         self.page = etree.parse(url, parser)
 
     def basicInfo(self):
@@ -91,7 +91,7 @@ class Wishlist():
         domain = params['domain']
         userid = id
         url = 'http://www.amazon' + domain + '/wishlist/' + userid + '/ref=cm_wl_act_print_o?' + '_encoding=UTF8&layout=standard-print&disableNav=1&visitor-view=1&items-per-page=1000'
-        parser = etree.HTMLParser()
+        parser = etree.HTMLParser(encoding='utf-8')
         self.page = etree.parse(url, parser)
 
     def authors(self):
