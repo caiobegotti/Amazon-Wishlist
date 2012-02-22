@@ -18,6 +18,8 @@ class Profile():
 
     def __init__(self, id, country):
         params = self.readConfig(country)
+        self.currency = params['currency']
+        self.symbol = params['symbol']
         self._download(params, id)
 
     def _download(self, params, id):
@@ -72,6 +74,8 @@ class Wishlist():
 
     def readConfig(self, country):
         params = countryParams(country)
+        self.currency = params['currency']
+        self.symbol = params['symbol']
         return params
 
     def __init__(self, id, country):
