@@ -9,48 +9,43 @@ from amazonwish.amazonwish import Profile
 
 from lxml.html import tostring
 
-class Main:
-    def __init__(self):
-        wl = Wishlist('2KRQL6OB16TTG', country='jp')
+wl = Wishlist('2KRQL6OB16TTG', country='jp')
 
-        titles = wl.titles()
-        authors = wl.authors()
-        covers = wl.covers()
-        prices = wl.prices()
-        via = wl.via()
+titles = wl.titles()
+authors = wl.authors()
+covers = wl.covers()
+prices = wl.prices()
+via = wl.via()
 
-        print 'Your titles are:'
-        for entry in titles: 
-            print '\t=' + entry
+print 'Your titles are:'
+for entry in titles: 
+    print '\t=' + entry
 
-        print 'The titles authors are:'
-        for entry in authors: 
-            print '\t=' + entry
+print 'The titles authors are:'
+for entry in authors: 
+    print '\t=' + entry
 
-        print 'Your items covers:'
-        for entry in covers: 
-            print '\t=' + entry
+print 'Your items covers:'
+for entry in covers: 
+    print '\t=' + entry
 
-        print 'Their prices:'
-        for entry in prices:
-            print '\t=' + entry
+print 'Their prices:'
+for entry in prices:
+    print '\t=' + entry
 
-        print 'Some external sources:'
-        for entry in via: 
-            print '\t=' + entry
+print 'Some external sources:'
+for entry in via: 
+    print '\t=' + entry
 
-        p = Profile('2KRQL6OB16TTG', country='jp')
+p = Profile('2KRQL6OB16TTG', country='jp')
 
-        info = p.basicInfo()
-        print 'Your name and avatar:'
-        print info
+info = p.basicInfo()
+print 'Your name and avatar:'
+print info
 
-        lists = p.wishlistsDetails()
-        print 'Your lists and their sizes:'
-        print lists
+lists = p.wishlistsDetails()
+print 'Your lists and their sizes:'
+print lists
 
-        total = wl.total_expenses()
-        print 'Your wishlist is worth ' + wl.currency + ' ' + wl.symbol + total
-
-if __name__ == "__main__":
-    Main()
+total = wl.total_expenses()
+print 'Your wishlist is worth ' + wl.currency + ' ' + wl.symbol + total
