@@ -29,6 +29,8 @@ class Profile():
         url = 'http://www.amazon' + domain + '/wishlist/' + userid
         if 'GBP' in self.currency:
             parser = etree.HTMLParser(encoding='latin-1')
+        elif 'JPY' in self.currency:
+            parser = etree.HTMLParser(encoding='shift-jis')
         else:
             parser = etree.HTMLParser(encoding='utf-8')
         self.page = etree.parse(url, parser)
@@ -92,6 +94,8 @@ class Wishlist():
         url = 'http://www.amazon' + domain + '/wishlist/' + userid + '/ref=cm_wl_act_print_o?' + '_encoding=UTF8&layout=standard-print&disableNav=1&visitor-view=1&items-per-page=1000'
         if 'GBP' in self.currency:
             parser = etree.HTMLParser(encoding='latin-1')
+        elif 'JPY' in self.currency:
+            parser = etree.HTMLParser(encoding='shift-jis')
         else:
             parser = etree.HTMLParser(encoding='utf-8')
         self.page = etree.parse(url, parser)
@@ -101,7 +105,7 @@ class Wishlist():
         authors = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[1]/td[3]/div/span")
         ret = []
         for a in authors:
-            ret.append(a.text)
+            ret.append(a.text.strip())
         return ret
     
     def titles(self):
@@ -116,9 +120,7 @@ class Wishlist():
         """Returns the price tags for every item in a wishlist."""
         prices = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[@class='pPrice']/span/strong")
         ret = []
-        if 'JPY' in self.currency:
-            cleaner = ur'\u0081\u008f'
-        elif 'EUR' in self.currency:
+        if 'EUR' in self.currency:
             cleaner = 'EUR'
         elif 'CDN' in self.currency:
             cleaner = 'CDN' + ur'\u0024'
