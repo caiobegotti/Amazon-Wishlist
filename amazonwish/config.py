@@ -37,7 +37,7 @@ COUNTRY_CONFIGS = {
     'jp': {
       'currency': 'JPY',
       'domain'  : '.jp',
-      'symbol'  : ur'\u00a5'
+      'symbol'  : ur'\uffe5'
     },
     'cn': {
       'currency': 'CNY',
