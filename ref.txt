@@ -26,7 +26,7 @@ juan = '58GCAE5DT41X'
 luigi = 'Y0P9HTJILVLW'
 
 # JP
-saori = '3DHOXWEP71O'
+kato = '2KRQL6OB16TTG'
 
 # CN
 ming = '3BNMGCLGH93KY'
