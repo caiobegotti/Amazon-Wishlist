@@ -27,7 +27,10 @@ class Profile():
         domain = params['domain']
         userid = id
         url = 'http://www.amazon' + domain + '/wishlist/' + userid
-        parser = etree.HTMLParser(encoding='utf-8')
+        if 'GBP' in self.currency:
+            parser = etree.HTMLParser(encoding='latin-1')
+        else:
+            parser = etree.HTMLParser(encoding='utf-8')
         self.page = etree.parse(url, parser)
 
     def basicInfo(self):
@@ -87,7 +90,10 @@ class Wishlist():
         domain = params['domain']
         userid = id
         url = 'http://www.amazon' + domain + '/wishlist/' + userid + '/ref=cm_wl_act_print_o?' + '_encoding=UTF8&layout=standard-print&disableNav=1&visitor-view=1&items-per-page=1000'
-        parser = etree.HTMLParser(encoding='utf-8')
+        if 'GBP' in self.currency:
+            parser = etree.HTMLParser(encoding='latin-1')
+        else:
+            parser = etree.HTMLParser(encoding='utf-8')
         self.page = etree.parse(url, parser)
 
     def authors(self):
@@ -111,11 +117,13 @@ class Wishlist():
         prices = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[@class='pPrice']/span/strong")
         ret = []
         if 'JPY' in self.currency:
-            cleaner = u'\u0081\u008f'
+            cleaner = ur'\u0081\u008f'
         elif 'EUR' in self.currency:
             cleaner = 'EUR'
         elif 'CDN' in self.currency:
             cleaner = 'CDN' + ur'\u0024'
+        elif 'GBP' in self.currency:
+            cleaner = ur'\u00a3'
         else:
             cleaner = self.symbol
         for p in prices:
