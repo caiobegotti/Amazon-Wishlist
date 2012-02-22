@@ -5,14 +5,6 @@ from config import *
 from lxml import etree
 from lxml.html import tostring
 
-def to_text(t):
-    """Returns a plain text string from an element tree."""
-    return tostring(t, encoding='utf-8', method='text', pretty_print=True) 
-
-def to_html(t):
-    """Returns a HTML string from an element tree."""
-    return tostring(t, encoding='utf-8', method='html', pretty_print=True) 
-
 class Profile():
     """
     The Profile() class is the one responsible for retrieving
@@ -41,8 +33,8 @@ class Profile():
         # wishlists are supposed to show a first name, so it's safe to assume it will never be null
         name = self.page.xpath("//td[@id='profile-name-Field']")
         ret = []
-        for string in name:
-            ret.append(to_text(string))
+        for s in name:
+            ret.append(s.text)
         photo = self.page.xpath("//div[@id='profile']/div/img/@src")
         if photo:
             ret.append(photo[0])
@@ -62,7 +54,7 @@ class Profile():
             retcodes.append(c.replace('regListsList',''))
         sizes = self.page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/div/span[1]")
         for s in sizes:
-            retsizes.append(to_text(s))
+            retsizes.append(s.text)
         #TODO: i don't really know why but sometimes these guys show up empty, and only them... debug pending
         return retcodes, retsizes
 
@@ -99,7 +91,7 @@ class Wishlist():
         authors = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[1]/td[3]/div/span")
         ret = []
         for a in authors:
-            ret.append(to_text(a).replace(' by ','').strip())
+            ret.append(a.text)
         return ret
     
     def titles(self):
@@ -107,7 +99,7 @@ class Wishlist():
         titles = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/div/strong")
         ret = []
         for t in titles:
-            ret.append(to_text(t).strip())
+            ret.append(t.text)
         return ret
     
     def prices(self):
@@ -115,7 +107,7 @@ class Wishlist():
         prices = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[@class='pPrice']/span/strong")
         ret = []
         for p in prices:
-            ret.append(to_text(p))
+            ret.append(p.text)
         return ret
     
     def via(self):
@@ -123,7 +115,7 @@ class Wishlist():
         via = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/strong[2]")
         ret = []
         for v in via:
-            ret.append(to_text(v).replace('www.',''))
+            ret.append(v.text.replace('www.',''))
         return ret
     
     def covers(self):
