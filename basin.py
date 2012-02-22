@@ -7,8 +7,6 @@ from amazonwish.config import *
 from amazonwish.amazonwish import Wishlist
 from amazonwish.amazonwish import Profile
 
-from lxml.html import tostring
-
 wl = Wishlist('2KRQL6OB16TTG', country='jp')
 
 titles = wl.titles()
