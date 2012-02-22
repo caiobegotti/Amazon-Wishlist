@@ -111,11 +111,11 @@ class Wishlist():
         prices = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[@class='pPrice']/span/strong")
         ret = []
         if 'JPY' in self.currency:
-            # quirk for the japanese site, i don't know
-            # why they return that before their currency char
             cleaner = u'\u0081\u008f'
         elif 'EUR' in self.currency:
             cleaner = 'EUR'
+        elif 'CDN' in self.currency:
+            cleaner = 'CDN' + ur'\u0024'
         else:
             cleaner = self.symbol
         for p in prices:

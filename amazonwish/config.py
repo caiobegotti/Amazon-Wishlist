@@ -10,7 +10,7 @@ COUNTRY_CONFIGS = {
       'symbol'  : ur'\u00a3'
     },
     'ca': {
-      'currency': 'CAD',
+      'currency': 'CDN',
       'domain'  : '.ca',
       'symbol'  : ur'\u0024'
     },
