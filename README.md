@@ -10,7 +10,6 @@ TODO
 
 * Write a scrapper using only someone's e-mail address
 * Italian store has odd author attribution with '~' that needs a look
-* UK store serves pages in latin-1, breaking all my utf-8 code
 * Handle Shift_JIS, Japanese charset that breaks titles/authors
 * Normalize all returns to the same type, if possible
 * Shorten the longest XPaths (minor, just prettyfication)
