@@ -15,7 +15,6 @@ TODO
 
 * Write a scrapper using only someone's e-mail address
 * Italian store has odd author attribution with '~' that needs a look
-* Handle Shift_JIS, Japanese charset that breaks titles/authors
 * Normalize all returns to the same type, if possible
 * Shorten the longest XPaths (minor, just prettyfication)
 * Some coded tests would be good...
