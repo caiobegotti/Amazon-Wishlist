@@ -21,23 +21,23 @@ class Main:
 
         print 'Your titles are:'
         for entry in titles: 
-            print '\t' + entry
+            print '\t=' + entry
 
         print 'The titles authors are:'
         for entry in authors: 
-            print '\t' + entry
+            print '\t=' + entry
 
         print 'Your items covers:'
         for entry in covers: 
-            print '\t' + entry
+            print '\t=' + entry
 
         print 'Their prices:'
         for entry in prices:
-            print '\t' + entry
+            print '\t=' + entry
 
         print 'Some external sources:'
         for entry in via: 
-            print '\t' + entry
+            print '\t=' + entry
 
         p = Profile('3BNMGCLGH93KY', country='cn')
 
