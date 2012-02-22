@@ -49,8 +49,8 @@ class Main:
         print 'Your lists and their sizes:'
         print lists
 
-        #total = wl.total_expenses()
-        #print 'How much would you need to buy all these? ' + total
+        total = wl.total_expenses()
+        print 'Your wishlist is ' + wl.currency + '' + wl.symbol + total + ' worth'
 
 if __name__ == "__main__":
     Main()
