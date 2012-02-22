@@ -11,7 +11,7 @@ from lxml.html import tostring
 
 class Main:
     def __init__(self):
-        wl = Wishlist('3BNMGCLGH93KY', country='cn')
+        wl = Wishlist('2KRQL6OB16TTG', country='jp')
 
         titles = wl.titles()
         authors = wl.authors()
@@ -39,7 +39,7 @@ class Main:
         for entry in via: 
             print '\t=' + entry
 
-        p = Profile('3BNMGCLGH93KY', country='cn')
+        p = Profile('2KRQL6OB16TTG', country='jp')
 
         info = p.basicInfo()
         print 'Your name and avatar:'
@@ -50,7 +50,7 @@ class Main:
         print lists
 
         total = wl.total_expenses()
-        print 'Your wishlist is ' + wl.currency + '' + wl.symbol + total + ' worth'
+        print 'Your wishlist is worth ' + wl.currency + ' ' + wl.symbol + total
 
 if __name__ == "__main__":
     Main()
