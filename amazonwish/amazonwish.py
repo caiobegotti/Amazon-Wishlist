@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from config import *
 from lxml import etree
+from config import *
 
 class Profile():
     """
