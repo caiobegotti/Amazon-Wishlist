@@ -46,4 +46,4 @@ print 'Your lists and their sizes:'
 print lists
 
 total = wl.total_expenses()
-print 'Your wishlist is worth ' + wl.currency + ' ' + wl.symbol + total
+print 'Your wishlist is worth ' + wl.currency + ' ' + wl.symbol + str(total)

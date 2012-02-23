@@ -152,4 +152,4 @@ class Wishlist():
         for p in self.prices():
             tags.append(float(p))
         ret = sum(tags)
-        return str(ret)
+        return ret
