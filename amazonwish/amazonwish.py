@@ -1,4 +1,8 @@
-# -*- coding: utf-8 -*-
+"""
+Python version of the old and buggy Perl module WWW::Amazon::Wishlist.
+It's written using LXML and XPaths for better readability. It supports the
+Amazon stores in the US, UK, France, Spain, Italy, Germany, Japan and China.
+"""
 
 from lxml import etree
 from config import *
