@@ -25,7 +25,10 @@ class Profile():
         self._download(params, id)
 
     def _download(self, params, id):
-        """Retrieves and stores the profile page (i.e. first wishlist page plus user's information and other wishlists details)."""
+        """
+        Retrieves and stores the profile page (i.e. first wishlist
+        page plus user's information and other wishlists details).
+        """
         domain = params['domain']
         userid = id
         url = 'http://www.amazon' + domain + '/wishlist/' + userid
@@ -38,7 +41,10 @@ class Profile():
         self.page = etree.parse(url, parser)
 
     def basicInfo(self):
-        """Returns the name of the wishlist owner and, if available, the address of its profile picture."""
+        """
+        Returns the name of the wishlist owner and, if available,
+        the address of its profile picture.
+        """
         # wishlists are supposed to show a first name, so it's safe to assume it will never be null
         name = self.page.xpath("//td[@id='profile-name-Field']")
         ret = []
@@ -55,7 +61,11 @@ class Profile():
         return lists
 
     def wishlistsDetails(self):
-        """Returns a tuple with lists, the first with all wishlists codes and the second with their total number of items (i.e. wishlist size)."""
+        """
+        Returns a tuple with lists, the first with all wishlists
+        codes and the second with their total number of items
+        (i.e. wishlist size).
+        """
         retcodes = []
         retsizes = []
         codes = self.page.xpath("//div[@id='profile']/div[@id='regListpublicBlock']/div/@id")
@@ -111,7 +121,10 @@ class Wishlist():
         return ret
     
     def titles(self):
-        """Returns items titles, even if they are pretty long ones (like academic books or journals)."""
+        """
+        Returns items titles, even if they are pretty long
+        ones (like academic books or journals).
+        """
         titles = self.page.xpath("//div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/div/strong")
         ret = []
         for t in titles:
@@ -135,7 +148,10 @@ class Wishlist():
         return ret
     
     def via(self):
-        """Returns the original web page from which the wished item was pulled, only for Universal items not from Amazon directly."""
+        """
+        Returns the original web page from which the wished item was
+        pulled, only for Universal items not from Amazon directly.
+        """
         via = self.page.xpath("//div/form/table/tbody[*]/tr[*]/td[*]/strong[2]")
         ret = []
         for v in via:
@@ -151,7 +167,10 @@ class Wishlist():
         return ret
     
     def total_expenses(self):
-        """Returns the total sum of all prices, without currency symbols, might excluse unavailable items or items without price tags."""
+        """
+        Returns the total sum of all prices, without currency symbols,
+        might excluse unavailable items or items without price tags.
+        """
         tags = []
         for p in self.prices():
             tags.append(float(p))
