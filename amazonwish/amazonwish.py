@@ -124,7 +124,7 @@ class Wishlist():
 
     def authors(self):
         """Returns the authors names and co-writers for every item."""
-        authors = self.page.xpath("//div[@id='itemsTable']/div/form/table/tbody[*]/tr[1]/td[3]/div/span")
+        authors = self.page.xpath("//div[@class='pTitle']/span[@class='small itemByline']")
         ret = []
         for a in authors:
             ret.append(a.text.strip())
@@ -135,7 +135,7 @@ class Wishlist():
         Returns items titles, even if they are pretty long
         ones (like academic books or journals).
         """
-        titles = self.page.xpath("//div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/div/strong")
+        titles = self.page.xpath("//div[@class='pTitle']/strong")
         ret = []
         for t in titles:
             ret.append(t.text)
