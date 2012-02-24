@@ -103,7 +103,13 @@ class Wishlist():
         """Retrieves and stores the printable version of the wishlist for later usage."""
         domain = params['domain']
         userid = id
-        url = 'http://www.amazon' + domain + '/wishlist/' + userid + '/ref=cm_wl_act_print_o?' + '_encoding=UTF8&layout=standard-print&disableNav=1&visitor-view=1&items-per-page=1000'
+        query = ['/ref=cm_wl_act_print_o?',
+                 '_encoding=UTF8',
+                 '&layout=standard-print',
+                 '&disableNav=1',
+                 '&visitor-view=1',
+                 '&items-per-page=1000']
+        url = 'http://www.amazon' + domain + '/wishlist/' + userid + ''.join(query)
         if ('GBP' or 'USD') in self.currency:
             parser = etree.HTMLParser(encoding='latin-1')
         elif 'JPY' in self.currency:
