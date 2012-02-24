@@ -21,16 +21,18 @@ class Profile():
     def __init__(self, id, country):
         params = self.readConfig(country)
         self.currency = params['currency']
+        self.domain = params['domain']
         self.symbol = params['symbol']
-        self._download(params, id)
+        self.id = id
+        self._download()
 
-    def _download(self, params, id):
+    def _download(self):
         """
         Retrieves and stores the profile page (i.e. first wishlist
         page plus user's information and other wishlists details).
         """
-        domain = params['domain']
-        userid = id
+        domain = self.domain
+        userid = self.id
         url = 'http://www.amazon' + domain + '/wishlist/' + userid
         if ('GBP' or 'USD') in self.currency:
             parser = etree.HTMLParser(encoding='latin-1')
@@ -91,18 +93,20 @@ class Wishlist():
 
     def readConfig(self, country):
         params = countryParams(country)
-        self.currency = params['currency']
-        self.symbol = params['symbol']
         return params
 
     def __init__(self, id, country):
         params = self.readConfig(country)
-        self._download(params, id)
+        self.currency = params['currency']
+        self.domain = params['domain']
+        self.symbol = params['symbol']
+        self.id = id
+        self._download()
         
-    def _download(self, params, id):
+    def _download(self):
         """Retrieves and stores the printable version of the wishlist for later usage."""
-        domain = params['domain']
-        userid = id
+        domain = self.domain
+        userid = self.id
         query = ['/ref=cm_wl_act_print_o?',
                  '_encoding=UTF8',
                  '&layout=standard-print',
