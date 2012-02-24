@@ -51,17 +51,17 @@ class Profile():
 
     def wishlists(self):
         """Returns a list of wishlists codes for a given person."""
-        lists = self.page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/h3/a")
+        lists = self.page.xpath("//div[@id='profile']/div[@id='regListpublicBlock']/div/h3/a")
         return lists
 
     def wishlistsDetails(self):
         """Returns a tuple with lists, the first with all wishlists codes and the second with their total number of items (i.e. wishlist size)."""
         retcodes = []
         retsizes = []
-        codes = self.page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/@id")
+        codes = self.page.xpath("//div[@id='profile']/div[@id='regListpublicBlock']/div/@id")
         for c in codes:
             retcodes.append(c.replace('regListsList',''))
-        sizes = self.page.xpath("/html/body/div[5]/div[1]/div/div[1]/div/div[@id='profileBox']/div/div[@id='profile']/div[@id='regListpublicBlock']/div/div/span[1]")
+        sizes = self.page.xpath("//div[@id='profile']/div[@id='regListpublicBlock']/div/div/span[1]")
         for s in sizes:
             retsizes.append(s.text)
         #TODO: i don't really know why but sometimes these guys show up empty, and only them... debug pending
@@ -104,7 +104,7 @@ class Wishlist():
 
     def authors(self):
         """Returns the authors names and co-writers for every item."""
-        authors = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[1]/td[3]/div/span")
+        authors = self.page.xpath("//div[@id='itemsTable']/div/form/table/tbody[*]/tr[1]/td[3]/div/span")
         ret = []
         for a in authors:
             ret.append(a.text.strip())
@@ -112,7 +112,7 @@ class Wishlist():
     
     def titles(self):
         """Returns items titles, even if they are pretty long ones (like academic books or journals)."""
-        titles = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/div/strong")
+        titles = self.page.xpath("//div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/div/strong")
         ret = []
         for t in titles:
             ret.append(t.text)
@@ -120,7 +120,7 @@ class Wishlist():
     
     def prices(self):
         """Returns the price tags for every item in a wishlist."""
-        prices = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[@class='pPrice']/span/strong")
+        prices = self.page.xpath("//div/form/table/tbody[*]/tr[*]/td[@class='pPrice']/span/strong")
         ret = []
         if 'EUR' in self.currency:
             cleaner = 'EUR'
@@ -136,7 +136,7 @@ class Wishlist():
     
     def via(self):
         """Returns the original web page from which the wished item was pulled, only for Universal items not from Amazon directly."""
-        via = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/strong[2]")
+        via = self.page.xpath("//div/form/table/tbody[*]/tr[*]/td[*]/strong[2]")
         ret = []
         for v in via:
             ret.append(v.text.replace('www.',''))
@@ -144,7 +144,7 @@ class Wishlist():
     
     def covers(self):
         """Returns the addresses of items pictures (e.g. book covers, albums pictures)."""
-        covers = self.page.xpath("/html/body/div[@id='printcfg']/div[@id='itemsTable']/div/form/table/tbody[*]/tr[*]/td[*]/div[@class='pImage']/img/@src")
+        covers = self.page.xpath("//div/form/table/tbody[*]/tr[*]/td[*]/div[@class='pImage']/img/@src")
         ret = []
         for c in covers:
             ret.append(c)

@@ -18,7 +18,6 @@ TODO
 * Italian store has odd author attribution with '~' that needs a look
 * Btw, I need to clean up, strip, whatever, the attributions (by, di, von, de)
 * Normalize all returns to the same type, if possible
-* Shorten the longest XPaths (minor, just prettyfication)
 * Some coded tests would be good...
 
 License
