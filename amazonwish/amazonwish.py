@@ -125,10 +125,14 @@ class Wishlist():
 
     def authors(self):
         """Returns the authors names and co-writers for every item."""
-        authors = self.page.xpath("//div[@class='pTitle']/span[@class='small itemByline']")
+        authors = self.page.xpath("//div[@class='pTitle']/span")
         ret = []
         for a in authors:
-            ret.append(a.text.strip())
+            res = tostring(a, encoding='utf-8', method='text', pretty_print=True).strip()
+            if '~'in res:
+                ret.append(res.split(' ~ ')[1])
+            else:
+                ret.append(res)
         return ret
     
     def titles(self):

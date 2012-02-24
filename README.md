@@ -15,7 +15,6 @@ TODO
 
 * Write a scrapper using only someone's e-mail address
 * Use argparse to pass the e-mail or wishlist code as parameters
-* Italian store has odd author attribution with '~' that needs a look
 * Btw, I need to clean up, strip, whatever, the attributions (by, di, von, de)
 * Normalize all returns to the same type, if possible
 * Some coded tests would be good...
