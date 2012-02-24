@@ -29,7 +29,7 @@ class Profile():
         domain = params['domain']
         userid = id
         url = 'http://www.amazon' + domain + '/wishlist/' + userid
-        if 'GBP' in self.currency:
+        if ('GBP' in self.currency) or ('USD' in self.currency):
             parser = etree.HTMLParser(encoding='latin-1')
         elif 'JPY' in self.currency:
             parser = etree.HTMLParser(encoding='shift-jis')
@@ -94,7 +94,7 @@ class Wishlist():
         domain = params['domain']
         userid = id
         url = 'http://www.amazon' + domain + '/wishlist/' + userid + '/ref=cm_wl_act_print_o?' + '_encoding=UTF8&layout=standard-print&disableNav=1&visitor-view=1&items-per-page=1000'
-        if 'GBP' in self.currency:
+        if ('GBP' in self.currency) or ('USD' in self.currency):
             parser = etree.HTMLParser(encoding='latin-1')
         elif 'JPY' in self.currency:
             parser = etree.HTMLParser(encoding='shift-jis')
