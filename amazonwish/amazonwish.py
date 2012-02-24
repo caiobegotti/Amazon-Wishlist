@@ -5,6 +5,7 @@ Amazon stores in the US, UK, France, Spain, Italy, Germany, Japan and China.
 """
 
 from lxml import etree
+from lxml.html import tostring
 from config import *
 
 class Profile():
@@ -143,7 +144,7 @@ class Wishlist():
     
     def prices(self):
         """Returns the price tags for every item in a wishlist."""
-        prices = self.page.xpath("//div/form/table/tbody[*]/tr[*]/td[@class='pPrice']/span/strong")
+        prices = self.page.xpath("//td[@class='pPrice']")
         ret = []
         if 'EUR' in self.currency:
             cleaner = 'EUR'
@@ -154,7 +155,8 @@ class Wishlist():
         else:
             cleaner = self.symbol
         for p in prices:
-            ret.append(p.text.replace(cleaner,'').replace(',','.').strip())
+            res = tostring(p, encoding='utf-8', method='text', pretty_print=True).strip()
+            ret.append(res.replace(cleaner,'').replace(',','.'))
         return ret
     
     def via(self):
@@ -182,7 +184,7 @@ class Wishlist():
         might excluse unavailable items or items without price tags.
         """
         tags = []
-        for p in self.prices():
+        for p in filter(None, self.prices()):
             tags.append(float(p))
         ret = sum(tags)
         return ret
