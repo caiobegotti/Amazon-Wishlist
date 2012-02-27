@@ -188,7 +188,7 @@ class Wishlist():
             cleaner = self.symbol
         for p in prices:
             res = tostring(p, encoding='unicode', method='text', pretty_print=True).strip()
-            ret.append(res.replace(cleaner,'').replace(',','.').strip())
+            ret.append(res.replace(cleaner,'').replace(',','.').replace('.00','').strip())
         return ret
     
     def via(self):
