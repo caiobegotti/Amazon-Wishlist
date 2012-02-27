@@ -146,7 +146,7 @@ class Wishlist():
     
     def prices(self):
         """Returns the price tags for every item in a wishlist."""
-        prices = self.page.xpath("//td[@class='pPrice'][not(text())]")
+        prices = self.page.xpath("//td[@class='pPrice'][not(text()) and not(strong)] | //td[@class='pPrice']/strong[3]")
         ret = []
         if 'EUR' in self.currency:
             cleaner = 'EUR'
@@ -157,7 +157,7 @@ class Wishlist():
         else:
             cleaner = self.symbol
         for p in prices:
-            res = tostring(p, encoding='utf-8', method='text', pretty_print=True).strip()
+            res = tostring(p, encoding='unicode', method='text', pretty_print=True).strip()
             ret.append(res.replace(cleaner,'').replace(',','.').strip())
         return ret
     
