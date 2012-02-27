@@ -1,49 +1,72 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import optparse
+
 from sys import exit
 
 from amazonwish.config import *
 from amazonwish.amazonwish import Wishlist
 from amazonwish.amazonwish import Profile
 
-wl = Wishlist('2KRQL6OB16TTG', country='jp')
+def basin():
+    parser = optparse.OptionParser("Usage: %prog [options]")
+    parser.add_option("-i", "--id", dest="id", type="string", help="wishlist ID (i.e. 3MCYFXCFDH4FA)")
+    parser.add_option("-s", "--store", dest="store", type="string", help="store domain (e.g. us, ca, uk)")
+ 
+    (options, args) = parser.parse_args()
+    if options.id is None:
+        print 'At least the wishlist ID is necessary, store will default to the main one'
+        parser.print_help()
+    else:
+        tests(options.id, options.store)
 
-titles = wl.titles()
-authors = wl.authors()
-covers = wl.covers()
-prices = wl.prices()
-via = wl.via()
+def tests(id, store):
+    if store is None:
+        store = 'us'
 
-print 'Your titles are:'
-for entry in titles: 
-    print '\t=' + entry
+    wl = Wishlist(id, country=store)
 
-print 'The titles authors are:'
-for entry in authors: 
-    print '\t=' + entry
+    titles = wl.titles()
+    authors = wl.authors()
+    covers = wl.covers()
+    prices = wl.prices()
+    via = wl.via()
 
-print 'Your items covers:'
-for entry in covers: 
-    print '\t=' + entry
+    print 'The titles authors are:'
+    for entry in authors: 
+        print '\t=' + entry
 
-print 'Their prices:'
-for entry in prices:
-    print '\t=' + entry
+    print 'Your titles are:'
+    for entry in titles: 
+        print '\t=' + entry
 
-print 'Some external sources:'
-for entry in via: 
-    print '\t=' + entry
+    print 'Your items covers:'
+    for entry in covers: 
+        print '\t=' + entry
+    
+    print 'Their prices:'
+    for entry in prices:
+        print '\t=' + entry
 
-p = Profile('2KRQL6OB16TTG', country='jp')
+    print 'Some external sources:'
+    for entry in via: 
+        print '\t=' + entry
 
-info = p.basicInfo()
-print 'Your name and avatar:'
-print info
+    p = Profile(id, country=store)
 
-lists = p.wishlistsDetails()
-print 'Your lists and their sizes:'
-print lists
+    info = p.basicInfo()
+    print 'Your name and avatar:'
+    print info
 
-total = wl.total_expenses()
-print 'Your wishlist is worth ' + wl.currency + ' ' + wl.symbol + str(total)
+    lists = p.wishlistsDetails()
+    print 'Your lists and their sizes:'
+    print lists
+
+    total = wl.total_expenses()
+    print 'Your wishlist is worth ' + wl.currency + ' ' + wl.symbol + str(total)
+
+    #print zip(titles, prices)
+
+if __name__ == "__main__":
+    basin()
