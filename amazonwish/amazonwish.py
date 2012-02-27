@@ -37,13 +37,10 @@ class Profile():
         userid = self.id
         url = 'http://www.amazon' + domain + '/wishlist/' + userid
         if 'us' in self.country or 'uk' in self.country:
-            print 'UK or American store charset...'
             parser = etree.HTMLParser(encoding='latin-1')
         elif 'jp' in self.country:
-            print 'Japanese store charset...'
             parser = etree.HTMLParser(encoding='shift-jis')
         else:
-            print 'Defaulting to UTF-8...'
             parser = etree.HTMLParser(encoding='utf-8')
         self.page = etree.parse(url, parser)
     
@@ -121,13 +118,10 @@ class Wishlist():
                  '&items-per-page=1000']
         url = 'http://www.amazon' + domain + '/wishlist/' + userid + ''.join(query)
         if 'us' in self.country or 'uk' in self.country:
-            print 'UK or American store charset...'
             parser = etree.HTMLParser(encoding='latin-1')
         elif 'jp' in self.country:
-            print 'Japanese store charset...'
             parser = etree.HTMLParser(encoding='shift-jis')
         else:
-            print 'Defaulting to UTF-8...'
             parser = etree.HTMLParser(encoding='utf-8')
         self.page = etree.parse(url, parser)
 
