@@ -30,6 +30,7 @@ def tests(id, store):
     titles = wl.titles()
     authors = wl.authors()
     covers = wl.covers()
+    urls = wl.urls()
     prices = wl.prices()
     via = wl.via()
 
@@ -43,6 +44,10 @@ def tests(id, store):
 
     print 'Your items covers:'
     for entry in covers: 
+        print '\t=' + entry
+    
+    print 'Items URLs are:'
+    for entry in urls: 
         print '\t=' + entry
     
     print 'Their prices:'

@@ -179,7 +179,17 @@ class Wishlist():
         for c in covers:
             ret.append(c)
         return ret
-    
+   
+    def urls(self):
+        """Returns the page address of a given item in the wishlist, with its full details"""
+        urls = self.page.xpath("//tbody[@class='itemWrapper']//@name")
+        ret = []
+        for u in urls:
+            if 'item' in u:
+                res = 'http://www.amazon' + self.domain + '/dp/' + u.split('.')[3]
+                ret.append(res)
+        return ret
+ 
     def total_expenses(self):
         """
         Returns the total sum of all prices, without currency symbols,
