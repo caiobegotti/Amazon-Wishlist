@@ -1,8 +1,18 @@
+# Copyright (C) 2012 - Caio Begotti <caio1982@gmail.com>
+#
+# Distributed under the GPLv2, see the LICENSE file.
+
 """
 Python version of the old and buggy Perl module WWW::Amazon::Wishlist.
 It's written using LXML and XPaths for better readability. It supports the
 Amazon stores in the US, UK, France, Spain, Italy, Germany, Japan and China.
+
+You need to load the parameters of stores up before using this module:
+
+>>> from amazonwish.config import *
 """
+
+__author__ = "Caio Begotti <caio1982@gmail.com>"
 
 from lxml import etree
 from lxml.html import tostring
@@ -13,14 +23,17 @@ class Profile():
     The Profile() class is the one responsible for retrieving
     information about a given user, such as name, profile photo,
     existing wishlists and their names and size.
+
+    >>> from amazonwish.amazonwish import Profile
+    >>> p = Profile('3MCYFXCFDH4FA', country='us')
     """
 
-    def readConfig(self, country):
+    def _readConfig(self, country):
         params = countryParams(country)
         return params
 
     def __init__(self, id, country):
-        params = self.readConfig(country)
+        params = self._readConfig(country)
         self.currency = params['currency']
         self.domain = params['domain']
         self.symbol = params['symbol']
@@ -48,6 +61,8 @@ class Profile():
         """
         Returns the name of the wishlist owner and, if available,
         the address of its profile picture.
+
+        >>> info = p.basicInfo()
         """
         # wishlists are supposed to show a first name, so it's safe to assume it will never be null
         name = self.page.xpath("//td[@id='profile-name-Field']")
@@ -60,7 +75,10 @@ class Profile():
         return ret
 
     def wishlists(self):
-        """Returns a list of wishlists codes for a given person."""
+        """Returns a list of wishlists codes for a given person.
+
+        >>> lists = p.wishlists()
+        """
         lists = self.page.xpath("//div[@id='profile']/div[@id='regListpublicBlock']/div/h3/a")
         return lists
 
@@ -69,6 +87,8 @@ class Profile():
         Returns a tuple with lists, the first with all wishlists
         codes and the second with their total number of items
         (i.e. wishlist size).
+
+        >>> details = p.wishlistsDetails()
         """
         retcodes = []
         retsizes = []
@@ -91,14 +111,17 @@ class Wishlist():
     (if books) or items picture, list which external sources your
     wishlist uses and even the total amount necessary if you were
     to buy all the items at once.
+
+    >>> from amazonwish.amazonwish import Wishlist
+    >>> wl = Wishlist('3MCYFXCFDH4FA', country='us')
     """
 
-    def readConfig(self, country):
+    def _readConfig(self, country):
         params = countryParams(country)
         return params
 
     def __init__(self, id, country):
-        params = self.readConfig(country)
+        params = self._readConfig(country)
         self.currency = params['currency']
         self.domain = params['domain']
         self.symbol = params['symbol']
@@ -126,7 +149,10 @@ class Wishlist():
         self.page = etree.parse(url, parser)
 
     def authors(self):
-        """Returns the authors names and co-writers for every item."""
+        """Returns the authors names and co-writers for every item.
+        
+        >>> authors = wl.authors()
+        """
         authors = self.page.xpath("//div[@class='pTitle']/span[@class='small itemByline'] | //div[@class='pTitle']/span/strong/span")
         ret = []
         for a in authors:
@@ -137,6 +163,8 @@ class Wishlist():
         """
         Returns items titles, even if they are pretty long
         ones (like academic books or journals).
+        
+        >>> titles = wl.titles()
         """
         titles = self.page.xpath("//div[@class='pTitle']/strong//text()")
         ret = []
@@ -145,7 +173,10 @@ class Wishlist():
         return ret
     
     def prices(self):
-        """Returns the price tags for every item in a wishlist."""
+        """Returns the price tags for every item in a wishlist.
+        
+        >>> prices = wl.prices()
+        """
         prices = self.page.xpath("//td[@class='pPrice'][not(text()) and not(strong)] | //td[@class='pPrice']/strong[3]")
         ret = []
         if 'EUR' in self.currency:
@@ -165,6 +196,8 @@ class Wishlist():
         """
         Returns the original web page from which the wished item was
         pulled, only for Universal items not from Amazon directly.
+        
+        >>> via = wl.via()
         """
         via = self.page.xpath("//div/form/table/tbody[*]/tr[*]/td[*]/strong[2]")
         ret = []
@@ -173,7 +206,10 @@ class Wishlist():
         return ret
     
     def covers(self):
-        """Returns the addresses of items pictures (e.g. book covers, albums pictures)."""
+        """Returns the addresses of items pictures (e.g. book covers, albums pictures).
+        
+        >>> covers = wl.covers()
+        """
         covers = self.page.xpath("//div/form/table/tbody[*]/tr[*]/td[*]/div[@class='pImage']/img/@src")
         ret = []
         for c in covers:
@@ -181,7 +217,10 @@ class Wishlist():
         return ret
    
     def urls(self):
-        """Returns the page address of a given item in the wishlist, with its full details"""
+        """Returns the page address of a given item in the wishlist, with its full details.
+        
+        >>> urls = wl.urls()
+        """
         urls = self.page.xpath("//tbody[@class='itemWrapper']//@name")
         ret = []
         for u in urls:
@@ -194,6 +233,8 @@ class Wishlist():
         """
         Returns the total sum of all prices, without currency symbols,
         might excluse unavailable items or items without price tags.
+        
+        >>> total = wl.total_expenses()
         """
         tags = []
         for p in filter(None, self.prices()):
