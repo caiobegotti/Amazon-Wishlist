@@ -75,5 +75,12 @@ def tests(id, store):
 
     #print zip(titles, prices)
 
+    print 'Vias: ' + str(len(via))
+    print 'Authors: ' + str(len(authors))
+    print 'Titles: ' + str(len(titles))
+    print 'Prices: ' + str(len(prices))
+    print 'URLs: ' + str(len(urls))
+    print 'Covers: ' + str(len(covers))
+
 if __name__ == "__main__":
     basin()
