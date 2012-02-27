@@ -1,10 +1,10 @@
-# pretty much the same idea, but less hackish, if possible:
-# lynx --dump --nolist 'http://www.amazon.com/wishlist/3MCYFXCFDH4FA/ref=cm_wl_act_print_o?_encoding=UTF8&layout=standard-print&disableNav=1&visitor-view=1&items-per-page=1000'
-# | sed '/\$/!d;s/^.*\$//g' | tr '\n' '+' | sed 's/+$//' | bc
-
 # US
 boto = 'CJ9SMX69NW27'
+
+# US
 caio = '3MCYFXCFDH4FA'
+
+# US
 claudio = '2QFV8ADUUJOZ8'
 
 # CA
