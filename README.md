@@ -15,7 +15,6 @@ TODO
 
 * Write a scrapper using only someone's e-mail address
 * Btw, I need to clean up, strip, whatever, the attributions (by, di, von, de)
-* Normalize all returns to the same type, if possible
 * Some coded tests would be good...
 
 License
