@@ -202,7 +202,7 @@ class Wishlist():
         ret = []
         for v in via:
             ret.append(v.text.replace('www.',''))
-        return ret
+        return set(ret)
     
     def covers(self):
         """Returns the addresses of items pictures (e.g. book covers, albums pictures).
