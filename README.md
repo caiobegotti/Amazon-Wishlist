@@ -10,6 +10,8 @@ Usage
 
 It's a simple module and the code documention is self-explanatory. Take a look at the test application `basin.py`.
 
+Also you can try the built-in documentation with `python -c 'from amazonwish import amazonwish; help(amazonwish)'`.
+
 TODO
 ====
 
