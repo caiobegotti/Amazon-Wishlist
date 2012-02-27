@@ -224,7 +224,11 @@ class Wishlist():
         ret = []
         for u in urls:
             if 'item' in u:
-                res = 'http://www.amazon' + self.domain + '/dp/' + u.split('.')[3]
+                code = u.split('.')[3]
+                if code:
+                    res = 'http://www.amazon' + self.domain + '/dp/' + code
+                else:
+                    res = ''
                 ret.append(res)
         return ret
  
