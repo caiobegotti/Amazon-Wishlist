@@ -25,6 +25,7 @@ class Profile():
         self.domain = params['domain']
         self.symbol = params['symbol']
         self.id = id
+        self.country = country
         self._download()
 
     def _download(self):
@@ -35,14 +36,17 @@ class Profile():
         domain = self.domain
         userid = self.id
         url = 'http://www.amazon' + domain + '/wishlist/' + userid
-        if ('GBP' or 'USD') in self.currency:
+        if 'us' in self.country or 'uk' in self.country:
+            print 'UK or American store charset...'
             parser = etree.HTMLParser(encoding='latin-1')
-        elif 'JPY' in self.currency:
+        elif 'jp' in self.country:
+            print 'Japanese store charset...'
             parser = etree.HTMLParser(encoding='shift-jis')
         else:
+            print 'Defaulting to UTF-8...'
             parser = etree.HTMLParser(encoding='utf-8')
         self.page = etree.parse(url, parser)
-
+    
     def basicInfo(self):
         """
         Returns the name of the wishlist owner and, if available,
@@ -102,6 +106,7 @@ class Wishlist():
         self.domain = params['domain']
         self.symbol = params['symbol']
         self.id = id
+        self.country = country
         self._download()
         
     def _download(self):
@@ -115,17 +120,20 @@ class Wishlist():
                  '&visitor-view=1',
                  '&items-per-page=1000']
         url = 'http://www.amazon' + domain + '/wishlist/' + userid + ''.join(query)
-        if ('GBP' or 'USD') in self.currency:
+        if 'us' in self.country or 'uk' in self.country:
+            print 'UK or American store charset...'
             parser = etree.HTMLParser(encoding='latin-1')
-        elif 'JPY' in self.currency:
+        elif 'jp' in self.country:
+            print 'Japanese store charset...'
             parser = etree.HTMLParser(encoding='shift-jis')
         else:
+            print 'Defaulting to UTF-8...'
             parser = etree.HTMLParser(encoding='utf-8')
         self.page = etree.parse(url, parser)
 
     def authors(self):
         """Returns the authors names and co-writers for every item."""
-        authors = self.page.xpath("//div[@class='pTitle']/span")
+        authors = self.page.xpath("//div[@class='pTitle']/span[@class='small itemByline'] | //div[@class='pTitle']/span/strong/span")
         ret = []
         for a in authors:
             ret.append(a.text.strip())
@@ -136,11 +144,10 @@ class Wishlist():
         Returns items titles, even if they are pretty long
         ones (like academic books or journals).
         """
-        titles = self.page.xpath("//div[@class='pTitle']/strong")
+        titles = self.page.xpath("//div[@class='pTitle']/strong//text()")
         ret = []
         for t in titles:
-            res = tostring(t, encoding='utf-8', method='text', pretty_print=True).strip()
-            ret.append(res)
+            ret.append(t)
         return ret
     
     def prices(self):
