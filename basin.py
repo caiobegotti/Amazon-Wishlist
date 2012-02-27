@@ -14,7 +14,7 @@ from amazonwish.amazonwish import Profile
 def basin():
     parser = optparse.OptionParser("Usage: %prog [options]")
     parser.add_option("-i", "--id", dest="id", type="string", help="wishlist ID (i.e. 3MCYFXCFDH4FA)")
-    parser.add_option("-s", "--store", dest="store", type="string", help="store domain (e.g. us, ca, uk)")
+    parser.add_option("-s", "--store", dest="store", type="string", help="store domain [us, uk, ca, fr, es, it, de, jp, cn]")
  
     (options, args) = parser.parse_args()
     if options.id is None:
