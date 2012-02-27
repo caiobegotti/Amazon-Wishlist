@@ -14,7 +14,6 @@ TODO
 ====
 
 * Write a scrapper using only someone's e-mail address
-* Btw, I need to clean up, strip, whatever, the attributions (by, di, von, de)
 * Some coded tests would be good...
 
 License

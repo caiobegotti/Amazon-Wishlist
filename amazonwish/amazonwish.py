@@ -153,9 +153,14 @@ class Wishlist():
         >>> authors = wl.authors()
         """
         authors = self.page.xpath("//div[@class='pTitle']/span[@class='small itemByline'] | //div[@class='pTitle']/span/strong/span")
+        attr = ('de ', 'di ', 'by ', 'von ')
         ret = []
         for a in authors:
-            ret.append(a.text.strip())
+            a = a.text.strip()
+            if a.startswith(tuple(attr)):
+                ret.append(a[3:].strip())
+            else:
+                ret.append(a)
         return ret
     
     def titles(self):
