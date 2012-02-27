@@ -128,11 +128,7 @@ class Wishlist():
         authors = self.page.xpath("//div[@class='pTitle']/span")
         ret = []
         for a in authors:
-            res = tostring(a, encoding='utf-8', method='text', pretty_print=True).strip()
-            if '~'in res:
-                ret.append(res.split(' ~ ')[1])
-            else:
-                ret.append(res)
+            ret.append(a.text.strip())
         return ret
     
     def titles(self):
@@ -143,12 +139,13 @@ class Wishlist():
         titles = self.page.xpath("//div[@class='pTitle']/strong")
         ret = []
         for t in titles:
-            ret.append(t.text)
+            res = tostring(t, encoding='utf-8', method='text', pretty_print=True).strip()
+            ret.append(res)
         return ret
     
     def prices(self):
         """Returns the price tags for every item in a wishlist."""
-        prices = self.page.xpath("//td[@class='pPrice']")
+        prices = self.page.xpath("//td[@class='pPrice'][not(text())]")
         ret = []
         if 'EUR' in self.currency:
             cleaner = 'EUR'
@@ -160,7 +157,7 @@ class Wishlist():
             cleaner = self.symbol
         for p in prices:
             res = tostring(p, encoding='utf-8', method='text', pretty_print=True).strip()
-            ret.append(res.replace(cleaner,'').replace(',','.'))
+            ret.append(res.replace(cleaner,'').replace(',','.').strip())
         return ret
     
     def via(self):
