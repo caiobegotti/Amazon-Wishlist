@@ -1,32 +1,21 @@
-# US
-boto = 'CJ9SMX69NW27'
+boto = -i CJ9SMX69NW27 -s us
 
-# US
-caio = '3MCYFXCFDH4FA'
+caio = -i 3MCYFXCFDH4FA -s us
 
-# US
-claudio = '2QFV8ADUUJOZ8'
+claudio = -i 2QFV8ADUUJOZ8 -s us
 
-# CA
-renata = '2OO8G9NM4QYQJ'
+renata = -i 2OO8G9NM4QYQJ -s ca
 
-# UK
-tony = '25LUEB8ZTW0YD'
+tony = -i 25LUEB8ZTW0YD -s uk
 
-# FR
-blino = '377PE49C4Y7UC'
+blino = -i 377PE49C4Y7UC -s fr
 
-# DE
-zuck = '1JZ9TLZEUZHZX'
+zuck = -i 1JZ9TLZEUZHZX -s de
 
-# ES
-juan = '58GCAE5DT41X'
+juan = -i 58GCAE5DT41X -s es
 
-# IT
-luigi = 'Y0P9HTJILVLW'
+luigi = -i Y0P9HTJILVLW -s it
 
-# JP
-kato = '2KRQL6OB16TTG'
+kato = -i 2KRQL6OB16TTG -s jp
 
-# CN
-ming = '3BNMGCLGH93KY'
+ming = -i 3BNMGCLGH93KY -s cn
