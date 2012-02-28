@@ -14,7 +14,7 @@ You need to load the parameters of stores up before using this module:
 __author__ = "Caio Begotti <caio1982@gmail.com>"
 
 from lxml import etree
-from lxml.html import tostring
+from lxml.html import tostring, fromstring
 from config import *
 
 class Profile():
@@ -152,15 +152,28 @@ class Wishlist():
         
         >>> authors = wl.authors()
         """
-        authors = self.page.xpath("//div[@class='pTitle']/span[@class='small itemByline'] | //div[@class='pTitle']/span/strong/span")
+        authors = self.page.xpath("//div[@class='pTitle']")
         attr = ('de ', 'di ', 'by ', 'von ')
         ret = []
         for a in authors:
-            a = a.text.strip()
-            if a.startswith(tuple(attr)):
-                ret.append(a[3:].strip())
+            subtree = tostring(a, encoding='unicode', method='html', pretty_print=True)
+            if 'span' in subtree:
+                parser = etree.HTMLParser()
+                div = etree.fromstring(subtree, parser)
+                res = div.xpath("//span[@class='small itemByline']//text()")
+                for a in res:
+                    a = a.replace('~','').strip()
+                    if a.startswith(tuple(attr)):
+                        a = a[3:].strip()
+                        ret.append(a)
+                    else:
+                        ret.append(a)
             else:
-                ret.append(a)
+                ret.append(ur'')
+        dirt = ['DVD','VHS']
+        for d in dirt:
+            while d in ret:
+                ret.remove(d)
         return ret
     
     def titles(self):

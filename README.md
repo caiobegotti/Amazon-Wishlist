@@ -15,6 +15,7 @@ Also you can try the built-in documentation with `python -c 'from amazonwish imp
 TODO
 ====
 
+* Optimize Wishlist.authors(), too hackish
 * Write a scrapper using only someone's e-mail address
 * Some coded tests would be good...
 
