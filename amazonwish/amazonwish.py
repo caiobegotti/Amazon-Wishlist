@@ -152,6 +152,8 @@ class Wishlist():
         
         >>> authors = wl.authors()
         """
+        # TODO: check .it, .ca and .de pages for misalignment, also de printing empty dups
+        #       though i can't check .jp or .cn for obvious reasons...
         authors = self.page.xpath("//div[@class='pTitle']")
         attr = ('de ', 'di ', 'by ', 'von ')
         ret = []
