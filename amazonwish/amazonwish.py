@@ -14,7 +14,7 @@ You need to load the parameters of stores up before using this module:
 __author__ = "Caio Begotti <caio1982@gmail.com>"
 
 from lxml import etree
-from lxml.html import tostring, fromstring, parse
+from lxml.html import tostring, fromstring
 from config import *
 
 class Search():
@@ -46,7 +46,8 @@ class Search():
                '&field-name=',
                input]
         url = 'http://www.amazon' + self.domain + ''.join(query)
-        self.page = parse(url).getroot()
+        parser = etree.HTMLParser()
+        self.page = etree.parse(url, parser)
     
     def list(self):
         """
@@ -58,10 +59,9 @@ class Search():
         >>> for l in lists:
         >>>     print l
         """
-        names = self.page.xpath("//td/span/a//text()")
-        lists = self.page.xpath("//td/span/a//@href")
+        names = self.page.xpath("//td/span/a//text() | //h1[@class='visitor']//text()")
+        lists = self.page.xpath("//td/span/a//@href | //div[@id='sortbarDisplay']/form//@action")
         codes = []
-        ret = []
         for l in lists:
             codes.append(l.split('/')[3])
         return zip(names, codes)
