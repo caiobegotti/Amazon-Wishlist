@@ -17,6 +17,7 @@ TODO
 
 * Optimize Wishlist.authors(), too hackish
 * Write a scrapper using only someone's e-mail address
+* Real preventive error handling, that's web scrapping dude
 * Some coded tests would be good...
 
 License
