@@ -14,8 +14,58 @@ You need to load the parameters of stores up before using this module:
 __author__ = "Caio Begotti <caio1982@gmail.com>"
 
 from lxml import etree
-from lxml.html import tostring, fromstring
+from lxml.html import tostring, fromstring, parse
 from config import *
+
+class Search():
+    """
+    The Search() class is the one to be used if you don't know an
+    user's wishlist ID and need to look them up by e-mail or their name.
+    
+    >>> from amazonwish.amazonwish import Search
+    >>> s = Search('begotti', country='us')
+    """
+    def _readConfig(self, country):
+        params = countryParams(country)
+        return params
+
+    def __init__(self, input, country):
+        params = self._readConfig(country)
+        self.currency = params['currency']
+        self.domain = params['domain']
+        self.symbol = params['symbol']
+        self.input = input
+        self.country = country
+        self._download()
+
+    def _download(self):
+        input = self.input
+        query = ['/gp/registry/search.html?',
+               'ie=UTF8',
+               '&type=wishlist',
+               '&field-name=',
+               input]
+        url = 'http://www.amazon' + self.domain + ''.join(query)
+        self.page = parse(url).getroot()
+    
+    def list(self):
+        """
+        Returns a list with tuples containing all matching usernames
+        and their main wishlist ID, with which you can get secondary
+        lists via the Wishlist() class.
+        
+        >>> lists = s.list()
+        >>> for l in lists:
+        >>>     print l
+        """
+        names = self.page.xpath("//td/span/a//text()")
+        lists = self.page.xpath("//td/span/a//@href")
+        codes = []
+        ret = []
+        for l in lists:
+            codes.append(l.split('/')[3])
+        return zip(names, codes)
+
 
 class Profile():
     """
