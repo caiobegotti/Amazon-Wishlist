@@ -5,8 +5,6 @@
 
 import optparse
 
-from sys import exit
-
 from amazonwish.config import *
 from amazonwish.amazonwish import Wishlist
 from amazonwish.amazonwish import Profile
