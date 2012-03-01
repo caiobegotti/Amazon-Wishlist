@@ -46,6 +46,12 @@ class Search():
                '&field-name=',
                input]
         url = 'http://www.amazon' + self.domain + ''.join(query)
+
+        # i thought we should use lxml's submit_form and all that stuff
+        # but turns out it handles forms just fine if i can pass
+        # parameters in the url query, which is good but lxml.html's
+        # parse can't follow 302 amazon returns (curl's -L flag), so
+        # i had to stick with etree's good and old HTMLParser
         parser = etree.HTMLParser()
         self.page = etree.parse(url, parser)
     
@@ -59,6 +65,7 @@ class Search():
         >>> for l in lists:
         >>>     print l
         """
+        # before pipe, page with usernames; after, single exact matches
         names = self.page.xpath("//td/span/a//text() | //h1[@class='visitor']//text()")
         lists = self.page.xpath("//td/span/a//@href | //div[@id='sortbarDisplay']/form//@action")
         codes = []
