@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Amazon Wishlist : Python version of the old and buggy Perl module WWW::Amazon::Wishlist" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Amazon Wishlist</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/caio1982/Amazon-Wishlist">Fork Me on GitHub</a>
+
+          <h1 id="project_title">Amazon Wishlist</h1>
+          <h2 id="project_tagline">Python version of the old and buggy Perl module WWW::Amazon::Wishlist</h2>
+
+          <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/caio1982/Amazon-Wishlist/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/caio1982/Amazon-Wishlist/tarball/master">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>About</h1>
+
+<p>Python version of the old and buggy Perl module WWW::Amazon::Wishlist. Using Amazon Wishlist you don't need to manually parse Amazon's wishlists anymore, you can simply search for any given costumer there and retrieve their details, how many items their lists have, books authors, titles, prices etc. It's written using LXML and XPaths for better readability and so far I guarantee it works fine with 2.6 in OSX.</p>
+
+<p>This is my first attempt in writing a Python module so bear with me as you find something not really looking pythonic. It supports the Amazon stores in the US, UK, France, Spain, Italy, Germany, Japan and China. I'm still behind testing them all, though.</p>
+
+<h1>Usage</h1>
+
+<p>It's a simple module and the code documention is self-explanatory. Take a look at the test application <code>basin.py</code>.</p>
+
+<p>Also you can try the built-in documentation with <code>python -c 'from amazonwish import amazonwish; help(amazonwish)'</code>.</p>
+
+<h1>TODO</h1>
+
+<ul>
+<li>Optimize Wishlist.authors(), too hackish</li>
+<li>Real preventive error handling, that's web scrapping dude</li>
+<li>Some coded tests would be good...</li>
+</ul><h1>License</h1>
+
+<p>All files in this repository are under GPLv2, please see the LICENSE file for details.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Amazon Wishlist maintained by <a href="https://github.com/caio1982">caio1982</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
