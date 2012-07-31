@@ -65,9 +65,13 @@ def tests(id, store):
     print 'Your name and avatar:'
     print info
 
-    lists = p.wishlistsDetails()
-    print 'Your lists and their sizes:'
+    lists = p.wishlists()
+    print 'Your lists are:'
     print lists
+
+    details = p.wishlistsDetails()
+    print 'Your lists and their sizes:'
+    print details
 
     total = wl.total_expenses()
     print 'Your wishlist is worth ' + wl.currency + ' ' + wl.symbol + str(total)
