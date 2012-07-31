@@ -135,7 +135,7 @@ class Profile():
 
         >>> lists = p.wishlists()
         """
-        lists = self.page.xpath("//div[@id='profile']/div[@id='regListpublicBlock']/div/h3/a")
+        lists = self.page.xpath("//div[@id='profile']/div[@id='regListpublicBlock']/div/h3/a//text()")
         return lists
 
     def wishlistsDetails(self):
