@@ -11,3 +11,10 @@ class TestSearchUnitedStates:
         matches = s.list()[0]
         assert matches[0] == 'Caio Begotti'
         assert matches[1] == '3MCYFXCFDH4FA'
+
+class TestSearchCanada:
+    def test_search(self):
+        s = Search('renata rocha', country='ca')
+        matches = s.list()[0]
+        assert matches[0] == 'Renata Rocha'
+        assert matches[1] == '2OO8G9NM4QYQJ'
