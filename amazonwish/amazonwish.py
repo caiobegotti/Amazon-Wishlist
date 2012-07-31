@@ -253,7 +253,7 @@ class Wishlist():
         
         >>> prices = wl.prices()
         """
-        prices = self.page.xpath("//td[@class='pPrice'][not(text()) and not(strong)] | //td[@class='pPrice']/strong[3]")
+        prices = self.page.xpath("//td[@class='pPrice'][not(text()) and not(strong)] | //td[@class='pPrice']/strong[3] | //td[@class='pPrice']/strong[1]")
         ret = []
         if 'EUR' in self.currency:
             cleaner = 'EUR'
@@ -265,7 +265,8 @@ class Wishlist():
             cleaner = self.symbol
         for p in prices:
             res = tostring(p, encoding='unicode', method='text', pretty_print=True).strip()
-            ret.append(res.replace(cleaner,'').replace(',','.').replace('.00','').strip())
+            if "At" not in res:
+                ret.append(res.replace(cleaner,'').replace(',','.').replace('.00','').strip())
         return ret
     
     def via(self):
@@ -308,7 +309,21 @@ class Wishlist():
                     res = ''
                 ret.append(res)
         return ret
- 
+
+    def ideas(self):
+        """Returs a list of ideas to shop for later, as reminders
+        
+        >>> ideas = wl.ideas()
+        """
+        ret = []
+        titles = self.titles()
+        prices = self.prices()
+        rows = zip(titles, prices)
+        for r in rows:
+            if "Idea" in r[1]:
+                ret.append(r[0])
+        return ret 
+
     def total_expenses(self):
         """
         Returns the total sum of all prices, without currency symbols,
@@ -317,7 +332,11 @@ class Wishlist():
         >>> total = wl.total_expenses()
         """
         tags = []
-        for p in filter(None, self.prices()):
+        prices = self.prices()
+        for p in prices:
+            if "Idea" in p:
+                prices.remove(p)
+        for p in filter(None, prices):
             tags.append(float(p))
         ret = sum(tags)
         return ret

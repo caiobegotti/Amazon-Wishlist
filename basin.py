@@ -33,6 +33,7 @@ def tests(id, store):
     urls = wl.urls()
     prices = wl.prices()
     via = wl.via()
+    ideas = wl.ideas()
 
     print 'The titles authors are:'
     for entry in authors: 
@@ -73,12 +74,15 @@ def tests(id, store):
 
     #print zip(titles, prices)
 
-    print 'Vias: ' + str(len(via))
-    print 'Authors: ' + str(len(authors))
-    print 'Titles: ' + str(len(titles))
-    print 'Prices: ' + str(len(prices))
-    print 'URLs: ' + str(len(urls))
-    print 'Covers: ' + str(len(covers))
+    #print 'Vias: ' + str(len(via))
+    #print 'Authors: ' + str(len(authors))
+    #print 'Titles: ' + str(len(titles))
+    #print 'Prices: ' + str(len(prices))
+    #print 'URLs: ' + str(len(urls))
+    #print 'Covers: ' + str(len(covers))
+
+    ideas = wl.ideas()
+    print ideas
 
 if __name__ == "__main__":
     basin()
