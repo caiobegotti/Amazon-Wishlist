@@ -245,7 +245,7 @@ class Wishlist():
         titles = self.page.xpath("//div[@class='pTitle']/strong//text()")
         ret = []
         for t in titles:
-            ret.append(t)
+            ret.append(t.replace(u'\u200B', '').strip())
         return ret
     
     def prices(self):
