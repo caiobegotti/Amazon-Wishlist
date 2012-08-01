@@ -151,7 +151,7 @@ class TestGermany:
         codes = details[0]
         sizes = details[1]
         assert codes[0] == '1JZ9TLZEUZHZX'
-        assert sizes[0] == '239'
+        assert sizes[0] == '240'
 
 class TestItaly:
     def setup_method(self, method):
