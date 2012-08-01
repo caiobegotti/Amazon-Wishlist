@@ -13,7 +13,7 @@ class TestWishlistUnitedStates:
 
     def test_ideas(self):
         ideas = wl.ideas()
-        assert ideas[0] == u'Backpac\u200bk & trave\u200bl stuff'
+        assert ideas[0] == 'Backpack & travel stuff'
 
     def test_prices(self):
         prices = wl.prices()
@@ -53,5 +53,24 @@ class TestWishlistUnitedStates:
         assert covers[-217] == 'http://g-ecx.images-amazon.com/images/G/01/gifts/registries/wishlist/note01._SX44_V135173731_.png'
         assert covers[-52] == 'http://g-ecx.images-amazon.com/images/G/01/x-locale/detail/thumb-no-image._SX44_V192211878_.gif'
 
-   # titles = wl.titles()
-   # authors = wl.authors()
+    def test_titles(self):
+        titles = wl.titles()
+        assert titles[-5] == 'The Handbook of Language Variation and Change (Blackwell Handbooks in Linguistics)'
+        assert titles[-7] == 'The World\'s Major Languages'
+        assert titles[-9] == 'Three is a Crowd?: Acquiring Portuguese in a Trilingual Environment (Child Language and Child Development)'
+        assert titles[-10] == 'Computational Processing of the Portuguese Language: 7th International Workshop, PROPOR 2006, Itatiaia, Brazil, May 13-17, 2006, Proceedings (Lecture ... / Lecture Notes in Artificial Intelligence)'
+        assert titles[-13] == u'The Posthumous Memoirs of Brás Cubas (Library of Latin America)'
+        assert titles[-35] == 'Dilbert 2.0: 20 Years of Dilbert'
+        assert titles[-43] == 'A Ditadura Encurralada'
+        #assert unicode(titles[-50]) == u'As Cem Melhores Cr\u0244nicas Brasileiras'
+        assert titles[-53] == 'Punk'
+        #assert titles[-67] == 'Law \& Order: Crime Scenes'
+
+    def test_authors(self):
+        authors = wl.authors()
+        assert authors[-1] == 'Paul Brians (Author)'
+        assert authors[-5] == 'J. K. Chambers (Editor), et al.'
+        assert authors[-6] == 'Walt Wolfram'
+        assert authors[-17] == 'Rosina Lippi-Green'
+        assert authors[-30] == 'Frans De Waal, F. B. M. De Waal'
+        assert authors[-45] == ''
