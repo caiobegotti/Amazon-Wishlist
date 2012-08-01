@@ -271,7 +271,7 @@ class Wishlist():
     
     def via(self):
         """
-        Returns the original web page from which the wished item was
+        Returns the sorted original web pages from which the wished item was
         pulled, only for Universal items not from Amazon directly.
         
         >>> via = wl.via()
@@ -279,8 +279,9 @@ class Wishlist():
         via = self.page.xpath("//div/form/table/tbody[*]/tr[*]/td[*]/strong[2]")
         ret = []
         for v in via:
-            ret.append(v.text.replace('www.',''))
-        return set(ret)
+            url = v.text.replace('www.','').replace(u'\u200B', '')
+            ret.append(url.strip())
+        return sorted(list(set(ret)))
     
     def covers(self):
         """Returns the addresses of items pictures (e.g. book covers, albums pictures).
