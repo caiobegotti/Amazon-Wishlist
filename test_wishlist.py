@@ -12,12 +12,19 @@ class TestWishlistUnitedStates:
         wl = Wishlist('3MCYFXCFDH4FA', country='us')
 
     def test_ideas(self):
-        ideas = wl.ideas()[0]
-        assert ideas == u'Backpac\u200bk & trave\u200bl stuff'
+        ideas = wl.ideas()
+        assert ideas[0] == u'Backpac\u200bk & trave\u200bl stuff'
+
+    def test_prices(self):
+        prices = wl.prices()
+        assert prices[-5] == '74.95'
+        assert prices[-9] == '119.95'
+        assert prices[-15] == '7.99'
+        assert prices[-59] == '32'
+        assert prices[-217] == 'Idea'
+
    # titles = wl.titles()
    # authors = wl.authors()
    # covers = wl.covers()
    # urls = wl.urls()
-   # prices = wl.prices()
    # via = wl.via()
-   # ideas = wl.ideas()
