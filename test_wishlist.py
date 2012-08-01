@@ -23,6 +23,12 @@ class TestWishlistUnitedStates:
         assert prices[-59] == '32'
         assert prices[-217] == 'Idea'
 
+    def test_via(self):
+        via = wl.via()
+        assert via[-1] == 'xkcd.com'
+        assert via[-2] == 'submarino.com.br'
+        assert via[-3] == 'saraivauni.com.br'
+
    # titles = wl.titles()
    # authors = wl.authors()
    # covers = wl.covers()
