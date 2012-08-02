@@ -281,7 +281,8 @@ class Wishlist():
         for v in via:
             url = v.text.replace('www.','').replace(u'\u200B', '')
             ret.append(url.strip())
-        return sorted(list(set(ret)))
+        ret = sorted(list(set(ret)))
+        return ret
     
     def covers(self):
         """Returns the addresses of items pictures (e.g. book covers, albums pictures).
