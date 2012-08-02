@@ -1,0 +1,12 @@
+body {
+	font-family: 'Quando', serif;
+	background: #FFFFFF;
+	color: #000000;
+}
+
+h1, h1 > * {
+	color: #000000;
+	text-decoration: none;
+	font-family: 'Caesar Dressing', cursive;
+	font-size: 250%;
+}

@@ -1,0 +1,11 @@
+$def with (search, total, info, items)
+<h2>Found...</h2>
+<img src=$info[1] alt='avatar'/>
+$for row in search:
+    <p>User $row[0] with wishlist $row[1] worth $total bucks.</p>
+
+<h3>Whose content is...</h3>
+<ol>
+$for row in items:
+    <li><img src=$row[0] alt='cover'/><a href=$row[1]>$row[2]</a> ($row[3])</li>
+</ol>
