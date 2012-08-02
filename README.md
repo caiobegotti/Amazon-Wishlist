@@ -17,7 +17,7 @@ TODO
 
 * Optimize Wishlist.authors(), too hackish
 * Real preventive error handling, that's web scrapping dude
-* Some coded tests would be good...
+* Write more py.test codes, specially for non-US stores
 
 License
 =======
