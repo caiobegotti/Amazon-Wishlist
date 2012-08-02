@@ -42,10 +42,6 @@ class TestWishlistUnitedStates:
         assert currency == 'USD'
         assert symbol == '$'
 
-    def test_total(self):
-        total = wl.total_expenses()
-        assert str(total) == '7650.41'
-
     def test_covers(self):
         covers = wl.covers()
         assert covers[-1] == 'http://ecx.images-amazon.com/images/I/51o69JlFGQL._SL110_SL44_.jpg'
