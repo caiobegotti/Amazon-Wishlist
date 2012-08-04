@@ -1,11 +1,41 @@
-$def with (search, total, info, items)
+$def with (search, total, info, items, symbol)
+$code:
+    def cut(string):
+        if len(string) >= 70:
+            string = string.split()
+            title = ' '.join(string[:10])
+            return title + '...'
+        else:
+            return string
+    def sign(string):
+        if 'Idea' in string:
+            return string
+        elif len(string) == 0:
+            return string
+        else:
+            return ('%s%s') % (symbol, string)
+
 <h2>Found...</h2>
 <img src=$info[1] alt='avatar'/>
 $for row in search:
     <p>User $row[0] with wishlist $row[1] worth $total bucks.</p>
 
 <h3>Whose content is...</h3>
-<ol>
-$for row in items:
-    <li><img src=$row[0] alt='cover'/><a href=$row[1]>$row[2]</a> ($row[3])</li>
-</ol>
+<input id="livefilter-input" type="text" value="">
+<table id="livefilter-list">
+    <thead>
+        <tr>
+            <th></th>
+            <th><a href="javascript:sortTable(1)">Title</a></th>
+            <th><a href="javascript:sortTable(2)">Price</a></th>
+        </tr>
+    </thead>
+    <tbody>
+    $for row in items:
+        <tr>
+            <td><div class='cover' style='background-image: url($row[0])'></div></td>
+            <td><a href=$row[1]>$cut(row[2])</a><cite>$row[3]</cite></td>
+            <td><em>$sign(row[4])</em></td>
+        </tr>
+    </tbody>
+</table>

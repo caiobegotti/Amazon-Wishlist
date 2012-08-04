@@ -44,10 +44,11 @@ class index:
             covers = wl.covers()
             urls = wl.urls()
             titles = wl.titles()
+            authors = wl.authors()
             prices = wl.prices()
-            items = zip(covers, urls, titles, prices)
+            items = zip(covers, urls, titles, authors, prices)
 
-            return render.result(s.list(), total, info, items)
+            return render.result(s.list(), total, info, items, wl.symbol)
         else:
             f = form()
             return render.form(f)
