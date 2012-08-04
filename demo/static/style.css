@@ -1,3 +1,42 @@
+cite {
+	font-size: 50%;
+	color: #CCCCCC;
+	display: block;
+}
+
+tr, td, tbody, thead, table {
+	padding: 0px;
+	margin: 0px;
+}
+
+em {
+	background: #f1da36; /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover, #f1da36 0%, #ffffff 50%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 50%, color-stop(0%,#f1da36), color-stop(50%,#ffffff)); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover, #f1da36 0%, #ffffff 50%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover, #f1da36 0%,#ffffff 50%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover, #f1da36 0%,#ffffff 50%); /* IE10+ */
+	background: radial-gradient(ellipse at center, #f1da36 0%,#ffffff 50%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1da36', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+em {
+	font-size: 200%;
+	font-family: 'Just Me Again Down Here', cursive;
+}
+
+td:nth-child(3):first-letter {
+	font-size: 50%;
+}
+
+.striped {
+	background: #F9F9F9;
+}
+
+td:first-child, td:last-child {
+	background: #FFFFFF;
+}
+
 body {
 	font-family: 'Quando', serif;
 	background: #FFFFFF;
@@ -9,4 +48,24 @@ h1, h1 > * {
 	text-decoration: none;
 	font-family: 'Caesar Dressing', cursive;
 	font-size: 250%;
+}
+
+.cover {
+	background-size: 200%;
+	background-position: center center;
+	background-repeat: no-repeat;
+	width: 32px;
+	height: 32px;
+	border: 1px solid black;
+	border-radius: 120px 20px;
+	box-shadow: 2px 2px 2px #CCC;
+}
+
+th {
+	text-align: left;
+}
+
+a, a:visited {
+	text-decoration: none;
+	color: #000000;
 }
