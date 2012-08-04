@@ -48,7 +48,7 @@ class index:
             prices = wl.prices()
             items = zip(covers, urls, titles, authors, prices)
 
-            return render.result(s.list(), total, info, items, wl.symbol)
+            return render.result(s.list(), total, info, items, wl.currency)
         else:
             f = form()
             return render.form(f)

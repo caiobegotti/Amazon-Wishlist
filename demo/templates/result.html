@@ -1,4 +1,4 @@
-$def with (search, total, info, items, symbol)
+$def with (search, total, info, items, currency)
 $code:
     def cut(string):
         if len(string) >= 70:
@@ -7,13 +7,11 @@ $code:
             return title + '...'
         else:
             return string
-    def sign(string):
-        if 'Idea' in string:
-            return string
-        elif len(string) == 0:
-            return string
+    def pricing(string):
+        if len(string) == 0:
+            return 'N/A'
         else:
-            return ('%s%s') % (symbol, string)
+            return string
 
 <h2>Found...</h2>
 <img src=$info[1] alt='avatar'/>
@@ -27,7 +25,7 @@ $for row in search:
         <tr>
             <th></th>
             <th><a href="javascript:sortTable(1)">Title</a></th>
-            <th><a href="javascript:sortTable(2)">Price</a></th>
+            <th><a href="javascript:sortTable(2)">Price (in $currency)</a></th>
         </tr>
     </thead>
     <tbody>
@@ -35,7 +33,7 @@ $for row in search:
         <tr>
             <td><div class='cover' style='background-image: url($row[0])'></div></td>
             <td><a href=$row[1]>$cut(row[2])</a><cite>$row[3]</cite></td>
-            <td><em>$sign(row[4])</em></td>
+            <td><em>$pricing(row[4])</em></td>
         </tr>
     </tbody>
 </table>

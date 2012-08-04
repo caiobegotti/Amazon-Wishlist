@@ -1,7 +1,12 @@
 cite {
+	font-style: normal;
 	font-size: 50%;
 	color: #CCCCCC;
 	display: block;
+}
+
+table {
+	border-collapse: collapse;
 }
 
 tr, td, tbody, thead, table {
@@ -25,12 +30,10 @@ em {
 	font-family: 'Just Me Again Down Here', cursive;
 }
 
-td:nth-child(3):first-letter {
-	font-size: 50%;
-}
-
-.striped {
-	background: #F9F9F9;
+tr:hover > td:nth-child(2), tr:hover > td:nth-child(2) > cite {
+	color: #000000;
+	background-color: #F8F8F8;
+	border-radius: 20px;
 }
 
 td:first-child, td:last-child {
