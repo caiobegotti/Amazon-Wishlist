@@ -106,7 +106,7 @@ class Profile():
         userid = self.id
         url = 'http://www.amazon' + domain + '/wishlist/' + userid
         if 'us' in self.country or 'uk' in self.country:
-            parser = etree.HTMLParser(encoding='latin-1')
+            parser = etree.HTMLParser(encoding='iso-latin-1')
         elif 'jp' in self.country:
             parser = etree.HTMLParser(encoding='shift-jis')
         else:
@@ -197,7 +197,7 @@ class Wishlist():
                  '&items-per-page=1000']
         url = 'http://www.amazon' + domain + '/wishlist/' + userid + ''.join(query)
         if 'us' in self.country or 'uk' in self.country:
-            parser = etree.HTMLParser(encoding='latin-1')
+            parser = etree.HTMLParser(encoding='iso-latin-1')
         elif 'jp' in self.country:
             parser = etree.HTMLParser(encoding='shift-jis')
         else:
