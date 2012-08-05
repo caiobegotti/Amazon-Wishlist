@@ -292,6 +292,8 @@ class Wishlist():
         covers = self.page.xpath("//div/form/table/tbody[*]/tr[*]/td[*]/div[@class='pImage']/img/@src")
         ret = []
         for c in covers:
+            c = c.split('.')
+            c = '.'.join(c[:-2]) + '.' + c[-1]
             ret.append(c)
         return ret
    
