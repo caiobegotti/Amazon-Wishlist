@@ -1,6 +1,7 @@
 $def with (search, total, info, items, currency)
 $code:
     def cut(string):
+        string = string[2]
         if len(string) >= 70:
             string = string.split()
             title = ' '.join(string[:10])
@@ -8,13 +9,19 @@ $code:
         else:
             return string
     def pricing(string):
+        string = string[4]
         if len(string) == 0:
             return 'N/A'
         else:
             return string
+    def avatar(string):
+        if len(string) == 2:
+            return string[1]
+        else:
+            return ''
 
 <h2>Found...</h2>
-<img src=$info[1] alt='avatar'/>
+<div id='avatar' style='background-image: url("$avatar(info)");'></div>
 $for row in search:
     <p>User $row[0] with wishlist $row[1] worth $total bucks.</p>
 
@@ -25,15 +32,15 @@ $for row in search:
         <tr>
             <th></th>
             <th><a href="#" onclick="sortTable(1); return false;">Title</a></th>
-            <th><a href="#" onclick="sortTable(2); return false;">Price (in $currency)</a></th>
+            <th><a href="#" onclick="sortTable(2); return false;">Price ($currency)</a></th>
         </tr>
     </thead>
     <tbody>
     $for row in items:
         <tr>
-            <td><div class='cover' style='background-image: url($row[0])'></div></td>
-            <td><a href=$row[1]>$cut(row[2])</a><cite>$row[3]</cite></td>
-            <td><em>$pricing(row[4])</em></td>
+            <td><div class='cover' style='background-image: url("$row[0]");'></div></td>
+            <td><a href="$row[1]">$cut(row)</a><cite>$row[3]</cite></td>
+            <td><em>$pricing(row)</em></td>
         </tr>
     </tbody>
 </table>

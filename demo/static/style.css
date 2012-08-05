@@ -1,3 +1,25 @@
+body {
+	background-image: url('basin-logo.png');
+	background-repeat: no-repeat;
+	background-position: top right;
+	padding: 0px;
+	margin: 0px;
+}
+
+footer {
+	padding: 2.5%;
+	font-size: 33;
+	text-align: center;
+}
+
+footer > p > a {
+	border-bottom: 1px dashed #CCCCCC;
+}
+
+footer > p > a:hover {
+	border-bottom: 1px solid #007FFF;
+}
+
 cite {
 	font-style: normal;
 	font-size: 50%;
@@ -5,13 +27,19 @@ cite {
 	display: block;
 }
 
-table {
+#livefilter-list {
 	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 tr, td, tbody, thead, table {
 	padding: 0px;
 	margin: 0px;
+}
+
+td {
+	padding: 5px;
 }
 
 em {
@@ -32,7 +60,7 @@ em {
 
 tr:hover > td:nth-child(2), tr:hover > td:nth-child(2) > cite {
 	color: #000000;
-	background-color: #F8F8F8;
+	background-color: #F5F5F5;
 	border-radius: 20px;
 }
 
@@ -42,15 +70,21 @@ td:first-child, td:last-child {
 
 body {
 	font-family: 'Quando', serif;
-	background: #FFFFFF;
 	color: #000000;
 }
 
-h1, h1 > * {
-	color: #000000;
-	text-decoration: none;
-	font-family: 'Caesar Dressing', cursive;
-	font-size: 250%;
+h1 {
+	width: 555px;
+	height: 140px;
+	background-image: url('basin-name.png');
+	backgroun-repeat: no-repeat;
+	margin: 0px;
+	padding: 0px;
+	margin-top: 2.5%;
+}
+
+h1 > p, h1 > a {
+	display: none;
 }
 
 .cover {
@@ -60,8 +94,19 @@ h1, h1 > * {
 	width: 32px;
 	height: 32px;
 	border: 1px solid black;
-	border-radius: 120px 20px;
-	box-shadow: 2px 2px 2px #CCC;
+	border-radius: 10px;
+	box-shadow: 2px 2px 2px #CCCCCC;
+}
+
+#avatar {
+	background-size: 200%;
+	background-position: center center;
+	background-repeat: no-repeat;
+	border-radius: 20px;
+	border: 1px solid #000000;
+	box-shadow: 4px 4px 8px #CCCCCC;
+	width: 100px;
+	height: 100px;
 }
 
 th {
@@ -71,4 +116,11 @@ th {
 a, a:visited {
 	text-decoration: none;
 	color: #000000;
+}
+
+nav, header {
+	margin-left: auto;
+	margin-right: auto;
+	border-collapse: collapse;
+	width: 85%;
 }
