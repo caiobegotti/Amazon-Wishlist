@@ -127,7 +127,9 @@ class Profile():
             ret.append(s.text)
         photo = self.page.xpath("//div[@id='profile']/div/img/@src")
         if photo:
-            ret.append(photo[0])
+            p = photo[0].split('.')
+            p = '.'.join(p[:-2]) + '.' + p[-1]
+            ret.append(p)
         return ret
 
     def wishlists(self):
