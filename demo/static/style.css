@@ -93,7 +93,7 @@ h1 > p, h1 > a {
 	background-repeat: no-repeat;
 	width: 32px;
 	height: 32px;
-	border: 1px solid black;
+	border: 1px solid transparent;
 	border-radius: 10px;
 	box-shadow: 2px 2px 2px #CCCCCC;
 }
@@ -123,4 +123,8 @@ nav, header {
 	margin-right: auto;
 	border-collapse: collapse;
 	width: 85%;
+}
+
+tr:hover > td:nth-child(1) > div {
+	border: 1px solid black;
 }
