@@ -343,6 +343,8 @@ class Wishlist():
             if "Idea" in p:
                 prices.remove(p)
         for p in filter(None, prices):
+            if p.count('.') > 1:
+                p = p.replace('.', '', (p.count('.') - 1))
             tags.append(float(p))
         ret = sum(tags)
         return ret
