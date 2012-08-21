@@ -270,7 +270,10 @@ class Wishlist():
             cleaner = self.symbol
         for p in prices:
             res = tostring(p, encoding='unicode', method='text', pretty_print=True).strip()
-            if "At" not in res:
+            if 'At' not in res:
+                # TODO: how would it work out for non-english stores? quite a huge bug ahead...
+                if 'Click' in res:
+                    res = ''
                 ret.append(res.replace(cleaner,'').replace(',','.').replace('.00','').strip())
         return ret
     
