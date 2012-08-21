@@ -71,7 +71,10 @@ class Search():
         codes = []
         for l in lists:
             codes.append(l.split('/')[3])
-        return zip(names, codes)
+        # FIXME: hack not to return empty search results,
+        # whose only anchor text is not english
+        if not 'tg' in codes:
+            return zip(names, codes)
 
 
 class Profile():
