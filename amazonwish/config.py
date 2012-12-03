@@ -46,6 +46,11 @@ COUNTRY_CONFIGS = {
       'currency': 'CNY',
       'domain'  : '.cn',
       'symbol'  : ur'\uffe5'
+    },
+    'br': {
+      'currency': 'BRL',
+      'domain'  : '.com.br',
+      'symbol'  : ur'\u0024',
     }
 }
 
