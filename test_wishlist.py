@@ -70,3 +70,51 @@ class TestWishlistUS:
         assert authors[-17] == 'Rosina Lippi-Green'
         assert authors[-30] == 'Frans De Waal, F. B. M. De Waal'
         assert authors[-45] == ''
+
+class TestWishlistUK:
+    def setup_method(self, method):
+        global wl
+        wl = Wishlist('MBI8TEEYJS10', country='uk')
+
+    def test_prices(self):
+        prices = wl.prices()
+        for p in prices:
+            try:
+                float(p)
+            except:
+                if not 'Idea' in p and p is None:
+                    assert p
+
+    def test_urls(self):
+        urls = wl.urls()
+        assert urls[0] == 'http://www.amazon.co.uk/dp/B005890FUI'
+        assert urls[1] == 'http://www.amazon.co.uk/dp/B008ETX1C8'
+        assert urls[2] == 'http://www.amazon.co.uk/dp/B005UYF6DW'
+        assert urls[3] == 'http://www.amazon.co.uk/dp/B003R0KOUQ'
+
+    def test_currency(self):
+        currency = wl.currency
+        symbol = wl.symbol
+        assert currency == 'GBP'
+        assert symbol == ur'\u00a3'
+
+    def test_covers(self):
+        covers = wl.covers()
+        assert covers[0] == 'http://ecx.images-amazon.com/images/I/41JpsttW8CL.jpg'
+        assert covers[1] == 'http://ecx.images-amazon.com/images/I/41witgYTdsL.jpg'
+        assert covers[2] == 'http://ecx.images-amazon.com/images/I/311M2ljl9kL.jpg'
+        assert covers[3] == 'http://ecx.images-amazon.com/images/I/514nO64FYTL.jpg'
+    
+    def test_titles(self):
+        titles = wl.titles()
+        assert titles[0] == 'Kindle Touch, Wi-Fi, 6" E Ink Touch Screen Display'
+        assert titles[1] == 'Official Team GB Cycling Duck'
+        assert titles[2] == "Rockport Men's Charlesview Black Lace Up K71053  12.5 UK, 13 US"
+        assert titles[3] == 'Avatar with Limited Edition Lenticular Artwork (Blu-ray 3D + Blu-ray + DVD)[Region Free]'
+
+    def test_authors(self):
+        authors = wl.authors()
+        assert authors[0] == ''
+        assert authors[1] == ''
+        assert authors[2] == ''
+        assert authors[3] == 'Sam Worthington'
