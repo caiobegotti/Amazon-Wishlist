@@ -118,3 +118,52 @@ class TestWishlistUK:
         assert authors[1] == ''
         assert authors[2] == ''
         assert authors[3] == 'Sam Worthington'
+
+class TestWishlistFrance:
+    def setup_method(self, method):
+        global wl
+        wl = Wishlist('2POKVB3027QIK', country='fr')
+
+    def test_prices(self):
+        prices = wl.prices()
+        for p in prices:
+            try:
+                float(p)
+            except:
+                if not 'Idea' in p and p is None:
+                    assert p
+
+    def test_urls(self):
+        urls = wl.urls()
+        assert urls[0] == 'http://www.amazon.fr/dp/B008384GHE'
+        assert urls[1] == 'http://www.amazon.fr/dp/2350761231'
+        assert urls[2] == 'http://www.amazon.fr/dp/2315002885'
+        assert urls[3] == 'http://www.amazon.fr/dp/2020537966'
+
+    def test_currency(self):
+        currency = wl.currency
+        symbol = wl.symbol
+        assert currency == 'EUR'
+        assert symbol == ur'\u20ac'
+
+    def test_covers(self):
+        covers = wl.covers()
+        assert covers[0] == 'http://ecx.images-amazon.com/images/I/51rKu1rvV8L.jpg'
+        assert covers[1] == 'http://ecx.images-amazon.com/images/I/41FcoyEUXBL.jpg'
+        assert covers[2] == 'http://ecx.images-amazon.com/images/I/513-V9oAo0L.jpg'
+        assert covers[3] == 'http://ecx.images-amazon.com/images/I/51WKWFVF81L.jpg'
+    
+    def test_titles(self):
+        titles = wl.titles()
+        assert titles[0] == u'Les dents de la mer - Bo\xeetier m\xe9tal [Blu-ray]'
+        assert titles[1] == "L'Agenda VDM 2012-2013"
+        assert titles[2] == "Shakespeare, c'est moi: La confession d'Edward de Vere"
+        assert titles[3] == u"Moi j'adore, la ma\xeetresse d\xe9teste"
+
+    def test_authors(self):
+        authors = wl.authors()
+        assert authors[0] == ''
+        assert authors[1] == 'Roy Scheider'
+        assert authors[2] == 'Didier Guedj (Auteur), et al.'
+        assert authors[3] == u'Jouannic Br\xfcnhilde (Auteur)'
+        assert authors[4] == u'Elisabeth Brami (Auteur), Lionel Le N\xe9ouanic (Illustrations)'
