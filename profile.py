@@ -13,7 +13,7 @@ def basin():
     parser = optparse.OptionParser("Usage: %prog [options]")
     parser.add_option("-i", "--id", dest="id", type="string", help="wishlist ID (i.e. 3MCYFXCFDH4FA)")
     parser.add_option("-s", "--store", dest="store", type="string", help="store domain [us, uk, ca, fr, es, it, de, jp, cn, br]")
- 
+
     (options, args) = parser.parse_args()
     if options.id is None:
         print 'At least the wishlist ID is necessary, store will default to the main one'
@@ -36,27 +36,27 @@ def tests(id, store):
     ideas = wl.ideas()
 
     print 'The titles authors are:'
-    for entry in authors: 
+    for entry in authors:
         print '\t=' + entry
 
     print 'Your titles are:'
-    for entry in titles: 
+    for entry in titles:
         print '\t=' + entry
 
     print 'Your items covers:'
-    for entry in covers: 
+    for entry in covers:
         print '\t=' + entry
-    
+
     print 'Items URLs are:'
-    for entry in urls: 
+    for entry in urls:
         print '\t=' + entry
-    
+
     print 'Their prices:'
     for entry in prices:
         print '\t=' + entry
 
     print 'Some external sources:'
-    for entry in via: 
+    for entry in via:
         print '\t=' + entry
 
     p = Profile(id, country=store)
