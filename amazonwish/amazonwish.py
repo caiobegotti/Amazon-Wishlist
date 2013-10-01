@@ -22,11 +22,17 @@ from config import *
 from BeautifulSoup import UnicodeDammit
 
 # that's a nice hack isn't it? i hate it
-def decoder(data):
+def _decoder(data):
     converted = UnicodeDammit(data, isHTML=True)
     if not converted.unicode:
         raise UnicodeDecodeError("Failed to detect encoding, tried [%s]", ', '.join(converted.triedEncodings))
     return converted.unicode
+
+def _parser(url):
+    parser = etree.HTMLParser()
+    page = etree.parse(url, parser)
+    data = fromstring(_decoder(tostring(page)))
+    return data
 
 class Search():
     """
@@ -57,15 +63,7 @@ class Search():
                '&field-name=',
                input]
         url = 'http://www.amazon' + self.domain + ''.join(query)
-
-        # i thought we should use lxml's submit_form and all that stuff
-        # but turns out it handles forms just fine if i can pass
-        # parameters in the url query, which is good but lxml.html's
-        # parse can't follow 302 amazon returns (curl's -L flag), so
-        # i had to stick with etree's good and old HTMLParser
-        parser = etree.HTMLParser()
-        page = etree.parse(url, parser)
-        self.page = fromstring(decoder(tostring(page)))
+        self.page = _parser(url)
 
     def list(self):
         """
@@ -120,13 +118,7 @@ class Profile():
         domain = self.domain
         userid = self.id
         url = 'http://www.amazon' + domain + '/wishlist/' + userid
-        if 'us' in self.country or 'uk' in self.country:
-            parser = etree.HTMLParser(encoding='iso-latin-1')
-        elif 'jp' in self.country:
-            parser = etree.HTMLParser(encoding='shift-jis')
-        else:
-            parser = etree.HTMLParser(encoding='utf-8')
-        self.page = etree.parse(url, parser)
+        self.page = _parser(url)
     
     def basicInfo(self):
         """
@@ -213,13 +205,7 @@ class Wishlist():
                  '&visitor-view=1',
                  '&items-per-page=1000']
         url = 'http://www.amazon' + domain + '/wishlist/' + userid + ''.join(query)
-        if 'us' in self.country or 'uk' in self.country:
-            parser = etree.HTMLParser(encoding='iso-latin-1')
-        elif 'jp' in self.country:
-            parser = etree.HTMLParser(encoding='shift-jis')
-        else:
-            parser = etree.HTMLParser(encoding='utf-8')
-        self.page = etree.parse(url, parser)
+        self.page = _parser(url)
 
     def authors(self):
         """Returns the authors names and co-writers for every item.
