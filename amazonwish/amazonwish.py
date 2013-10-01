@@ -264,6 +264,8 @@ class Wishlist():
             cleaner = 'CDN' + ur'\u0024'
         elif 'GBP' in self.currency:
             cleaner = ur'\u00a3'
+        elif 'INR' in self.currency:
+            cleaner = 'Rs. '
         else:
             cleaner = self.symbol
         for p in prices:
