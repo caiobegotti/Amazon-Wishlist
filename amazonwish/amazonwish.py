@@ -17,6 +17,17 @@ from lxml import etree
 from lxml.html import tostring, fromstring
 from config import *
 
+# only for charset detection, enforcing unicode
+# when lxml is completely shitty in doing that!
+from BeautifulSoup import UnicodeDammit
+
+# that's a nice hack isn't it? i hate it
+def decoder(data):
+    converted = UnicodeDammit(data, isHTML=True)
+    if not converted.unicode:
+        raise UnicodeDecodeError("Failed to detect encoding, tried [%s]", ', '.join(converted.triedEncodings))
+    return converted.unicode
+
 class Search():
     """
     The Search() class is the one to be used if you don't know an
@@ -53,8 +64,9 @@ class Search():
         # parse can't follow 302 amazon returns (curl's -L flag), so
         # i had to stick with etree's good and old HTMLParser
         parser = etree.HTMLParser()
-        self.page = etree.parse(url, parser)
-    
+        page = etree.parse(url, parser)
+        self.page = fromstring(decoder(tostring(page)))
+
     def list(self):
         """
         Returns a list with tuples containing all matching usernames
