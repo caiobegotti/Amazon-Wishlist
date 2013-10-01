@@ -8,7 +8,7 @@ This is my first attempt in writing a Python module so bear with me as you find 
 Usage
 =====
 
-It's a simple module and the code documention is self-explanatory. Take a look at the test application `basin.py`.
+It's a simple module and the code documention is self-explanatory. Take a look at the test application `basin.py` at https://github.com/caio1982/amazon-basin.
 
 Also you can try the built-in documentation with `python -c 'from amazonwish import amazonwish; help(amazonwish)'`.
 
