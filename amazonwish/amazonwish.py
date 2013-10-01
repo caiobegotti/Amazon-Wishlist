@@ -30,9 +30,13 @@ def _decoder(data):
 
 def _parser(url):
     parser = etree.HTMLParser()
-    page = etree.parse(url, parser)
-    data = fromstring(_decoder(tostring(page)))
-    return data
+    try:
+        page = etree.parse(url, parser)
+    except IOError:
+        raise IOError("Failed to download page data, check your connection")
+    decoded = _decoder(tostring(page))
+    tree = fromstring(decoded)
+    return tree
 
 class Search():
     """
