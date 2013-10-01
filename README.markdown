@@ -19,6 +19,7 @@ TODO
 * Real preventive error handling, that's web scrapping dude
 * Write more py.test codes, specially for non-US stores
 * Get item titles even though they are not available (xpath bugs?)
+* Currency calculation is not very robust
 
 License
 =======
