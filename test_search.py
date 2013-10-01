@@ -75,6 +75,14 @@ class TestSearchChina:
 #        assert matches[0] == 'Caio Begotti'
 #        assert matches[1] == ''
 
+class TestSearchIndia:
+    def test_search(self):
+        s = Search('caio1982@gmail.com', country='in')
+        matches = s.list()[0]
+        assert matches[0] == 'Caio Begotti'
+        assert matches[1] == 'ZVKVJQHOBAT2'
+
+
 class TestSearchUSMultiple:
     def test_search(self):
         s = Search('begotti', country='us')
