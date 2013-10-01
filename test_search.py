@@ -59,6 +59,7 @@ class TestSearchJapan:
         s = Search('caio1982@gmail.com', country='jp')
         matches = s.list()[0]
         assert matches[0] == 'Caio Begotti'
+        assert matches[0] == 'Caio B\u200begotti'
         assert matches[1] == '13RB1XNS2VF62'
 
 class TestSearchChina:
