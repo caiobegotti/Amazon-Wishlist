@@ -52,6 +52,11 @@ COUNTRY_CONFIGS = {
       'domain'  : '.com.br',
       'symbol'  : ur'\u0024',
     },
+    'mx': {
+      'currency': 'MXN',
+      'domain'  : '.com.mx',
+      'symbol'  : ur'\u0024',
+    },
     'in': {
       'currency': 'INR',
       'domain'  : '.in',
