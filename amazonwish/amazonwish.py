@@ -13,8 +13,11 @@ You need to load the parameters of stores up before using this module:
 
 __author__ = "Caio Begotti <caio1982@gmail.com>"
 
+import locale
+
 from lxml import etree
 from lxml.html import tostring, fromstring
+
 from config import *
 
 # only for charset detection, enforcing unicode
@@ -260,7 +263,7 @@ class Wishlist():
         
         >>> prices = wl.prices()
         """
-        prices = self.page.xpath("//td[@class='pPrice'][not(text()) and not(strong)] | //td[@class='pPrice']/strong[3] | //td[@class='pPrice']/strong[1]")
+        prices = self.page.xpath("//td[@class='pPrice'][not(text()) and not(strong)] | //td[@class='pPrice']/strong[3] | //td[@class='pPrice']/strong[1] | //td[@class='Price']/span/strong//text()")
         ret = []
         if 'EUR' in self.currency:
             cleaner = 'EUR'
@@ -278,7 +281,14 @@ class Wishlist():
                 # TODO: how would it work out for non-english stores? quite a huge bug ahead...
                 if 'Click' in res:
                     res = ''
-                ret.append(res.replace(cleaner,'').replace(',','.').replace('.00','').strip())
+                if 'EUR' in self.currency or 'BRL' in self.currency:
+                    res = res.replace(cleaner, '')
+                    res = res.replace('.', '')
+                    res = res.replace(',', '.')
+                else:
+                    res = res.replace(cleaner, '')
+                    res = res.replace(',', '')
+                ret.append(res)
         return ret
     
     def via(self):
@@ -357,4 +367,6 @@ class Wishlist():
                 p = p.replace('.', '', (p.count('.') - 1))
             tags.append(float(p))
         ret = sum(tags)
-        return ret
+
+        locale.setlocale(locale.LC_MONETARY, '')
+        return locale.currency(ret, grouping=True, symbol=False)
