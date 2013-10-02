@@ -301,8 +301,7 @@ class Wishlist():
         via = self.page.xpath("//div/form/table/tbody[*]/tr[*]/td[*]/strong[2]")
         ret = []
         for v in via:
-            url = v.text.replace('www.','').replace(u'\u200B', '')
-            ret.append(url.strip())
+            ret.append(v.text)
         ret = sorted(list(set(ret)))
         return ret
     
