@@ -15,6 +15,7 @@ setup(name='amazon-wishlist',
       py_modules=['amazonwish.amazonwish', 'amazonwish.config'],
       license='GNU General Public License v2 (GPLv2)',
       keywords='amazon wishlist xpath scrapping',
+      include_package_data=True,
       classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',

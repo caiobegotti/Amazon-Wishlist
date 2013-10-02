@@ -1,0 +1,2 @@
+include profile.py
+include search.py
