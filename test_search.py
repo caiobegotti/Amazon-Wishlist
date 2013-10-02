@@ -69,9 +69,18 @@ class TestSearchChina:
         assert matches[0] == 'Caio Begotti'
         assert matches[1] == '3BFG9M3CL83QR'
 
+#kindle-only for the moment, no wishlists
+#
 #class TestSearchBrazil:
 #    def test_search(self):
 #        s = Search('caio1982@gmail.com', country='br')
+#        matches = s.list()[0]
+#        assert matches[0] == 'Caio Begotti'
+#        assert matches[1] == ''
+#
+#class TestSearchMexico:
+#    def test_search(self):
+#        s = Search('caio1982@gmail.com', country='mx')
 #        matches = s.list()[0]
 #        assert matches[0] == 'Caio Begotti'
 #        assert matches[1] == ''
