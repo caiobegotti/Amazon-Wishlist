@@ -74,8 +74,8 @@ def tests(id, store):
     print details
 
     total = wl.total_expenses()
-    print 'Your wishlist is worth ' + wl.currency + ' ' + wl.symbol + str(total)
-
+    print 'In %s your wishlist is worth %s%s' % (wl.currency, wl.symbol, total)
+    
     #print zip(titles, prices)
 
     #print 'Vias: ' + str(len(via))
