@@ -5,7 +5,7 @@ def read(fname):
     return open(path.join(path.dirname(__file__), fname)).read()
 
 setup(name='amazon-wishlist',
-      version='0.2',
+      version='0.3',
       description='Python version of the old and buggy Perl module WWW::Amazon::Wishlist',
       author='Caio Begotti',
       author_email='caio1982@gmail.com',
