@@ -15,11 +15,9 @@ Also you can try the built-in documentation with `python -c 'from amazonwish imp
 TODO
 ====
 
-* Optimize Wishlist.authors(), too hackish
 * Real preventive error handling, that's web scrapping dude
 * Write more py.test codes, specially for non-US stores
-* Get item titles even though they are not available (xpath bugs?)
-* Currency calculation is not very robust
+* Get item titles even though they are not available (XPath bug?)
 
 License
 =======
