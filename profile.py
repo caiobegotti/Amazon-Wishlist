@@ -16,7 +16,7 @@ def basin():
 
     (options, args) = parser.parse_args()
     if options.id is None:
-        print 'At least the wishlist ID is necessary, store will default to the main one'
+        print 'At least the wishlist ID is necessary, store will default to the US one'
         parser.print_help()
     else:
         tests(options.id, options.store)
@@ -27,38 +27,45 @@ def tests(id, store):
 
     wl = Wishlist(id, country=store)
 
-    titles = wl.titles()
+    print 'Authors or manufacturers:'
     authors = wl.authors()
-    covers = wl.covers()
-    urls = wl.urls()
-    prices = wl.prices()
-    via = wl.via()
-    ideas = wl.ideas()
-
-    print 'The titles authors are:'
     for entry in authors:
         print '\t=' + entry
 
-    print 'Your titles are:'
+    print 'Items titles:'
+    titles = wl.titles()
     for entry in titles:
         print '\t=' + entry
 
-    print 'Your items covers:'
+    print 'Items covers:'
+    covers = wl.covers()
     for entry in covers:
         print '\t=' + entry
 
-    print 'Items URLs are:'
+    print 'Items URLs:'
+    urls = wl.urls()
     for entry in urls:
         print '\t=' + entry
 
-    print 'Their prices:'
+    print 'Items prices:'
+    prices = wl.prices()
     for entry in prices:
         print '\t=' + entry
+        #for c in entry:
+        #    print '[%s]' % c, repr(c), type(c)
 
-    print 'Some external sources:'
+    print 'Universal wishlist sources:'
+    via = wl.via()
     for entry in via:
         print '\t=' + entry
 
+    ideas = wl.ideas()
+    print 'Ideas you saved for later:'
+    print ideas
+
+    total = wl.total_expenses()
+    print 'In %s your wishlist is worth %s%s' % (wl.currency, wl.symbol, total)
+    
     p = Profile(id, country=store)
 
     info = p.basicInfo()
@@ -66,27 +73,12 @@ def tests(id, store):
     print info
 
     lists = p.wishlists()
-    print 'Your lists are:'
+    print 'Your lists data:'
     print lists
 
     details = p.wishlistsDetails()
     print 'Your lists and their sizes:'
     print details
-
-    total = wl.total_expenses()
-    print 'In %s your wishlist is worth %s%s' % (wl.currency, wl.symbol, total)
-    
-    #print zip(titles, prices)
-
-    #print 'Vias: ' + str(len(via))
-    #print 'Authors: ' + str(len(authors))
-    #print 'Titles: ' + str(len(titles))
-    #print 'Prices: ' + str(len(prices))
-    #print 'URLs: ' + str(len(urls))
-    #print 'Covers: ' + str(len(covers))
-
-    ideas = wl.ideas()
-    print ideas
 
 if __name__ == "__main__":
     basin()
