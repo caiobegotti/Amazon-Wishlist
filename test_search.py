@@ -98,11 +98,3 @@ class TestSearchUSMultiple:
         matches = s.list()
         assert matches[0][0] == 'Caio Begotti'
         assert matches[1][0] == 'Pedro Ivo de Brito Begotti'
-
-class TestSearchUSName:
-    def test_search(self):
-        s = Search('caio begotti', country='us')
-        matches = s.list()[0]
-        assert matches[0] == 'Caio Begotti'
-        assert matches[1] == '3MCYFXCFDH4FA'
-
