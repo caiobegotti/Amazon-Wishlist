@@ -41,6 +41,15 @@ def _parser(url):
     tree = fromstring(decoded)
     return tree
 
+def _stripper(s):
+    known = [u'\u200b',
+             u'\x81\x8f',
+             u'\xef\xbf',
+             u'\xa5']
+    for c in known:
+        s = s.replace(c, '')
+    return s.strip()
+
 class Search():
     """
     The Search() class is the one to be used if you don't know an
@@ -83,11 +92,13 @@ class Search():
         >>>     print l
         """
         # before pipe, page with usernames; after, single exact matches
-        names = self.page.xpath("//td/span/a//text() | //h1[@class='visitor']//text()")
         lists = self.page.xpath("//td/span/a//@href | //div[@id='sortbarDisplay']/form//@action")
+        names = self.page.xpath("//td/span/a//text() | //h1[@class='visitor']//text()")
+        names = [_stripper(n) for n in names]
+
         codes = []
         for l in lists:
-            codes.append(l.split('/')[3])
+            codes.append(_stripper(l.split('/')[3]))
         # FIXME: hack not to return empty search results,
         # whose only anchor text is not english
         if not 'tg' in codes:
@@ -138,12 +149,12 @@ class Profile():
         name = self.page.xpath("//td[@id='profile-name-Field']")
         ret = []
         for s in name:
-            ret.append(s.text)
+            ret.append(_stripper(s.text))
         photo = self.page.xpath("//div[@id='profile']/div/img/@src")
         if photo:
             p = photo[0].split('.')
             p = '.'.join(p[:-2]) + '.' + p[-1]
-            ret.append(p)
+            ret.append(_stripper(p))
         return ret
 
     def wishlists(self):
@@ -166,10 +177,10 @@ class Profile():
         retsizes = []
         codes = self.page.xpath("//div[@id='profile']/div[@id='regListpublicBlock']/div/@id")
         for c in codes:
-            retcodes.append(c.replace('regListsList',''))
+            retcodes.append(_stripper(c.replace('regListsList','')))
         sizes = self.page.xpath("//div[@id='profile']/div[@id='regListpublicBlock']/div/div/span[1]")
         for s in sizes:
-            retsizes.append(s.text)
+            retsizes.append(_stripper(s.text))
         #TODO: i don't really know why but sometimes these guys show up empty, and only them... debug pending
         return retcodes, retsizes
 
@@ -234,9 +245,9 @@ class Wishlist():
                     a = a.replace('~','').strip()
                     if a.startswith(tuple(attr)):
                         a = a[3:].strip()
-                        ret.append(a)
+                        ret.append(_stripper(a))
                     else:
-                        ret.append(a)
+                        ret.append(_stripper(a))
             else:
                 ret.append(ur'')
         dirt = ['DVD','VHS']
@@ -255,7 +266,7 @@ class Wishlist():
         titles = self.page.xpath("//div[@class='pTitle']/strong//text()")
         ret = []
         for t in titles:
-            ret.append(t.replace(u'\u200B', '').strip())
+            ret.append(_stripper(t))
         return ret
     
     def prices(self):
@@ -264,17 +275,24 @@ class Wishlist():
         >>> prices = wl.prices()
         """
         prices = self.page.xpath("//td[@class='pPrice'][not(text()) and not(strong)] | //td[@class='pPrice']/strong[3] | //td[@class='pPrice']/strong[1] | //td[@class='Price']/span/strong//text()")
-        ret = []
+
+        # cleanups
         if 'EUR' in self.currency:
-            cleaner = 'EUR'
+            dust = 'EUR'
         elif 'CDN' in self.currency:
-            cleaner = 'CDN' + ur'\u0024'
+            dust = 'CDN' + ur'\u0024'
         elif 'GBP' in self.currency:
-            cleaner = ur'\u00a3'
+            dust = ur'\u00a3'
         elif 'INR' in self.currency:
-            cleaner = 'Rs. '
+            dust = 'Rs. '
+        elif 'CNY' in self.currency:
+            dust = u'\xa5'
+        elif 'JPY' in self.currency:
+            dust = u'\x81\x8f'
         else:
-            cleaner = self.symbol
+            dust = self.symbol
+        
+        ret = []
         for p in prices:
             res = tostring(p, encoding='unicode', method='text', pretty_print=True).strip()
             if 'At' not in res:
@@ -282,13 +300,13 @@ class Wishlist():
                 if 'Click' in res:
                     res = ''
                 if 'EUR' in self.currency or 'BRL' in self.currency:
-                    res = res.replace(cleaner, '')
+                    res = res.replace(dust, '')
                     res = res.replace('.', '')
                     res = res.replace(',', '.')
                 else:
-                    res = res.replace(cleaner, '')
+                    res = res.replace(dust, '')
                     res = res.replace(',', '')
-                ret.append(res)
+                ret.append(_stripper(res))
         return ret
     
     def via(self):
@@ -301,7 +319,7 @@ class Wishlist():
         via = self.page.xpath("//div/form/table/tbody[*]/tr[*]/td[*]/strong[2]")
         ret = []
         for v in via:
-            ret.append(v.text)
+            ret.append(_stripper(v.text))
         ret = sorted(list(set(ret)))
         return ret
     
@@ -315,7 +333,7 @@ class Wishlist():
         for c in covers:
             c = c.split('.')
             c = '.'.join(c[:-2]) + '.' + c[-1]
-            ret.append(c)
+            ret.append(_stripper(c))
         return ret
    
     def urls(self):
@@ -332,7 +350,7 @@ class Wishlist():
                     res = 'http://www.amazon' + self.domain + '/dp/' + code
                 else:
                     res = ''
-                ret.append(res)
+                ret.append(_stripper(res))
         return ret
 
     def ideas(self):
@@ -346,7 +364,7 @@ class Wishlist():
         rows = zip(titles, prices)
         for r in rows:
             if "Idea" in r[1]:
-                ret.append(r[0])
+                ret.append(_stripper(r[0]))
         return ret 
 
     def total_expenses(self):
