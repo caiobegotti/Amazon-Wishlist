@@ -72,7 +72,7 @@ def tests(id, store):
     
     p = Profile(id, country=store)
 
-    info = p.basicInfo()
+    info = p.basic_info()
     print 'Your name and avatar:'
     print info
 
@@ -80,7 +80,7 @@ def tests(id, store):
     print 'Your lists data:'
     print lists
 
-    details = p.wishlistsDetails()
+    details = p.wishlists_details()
     print 'Your lists and their sizes:'
     print details
 
