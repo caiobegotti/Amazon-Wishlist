@@ -6,7 +6,7 @@ README = file.read()
 file.close()
 
 setup(name = 'amazon-wishlist',
-      version = '0.4',
+      version = '0.5',
       description = 'Python version of the old and buggy Perl module WWW::Amazon::Wishlist',
       author = 'Caio Begotti',
       author_email = 'caio1982@gmail.com',
