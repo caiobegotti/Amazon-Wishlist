@@ -8,17 +8,16 @@ Amazon stores in the US, UK, France, Spain, Italy, Germany, Japan and China.
 
 You need to load the parameters of stores up before using this module:
 
->>> from amazonwish.config import *
+>>> from amazonwish.config import country_params
 """
 
 __author__ = "Caio Begotti <caio1982@gmail.com>"
 
 import locale
+import config
 
 from lxml import etree
 from lxml.html import tostring, fromstring
-
-from config import *
 
 # only for charset detection, enforcing unicode
 # when lxml is completely shitty in doing that!
@@ -59,7 +58,7 @@ class Search():
     >>> s = Search('begotti', country='us')
     """
     def _readConfig(self, country):
-        params = countryParams(country)
+        params = config.country_params(country)
         return params
 
     def __init__(self, input, country):
@@ -116,7 +115,7 @@ class Profile():
     """
 
     def _readConfig(self, country):
-        params = countryParams(country)
+        params = config.country_params(country)
         return params
 
     def __init__(self, id, country):
@@ -200,7 +199,7 @@ class Wishlist():
     """
 
     def _readConfig(self, country):
-        params = countryParams(country)
+        params = config.country_params(country)
         return params
 
     def __init__(self, id, country):
