@@ -64,7 +64,7 @@ COUNTRY_CONFIGS = {
     }
 }
 
-def countryParams(country):
+def country_params(country):
     if COUNTRY_CONFIGS.has_key(country):
         return COUNTRY_CONFIGS[country]
     else:
