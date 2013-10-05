@@ -385,5 +385,9 @@ class Wishlist():
             tags.append(float(p))
         ret = sum(tags)
 
-        locale.setlocale(locale.LC_MONETARY, '')
+        if 'EUR' in self.currency or 'BRL' in self.currency:
+            locale.setlocale(locale.LC_MONETARY, 'de_DE.UTF-8')
+        else:
+            locale.setlocale(locale.LC_MONETARY, 'en_US.UTF-8')
+
         return locale.currency(ret, grouping=True, symbol=False)
