@@ -1,0 +1,21 @@
+Network error without checking if tostring has actually something to parse?
+
+Traceback (most recent call last):
+  File "./profile.py", line 92, in <module>
+    basin()
+  File "./profile.py", line 22, in basin
+    tests(options.id, options.store)
+  File "./profile.py", line 62, in tests
+    p = Profile(id, country=store)
+  File "/home/danihabkost/Amazon-Wishlist/amazonwish/amazonwish.py", line 118, in __init__
+    self._download()
+  File "/home/danihabkost/Amazon-Wishlist/amazonwish/amazonwish.py", line 128, in _download
+    self.page = _parser(url)
+  File "/home/danihabkost/Amazon-Wishlist/amazonwish/amazonwish.py", line 40, in _parser
+    decoded = _decoder(tostring(page))
+  File "/usr/lib/python2.7/dist-packages/lxml/html/__init__.py", line 1509, in tostring
+    encoding=encoding)
+  File "lxml.etree.pyx", line 2875, in lxml.etree.tostring (src/lxml/lxml.etree.c:55689)
+  File "serializer.pxi", line 131, in lxml.etree._tostring (src/lxml/lxml.etree.c:90378)
+  File "serializer.pxi", line 186, in lxml.etree._raiseSerialisationError (src/lxml/lxml.etree.c:90939)
+lxml.etree.SerialisationError: IO_ENCODER
