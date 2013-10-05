@@ -1,1 +1,4 @@
+amazon_wishlist.egg-info
+dist
+.cache
 *.pyc
