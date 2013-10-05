@@ -3,7 +3,11 @@
 # Copyright (C) 2012 - Caio Begotti <caio1982@gmail.com>
 # Distributed under the GPLv2, see the LICENSE file.
 
-from amazonwish.config import *
+import sys
+import os.path
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from amazonwish.amazonwish import Profile
 
 class TestUS:
