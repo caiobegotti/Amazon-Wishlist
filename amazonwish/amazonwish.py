@@ -4,7 +4,9 @@
 """
 Python version of the old and buggy Perl module WWW::Amazon::Wishlist.
 It's written using LXML and XPaths for better readability. It supports the
-Amazon stores in the US, UK, France, Spain, Italy, Germany, Japan and China.
+Amazon stores in the US, Canda, UK, France, Spain, Italy, Germany, Japan, China
+and India. Brazilian and Mexican stores also have built-in support though
+they are not live yet.
 
 You need to load the parameters of stores up before using this module:
 
