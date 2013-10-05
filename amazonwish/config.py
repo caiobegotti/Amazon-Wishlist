@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright (C) 2012 - Caio Begotti <caio1982@gmail.com>
 # Distributed under the GPLv2, see the LICENSE file.
 
