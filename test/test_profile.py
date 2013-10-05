@@ -12,22 +12,22 @@ from amazonwish.amazonwish import Profile
 
 class TestUS:
     def setup_method(self, method):
-        global p
-        p = Profile('3MCYFXCFDH4FA', country='us')
+        global person
+        person = Profile('3MCYFXCFDH4FA', country='us')
 
-    def test_basicInfo(self):
-        info = p.basicInfo()
+    def test_basic_info(self):
+        info = person.basic_info()
         assert info[0] == 'Caio Begotti'
         assert info[1] == 'http://ecx.images-amazon.com/images/I/51-aMSvDbhL.jpg'
 
     def test_wishlists(self):
-        lists = p.wishlists()
+        lists = person.wishlists()
         assert lists[0] == 'Stuff'
         assert lists[1] == 'Test'
         assert lists[2] == 'Wish List'
 
-    def test_wishlistsDetails(self):
-        details = p.wishlistsDetails()
+    def test_wishlists_details(self):
+        details = person.wishlists_details()
         codes = details[0]
         sizes = details[1]
         assert codes[0] == '22LLDFNTWM5J7'
@@ -39,19 +39,19 @@ class TestUS:
 
 class TestUK:
     def setup_method(self, method):
-        global p
-        p = Profile('MBI8TEEYJS10', country='uk')
+        global person
+        person = Profile('MBI8TEEYJS10', country='uk')
 
-    def test_basicInfo(self):
-        info = p.basicInfo()
+    def test_basic_info(self):
+        info = person.basic_info()
         assert info[0] == 'Caio Begotti'
 
     def test_wishlists(self):
-        lists = p.wishlists()
+        lists = person.wishlists()
         assert lists[0] == 'Wish List'
 
-    def test_wishlistsDetails(self):
-        details = p.wishlistsDetails()
+    def test_wishlists_details(self):
+        details = person.wishlists_details()
         codes = details[0]
         sizes = details[1]
         assert codes[0] == 'MBI8TEEYJS10'
@@ -59,19 +59,19 @@ class TestUK:
 
 class TestJapan:
     def setup_method(self, method):
-        global p
-        p = Profile('13RB1XNS2VF62', country='jp')
+        global person
+        person = Profile('13RB1XNS2VF62', country='jp')
 
-    def test_basicInfo(self):
-        info = p.basicInfo()
+    def test_basic_info(self):
+        info = person.basic_info()
         assert info[0] == 'Caio Begotti'
 
     def test_wishlists(self):
-        lists = p.wishlists()
+        lists = person.wishlists()
         assert lists[0] == u'\u65b0\u3057\u3044\u307b\u3057\u3044\u7269\u200b\u30ea\u30b9\u30c8'
 
-    def test_wishlistsDetails(self):
-        details = p.wishlistsDetails()
+    def test_wishlists_details(self):
+        details = person.wishlists_details()
         codes = details[0]
         sizes = details[1]
         assert codes[0] == '13RB1XNS2VF62'
@@ -79,19 +79,19 @@ class TestJapan:
 
 class TestChina:
     def setup_method(self, method):
-        global p
-        p = Profile('3BFG9M3CL83QR', country='cn')
+        global person
+        person = Profile('3BFG9M3CL83QR', country='cn')
 
-    def test_basicInfo(self):
-        info = p.basicInfo()
+    def test_basic_info(self):
+        info = person.basic_info()
         assert info[0] == 'Caio Begotti'
 
     def test_wishlists(self):
-        lists = p.wishlists()
+        lists = person.wishlists()
         assert lists[0] == u'\u5fc3\u613f\u5355'
 
-    def test_wishlistsDetails(self):
-        details = p.wishlistsDetails()
+    def test_wishlists_details(self):
+        details = person.wishlists_details()
         codes = details[0]
         sizes = details[1]
         assert codes[0] == '3BFG9M3CL83QR'
@@ -99,19 +99,19 @@ class TestChina:
 
 class TestFrance:
     def setup_method(self, method):
-        global p
-        p = Profile('2POKVB3027QIK', country='fr')
+        global person
+        person = Profile('2POKVB3027QIK', country='fr')
 
-    def test_basicInfo(self):
-        info = p.basicInfo()
+    def test_basic_info(self):
+        info = person.basic_info()
         assert info[0] == 'Caio Begotti'
 
     def test_wishlists(self):
-        lists = p.wishlists()
+        lists = person.wishlists()
         assert lists[0] == 'Wish FRANCE'
 
-    def test_wishlistsDetails(self):
-        details = p.wishlistsDetails()
+    def test_wishlists_details(self):
+        details = person.wishlists_details()
         codes = details[0]
         sizes = details[1]
         assert codes[0] == '2POKVB3027QIK'
@@ -119,19 +119,19 @@ class TestFrance:
 
 class TestCanada:
     def setup_method(self, method):
-        global p
-        p = Profile('PEK9J1M112UK', country='ca')
+        global person
+        person = Profile('PEK9J1M112UK', country='ca')
 
-    def test_basicInfo(self):
-        info = p.basicInfo()
+    def test_basic_info(self):
+        info = person.basic_info()
         assert info[0] == 'Caio Begotti'
 
     def test_wishlists(self):
-        lists = p.wishlists()
+        lists = person.wishlists()
         assert lists[0] == 'Wish Canada'
 
-    def test_wishlistsDetails(self):
-        details = p.wishlistsDetails()
+    def test_wishlists_details(self):
+        details = person.wishlists_details()
         codes = details[0]
         sizes = details[1]
         assert codes[0] == 'PEK9J1M112UK'
@@ -139,19 +139,19 @@ class TestCanada:
 
 class TestGermany:
     def setup_method(self, method):
-        global p
+        global person
         p = Profile('2ZPN6SBGBP4X8', country='de')
 
     def test_basicInfo(self):
-        info = p.basicInfo()
+        info = person.basicInfo()
         assert info[0] == 'Caio Begotti'
 
     def test_wishlists(self):
-        lists = p.wishlists()
+        lists = person.wishlists()
         assert lists[0] == 'WL germany'
 
     def test_wishlistsDetails(self):
-        details = p.wishlistsDetails()
+        details = person.wishlistsDetails()
         codes = details[0]
         sizes = details[1]
         assert codes[0] == '2ZPN6SBGBP4X8'
@@ -159,19 +159,19 @@ class TestGermany:
 
 class TestItaly:
     def setup_method(self, method):
-        global p
+        global person
         p = Profile('3W1RQNDJTCQC', country='it')
 
     def test_basicInfo(self):
-        info = p.basicInfo()
+        info = person.basicInfo()
         assert info[0] == 'Caio Begotti'
 
     def test_wishlists(self):
-        lists = p.wishlists()
+        lists = person.wishlists()
         assert lists[0] == 'Desideri IT'
 
     def test_wishlistsDetails(self):
-        details = p.wishlistsDetails()
+        details = person.wishlistsDetails()
         codes = details[0]
         sizes = details[1]
         assert codes[0] == '3W1RQNDJTCQC'
@@ -179,19 +179,19 @@ class TestItaly:
 
 class TestSpain:
     def setup_method(self, method):
-        global p
+        global person
         p = Profile('1LJ10M7BWAICD', country='es')
 
     def test_basicInfo(self):
-        info = p.basicInfo()
+        info = person.basicInfo()
         assert info[0] == 'Caio Begotti'
 
     def test_wishlists(self):
-        lists = p.wishlists()
+        lists = person.wishlists()
         assert lists[0] == 'Lista de deseos'
 
     def test_wishlistsDetails(self):
-        details = p.wishlistsDetails()
+        details = person.wishlistsDetails()
         codes = details[0]
         sizes = details[1]
         assert codes[0] == '1LJ10M7BWAICD'
@@ -199,19 +199,19 @@ class TestSpain:
 
 #class TestBrazil:
 #    def setup_method(self, method):
-#        global p
+#        global person
 #        p = Profile('', country='br')
 #
 #    def test_basicInfo(self):
-#        info = p.basicInfo()
+#        info = person.basicInfo()
 #        assert info[0] == 'Caio Begotti'
 #
 #    def test_wishlists(self):
-#        lists = p.wishlists()
+#        lists = person.wishlists()
 #        assert lists[0] == 'Lista de desejos'
 #
 #    def test_wishlistsDetails(self):
-#        details = p.wishlistsDetails()
+#        details = person.wishlistsDetails()
 #        codes = details[0]
 #        sizes = details[1]
 #        assert codes[0] == ''
