@@ -2,6 +2,10 @@
 # Copyright (C) 2012 - Caio Begotti <caio1982@gmail.com>
 # Distributed under the GPLv2, see the LICENSE file.
 
+"""
+Configuration module listing currently available store parameters.
+"""
+
 COUNTRY_CONFIGS = {
     'us': {
       'currency': 'USD',
@@ -66,6 +70,10 @@ COUNTRY_CONFIGS = {
 }
 
 def country_params(country):
+    """
+    Returns a big dictionary with all stores' parameters within each own
+    dictionary, including its code, currency code, currency symbol and domain.
+    """
     if COUNTRY_CONFIGS.has_key(country):
         return COUNTRY_CONFIGS[country]
     else:
