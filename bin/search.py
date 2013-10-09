@@ -12,6 +12,7 @@ import optparse
 
 from amazonwish.amazonwish import Search
 
+
 def search():
     parser = optparse.OptionParser("Usage: %prog [options]")
     parser.add_option("-q", "--query", dest="query", type="string", help="query someone's info (i.e. caio1982@gmail.com)")
@@ -23,6 +24,7 @@ def search():
         parser.print_help()
     else:
         tests(options.query, options.store)
+
 
 def tests(query, store):
     if store is None:

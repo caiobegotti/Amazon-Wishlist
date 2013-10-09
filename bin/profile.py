@@ -13,6 +13,7 @@ import optparse
 from amazonwish.amazonwish import Wishlist
 from amazonwish.amazonwish import Profile
 
+
 def basin():
     parser = optparse.OptionParser("Usage: %prog [options]")
     parser.add_option("-i", "--id", dest="id", type="string", help="wishlist ID (i.e. 3MCYFXCFDH4FA)")
@@ -24,6 +25,7 @@ def basin():
         parser.print_help()
     else:
         tests(options.id, options.store)
+
 
 def tests(id, store):
     if store is None:
@@ -55,7 +57,7 @@ def tests(id, store):
     prices = wl.prices()
     for entry in prices:
         print '\t=' + entry
-        #for c in entry:
+        # for c in entry:
         #    print '[%s]' % c, repr(c), type(c)
 
     print 'Universal wishlist sources:'
@@ -69,7 +71,7 @@ def tests(id, store):
 
     total = wl.total_expenses()
     print 'In %s your wishlist is worth %s%s' % (wl.currency, wl.symbol, total)
-    
+
     p = Profile(id, country=store)
 
     info = p.basic_info()

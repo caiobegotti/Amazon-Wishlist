@@ -27,12 +27,15 @@ from lxml.html import tostring, fromstring
 from BeautifulSoup import UnicodeDammit
 
 # that's a nice hack isn't it? i hate it
+
+
 def _decoder(data):
     """Simple helper to enforce a decent charset handling."""
     converted = UnicodeDammit(data, isHTML=True)
     if not converted.unicode:
         raise UnicodeDecodeError("Failed to detect encoding, tried [%s]", ', '.join(converted.triedEncodings))
     return converted.unicode
+
 
 def _parser(url):
     """Simple helper function to parse a document, returning its etree."""
@@ -41,9 +44,14 @@ def _parser(url):
         page = etree.parse(url, parser)
     except IOError:
         raise IOError("Failed to download page data, check your connection")
-    decoded = _decoder(tostring(page))
-    tree = fromstring(decoded)
-    return tree
+
+    try:
+        stringfied = tostring(page)
+    except:
+        raise BaseException("LXML failed to serialise the ElementTree into a string!")
+
+    return fromstring(_decoder(stringfied))
+
 
 def _stripper(string):
     """Simple string helper to get rid of nasty chars detected in tests."""
@@ -55,18 +63,22 @@ def _stripper(string):
         string = string.replace(char, '')
     return string.strip()
 
+
 def _read_config(country):
     """Simple helper to return the configuration dictionaries of the module"""
     return config.country_params(country)
 
+
 class Search():
+
     """
     The Search() class is the one to be used if you don't know an
     user's wishlist ID and need to look them up by e-mail or their name.
-    
+
     >>> from amazonwish.amazonwish import Search
     >>> search = Search('begotti', country='us')
     """
+
     def __init__(self, name, country):
         params = _read_config(country)
         self.currency = params['currency']
@@ -80,10 +92,10 @@ class Search():
     def _download(self):
         """Builds a search query and retrieves its result for the parser."""
         query = ['/gp/registry/search.html?',
-               'ie=UTF8',
-               '&type=wishlist',
-               '&field-name=',
-               self.name]
+                 'ie=UTF8',
+                 '&type=wishlist',
+                 '&field-name=',
+                 self.name]
         url = 'http://www.amazon' + self.domain + ''.join(query)
         self.page = _parser(url)
 
@@ -92,7 +104,7 @@ class Search():
         Returns a list with tuples containing all matching usernames
         and their main wishlist ID, with which you can get secondary
         lists via the Wishlist() class.
-        
+
         >>> wishlists = search.list()
         >>> for row in wishlists:
         >>>     print row
@@ -112,6 +124,7 @@ class Search():
 
 
 class Profile():
+
     """
     The Profile() class is the one responsible for retrieving
     information about a given user, such as name, profile photo,
@@ -138,7 +151,7 @@ class Profile():
         """
         url = 'http://www.amazon' + self.domain + '/wishlist/' + self.userid
         self.page = _parser(url)
-    
+
     def basic_info(self):
         """
         Returns the name of the wishlist owner and, if available,
@@ -178,7 +191,7 @@ class Profile():
         retsizes = []
         codes = self.page.xpath("//div[@id='profile']/div[@id='regListpublicBlock']/div/@id")
         for code in codes:
-            retcodes.append(_stripper(code.replace('regListsList','')))
+            retcodes.append(_stripper(code.replace('regListsList', '')))
         sizes = self.page.xpath("//div[@id='profile']/div[@id='regListpublicBlock']/div/div/span[1]")
         for size in sizes:
             retsizes.append(_stripper(size.text))
@@ -186,6 +199,7 @@ class Profile():
 
 
 class Wishlist():
+
     """
     The Wishlist() class is the main class of Amazon Wishlist as
     it's here where the magic happens. This class will retrieve
@@ -208,7 +222,7 @@ class Wishlist():
         self.country = country
         self.page = None
         self._download()
-        
+
     def _download(self):
         """Retrieves and stores the printable version of the wishlist for later usage."""
         query = ['/ref=cm_wl_act_print_o?',
@@ -222,7 +236,7 @@ class Wishlist():
 
     def authors(self):
         """Returns the authors names and co-writers for every item.
-        
+
         >>> authors = wishlist.authors()
         """
         authors = self.page.xpath("//div[@class='pTitle']")
@@ -235,7 +249,7 @@ class Wishlist():
                 div = etree.fromstring(subtree, parser)
                 res = div.xpath("//span[@class='small itemByline']//text()")
                 for author in res:
-                    author = author.replace('~','').strip()
+                    author = author.replace('~', '').strip()
                     if author.startswith(tuple(attr)):
                         author = author[3:].strip()
                         ret.append(_stripper(author))
@@ -243,17 +257,17 @@ class Wishlist():
                         ret.append(_stripper(author))
             else:
                 ret.append(ur'')
-        dirt = ['DVD','VHS']
+        dirt = ['DVD', 'VHS']
         for item in dirt:
             while item in ret:
                 ret.remove(item)
         return ret
-    
+
     def titles(self):
         """
         Returns items titles, even if they are pretty long
         ones (like academic books or journals).
-        
+
         >>> titles = wishlist.titles()
         """
         titles = self.page.xpath("//div[@class='pTitle']/strong//text()")
@@ -261,10 +275,10 @@ class Wishlist():
         for title in titles:
             ret.append(_stripper(title))
         return ret
-    
+
     def prices(self):
         """Returns the price tags for every item in a wishlist.
-        
+
         >>> prices = wishlist.prices()
         """
         prices = self.page.xpath("//td[@class='pPrice'][not(text()) and not(strong)] | //td[@class='pPrice']/strong[3] | //td[@class='pPrice']/strong[1] | //td[@class='Price']/span/strong//text()")
@@ -284,7 +298,7 @@ class Wishlist():
             dust = u'\x81\x8f'
         else:
             dust = self.symbol
-        
+
         ret = []
         for price in prices:
             res = tostring(price, encoding='unicode', method='text', pretty_print=True).strip()
@@ -301,12 +315,12 @@ class Wishlist():
                     res = res.replace(',', '')
                 ret.append(_stripper(res))
         return ret
-    
+
     def via(self):
         """
         Returns the sorted original web pages from which the wished item was
         pulled, only for Universal items not from Amazon directly.
-        
+
         >>> via = wishlist.via()
         """
         sources = self.page.xpath("//div/form/table/tbody[*]/tr[*]/td[*]/strong[2]")
@@ -315,10 +329,10 @@ class Wishlist():
             ret.append(_stripper(url.text))
         ret = sorted(list(set(ret)))
         return ret
-    
+
     def covers(self):
         """Returns the addresses of items pictures (e.g. book covers, albums pictures).
-        
+
         >>> covers = wishlist.covers()
         """
         covers = self.page.xpath("//div/form/table/tbody[*]/tr[*]/td[*]/div[@class='pImage']/img/@src")
@@ -328,10 +342,10 @@ class Wishlist():
             filename = '.'.join(filename[:-2]) + '.' + filename[-1]
             ret.append(_stripper(filename))
         return ret
-   
+
     def urls(self):
         """Returns the page address of a given item in the wishlist, with its full details.
-        
+
         >>> urls = wishlist.urls()
         """
         urls = self.page.xpath("//tbody[@class='itemWrapper']//@name")
@@ -348,7 +362,7 @@ class Wishlist():
 
     def ideas(self):
         """Returs a list of ideas to shop for later, as reminders
-        
+
         >>> ideas = wishlist.ideas()
         """
         ret = []
@@ -358,13 +372,13 @@ class Wishlist():
         for row in rows:
             if "Idea" in row[1]:
                 ret.append(_stripper(row[0]))
-        return ret 
+        return ret
 
     def total_expenses(self):
         """
         Returns the total sum of all prices, without currency symbols,
         might excluse unavailable items or items without price tags.
-        
+
         >>> total = wishlist.total_expenses()
         """
         tags = []

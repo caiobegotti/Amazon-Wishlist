@@ -10,7 +10,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from amazonwish.amazonwish import Wishlist
 
+
 class TestWishlistUS:
+
     def setup_method(self, method):
         global wishlist
         wishlist = Wishlist('3MCYFXCFDH4FA', country='us')
@@ -75,7 +77,9 @@ class TestWishlistUS:
         assert authors[-30] == 'Frans De Waal, F. B. M. De Waal'
         assert authors[-45] == ''
 
+
 class TestWishlistUK:
+
     def setup_method(self, method):
         global wishlist
         wishlist = Wishlist('MBI8TEEYJS10', country='uk')
@@ -108,7 +112,7 @@ class TestWishlistUK:
         assert covers[1] == 'http://ecx.images-amazon.com/images/I/41witgYTdsL.jpg'
         assert covers[2] == 'http://ecx.images-amazon.com/images/I/311M2ljl9kL.jpg'
         assert covers[3] == 'http://ecx.images-amazon.com/images/I/514nO64FYTL.jpg'
-    
+
     def test_titles(self):
         titles = wishlist.titles()
         assert titles[0] == 'Kindle Touch, Wi-Fi, 6" E Ink Touch Screen Display'
@@ -123,7 +127,9 @@ class TestWishlistUK:
         assert authors[2] == ''
         assert authors[3] == 'Sam Worthington'
 
+
 class TestWishlistFrance:
+
     def setup_method(self, method):
         global wishlist
         wishlist = Wishlist('2POKVB3027QIK', country='fr')
@@ -156,7 +162,7 @@ class TestWishlistFrance:
         assert covers[1] == 'http://ecx.images-amazon.com/images/I/41FcoyEUXBL.jpg'
         assert covers[2] == 'http://ecx.images-amazon.com/images/I/513-V9oAo0L.jpg'
         assert covers[3] == 'http://ecx.images-amazon.com/images/I/51WKWFVF81L.jpg'
-    
+
     def test_titles(self):
         titles = wishlist.titles()
         assert titles[0] == u'Les dents de la mer - Bo\xeetier m\xe9tal [Blu-ray]'

@@ -10,7 +10,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from amazonwish.amazonwish import Profile
 
+
 class TestUS:
+
     def setup_method(self, method):
         global person
         person = Profile('3MCYFXCFDH4FA', country='us')
@@ -37,7 +39,9 @@ class TestUS:
         assert sizes[1] == '1'
         assert sizes[2] >= '200'
 
+
 class TestUK:
+
     def setup_method(self, method):
         global person
         person = Profile('MBI8TEEYJS10', country='uk')
@@ -57,7 +61,9 @@ class TestUK:
         assert codes[0] == 'MBI8TEEYJS10'
         assert sizes[0] == '4'
 
+
 class TestJapan:
+
     def setup_method(self, method):
         global person
         person = Profile('13RB1XNS2VF62', country='jp')
@@ -77,7 +83,9 @@ class TestJapan:
         assert codes[0] == '13RB1XNS2VF62'
         assert sizes[0] == '1'
 
+
 class TestChina:
+
     def setup_method(self, method):
         global person
         person = Profile('3BFG9M3CL83QR', country='cn')
@@ -97,7 +105,9 @@ class TestChina:
         assert codes[0] == '3BFG9M3CL83QR'
         assert sizes[0] == '1'
 
+
 class TestFrance:
+
     def setup_method(self, method):
         global person
         person = Profile('2POKVB3027QIK', country='fr')
@@ -117,7 +127,9 @@ class TestFrance:
         assert codes[0] == '2POKVB3027QIK'
         assert sizes[0] == '4'
 
+
 class TestCanada:
+
     def setup_method(self, method):
         global person
         person = Profile('PEK9J1M112UK', country='ca')
@@ -137,7 +149,9 @@ class TestCanada:
         assert codes[0] == 'PEK9J1M112UK'
         assert sizes[0] == '2'
 
+
 class TestGermany:
+
     def setup_method(self, method):
         global person
         person = Profile('2ZPN6SBGBP4X8', country='de')
@@ -157,7 +171,9 @@ class TestGermany:
         assert codes[0] == '2ZPN6SBGBP4X8'
         assert sizes[0] == '3'
 
+
 class TestItaly:
+
     def setup_method(self, method):
         global person
         person = Profile('3W1RQNDJTCQC', country='it')
@@ -177,7 +193,9 @@ class TestItaly:
         assert codes[0] == '3W1RQNDJTCQC'
         assert sizes[0] == '4'
 
+
 class TestSpain:
+
     def setup_method(self, method):
         global person
         person = Profile('1LJ10M7BWAICD', country='es')
@@ -197,7 +215,7 @@ class TestSpain:
         assert codes[0] == '1LJ10M7BWAICD'
         assert sizes[0] == '3'
 
-#class TestBrazil:
+# class TestBrazil:
 #    def setup_method(self, method):
 #        global person
 #        person = Profile('', country='br')
