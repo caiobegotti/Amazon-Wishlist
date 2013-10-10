@@ -18,7 +18,7 @@ class TestWishlistJapan:
 
     def setup_method(self, method):
         global wishlist
-        wishlist = Wishlist('', country='jp')
+        wishlist = Wishlist('13RB1XNS2VF62', country='jp')
 
     def test_prices(self):
         prices = wishlist.prices()

@@ -18,7 +18,7 @@ class TestWishlistChina:
 
     def setup_method(self, method):
         global wishlist
-        wishlist = Wishlist('', country='cn')
+        wishlist = Wishlist('3BFG9M3CL83QR', country='cn')
 
     def test_prices(self):
         prices = wishlist.prices()
@@ -26,7 +26,7 @@ class TestWishlistChina:
             try:
                 float(price)
             except:
-                if not 'Idea' in price and price is None:
+                if not ur'\xe8\xa7\x82\xe5\xbf\xb5' in price and price is None:
                     assert price
 
     def test_urls(self):

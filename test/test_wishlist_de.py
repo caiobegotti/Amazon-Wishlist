@@ -18,7 +18,7 @@ class TestWishlistGermany:
 
     def setup_method(self, method):
         global wishlist
-        wishlist = Wishlist('', country='de')
+        wishlist = Wishlist('2ZPN6SBGBP4X8', country='de')
 
     def test_prices(self):
         prices = wishlist.prices()
@@ -26,7 +26,7 @@ class TestWishlistGermany:
             try:
                 float(price)
             except:
-                if not 'Idea' in price and price is None:
+                if not 'Idee' in price and price is None:
                     assert price
 
     def test_urls(self):
