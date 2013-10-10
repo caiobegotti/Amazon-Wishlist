@@ -164,7 +164,7 @@ class Profile():
         """
         # wishlists are supposed to show a first name, so it's safe to assume it will never be null
         ret = []
-        for name in self.page.xpath("//td[@id='profile-name-Field']//text()")
+        for name in self.page.xpath("//td[@id='profile-name-Field']//text()"):
             ret.append(_stripper(name))
 
         photo = self.page.xpath("//div[@id='profile']/div/img/@src")
