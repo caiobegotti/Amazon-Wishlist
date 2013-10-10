@@ -26,7 +26,7 @@ class TestWishlistFrance:
             try:
                 float(price)
             except:
-                if not 'Idée' in price and price is None:
+                if not ur'Id\xc3\xa9e' in price and price is None:
                     assert price
 
     def test_urls(self):
