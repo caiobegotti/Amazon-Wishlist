@@ -28,9 +28,6 @@ def basin():
 
 
 def tests(id, store):
-    if store is None:
-        store = 'us'
-
     wl = Wishlist(id, country=store)
 
     print 'Authors or manufacturers:'

@@ -27,9 +27,6 @@ def search():
 
 
 def tests(query, store):
-    if store is None:
-        store = 'us'
-
     s = Search(query, country=store)
     matches = s.list()
 

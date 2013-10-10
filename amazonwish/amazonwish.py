@@ -79,7 +79,7 @@ class Search():
     >>> search = Search('begotti', country='us')
     """
 
-    def __init__(self, name, country):
+    def __init__(self, name, country='us'):
         params = _read_config(country)
         self.currency = params['currency']
         self.domain = params['domain']
@@ -134,7 +134,7 @@ class Profile():
     >>> person = Profile('3MCYFXCFDH4FA', country='us')
     """
 
-    def __init__(self, userid, country):
+    def __init__(self, userid, country='us'):
         params = _read_config(country)
         self.currency = params['currency']
         self.domain = params['domain']
@@ -213,7 +213,7 @@ class Wishlist():
     >>> wishlist = Wishlist('3MCYFXCFDH4FA', country='us')
     """
 
-    def __init__(self, userid, country):
+    def __init__(self, userid, country='us'):
         params = _read_config(country)
         self.currency = params['currency']
         self.domain = params['domain']
