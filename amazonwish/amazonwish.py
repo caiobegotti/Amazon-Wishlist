@@ -381,7 +381,7 @@ class Wishlist():
 
     def total_expenses(self):
         """
-        Returns the total sum of all prices (without currency symbols),
+        Returns the total sum of all prices (with no currency or locale setting),
         not considering unavailable items or items with no price tags.
 
         >>> total = wishlist.total_expenses()
