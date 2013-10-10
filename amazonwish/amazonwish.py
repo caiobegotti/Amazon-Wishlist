@@ -74,15 +74,11 @@ class Search():
     The Search() class is the one to be used if you don't know an
     user's wishlist ID and need to look them up by e-mail or their name.
 
-    The country parameter is optional, will default to US if not specified.
-
     >>> from amazonwish.amazonwish import Search
     >>> search = Search('begotti', country='it')
     """
 
     def __init__(self, name, country):
-        if country is None:
-            country = 'us'
         params = _read_config(country)
         self.currency = params['currency']
         self.domain = params['domain']
@@ -133,15 +129,11 @@ class Profile():
     information about a given user, such as name, profile photo,
     existing wishlists and their names and size.
 
-    The country parameter is optional, will default to US if not specified.
-
     >>> from amazonwish.amazonwish import Profile
     >>> person = Profile('3MCYFXCFDH4FA', country='us')
     """
 
     def __init__(self, userid, country):
-        if country is None:
-            country = 'us'
         params = _read_config(country)
         self.currency = params['currency']
         self.domain = params['domain']
@@ -216,15 +208,11 @@ class Wishlist():
     wishlist uses and even the total amount necessary if you were
     to buy all the items at once.
 
-    The country parameter is optional, will default to US if not specified.
-
     >>> from amazonwish.amazonwish import Wishlist
     >>> wishlist = Wishlist('3MCYFXCFDH4FA', country='us')
     """
 
     def __init__(self, userid, country):
-        if country is None:
-            country = 'us'
         params = _read_config(country)
         self.currency = params['currency']
         self.domain = params['domain']
