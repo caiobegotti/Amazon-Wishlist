@@ -9,6 +9,7 @@ import os.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import optparse
+import locale
 
 from amazonwish.amazonwish import Wishlist
 from amazonwish.amazonwish import Profile
@@ -66,7 +67,12 @@ def retrieve(userid, store):
         print '\t=' + entry
 
     total = wishlist.total_expenses()
-    print 'In %s your wishlist is worth %s%s' % (wishlist.currency, wishlist.symbol, total)
+    if 'EUR' in wishlist.currency or 'BRL' in wishlist.currency:
+        locale.setlocale(locale.LC_MONETARY, 'de_DE.UTF-8')
+    else:
+        locale.setlocale(locale.LC_MONETARY, 'en_US.UTF-8')
+    print 'In %s your wishlist is worth %s%s' % (wishlist.currency, wishlist.symbol, 
+                                                 locale.currency(total, grouping=True, symbol=False))
 
     profile = Profile(userid, country=store)
 

@@ -18,7 +18,6 @@ they are not live yet.
 
 __author__ = "Caio Begotti <caio1982@gmail.com>"
 
-import locale
 import config
 
 from lxml import etree
@@ -397,10 +396,4 @@ class Wishlist():
                 price = price.replace('.', '', (price.count('.') - 1))
             tags.append(float(price))
         ret = sum(tags)
-
-        if 'EUR' in self.currency or 'BRL' in self.currency:
-            locale.setlocale(locale.LC_MONETARY, 'de_DE.UTF-8')
-        else:
-            locale.setlocale(locale.LC_MONETARY, 'en_US.UTF-8')
-
-        return locale.currency(ret, grouping=True, symbol=False)
+        return ret
