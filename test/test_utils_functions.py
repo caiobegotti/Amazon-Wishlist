@@ -1,7 +1,7 @@
 import re
 
 URL = "^http://.*amazon.*/images/.*\..*$"
-WISHLIST = "^[0-9A-Z]{13}$"
+WISHLIST = "^[0-9A-Z]{10,}$"
 NAME = "^[\w ']{1,}"
 NUMBER = "^\d{1,}"
 PRICE = "^((\d{1,3}[.,])+\d{1,2})$"
