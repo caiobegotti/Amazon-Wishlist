@@ -163,15 +163,16 @@ class Profile():
         >>> info = person.basic_info()
         """
         # wishlists are supposed to show a first name, so it's safe to assume it will never be null
-        namefields = self.page.xpath("//td[@id='profile-name-Field']")
         ret = []
-        for name in namefields:
-            ret.append(_stripper(name.text))
+        for name in self.page.xpath("//td[@id='profile-name-Field']//text()")
+            ret.append(_stripper(name))
+
         photo = self.page.xpath("//div[@id='profile']/div/img/@src")
         if photo:
             filename = photo[0].split('.')
             filename = '.'.join(filename[:-2]) + '.' + filename[-1]
             ret.append(_stripper(filename))
+
         return ret
 
     def wishlists(self):
@@ -179,8 +180,7 @@ class Profile():
 
         >>> lists = person.wishlists()
         """
-        lists = self.page.xpath("//div[@id='profile']/div[@id='regListpublicBlock']/div/h3/a//text()")
-        return lists
+        return self.page.xpath("//div[@id='profile']/div[@id='regListpublicBlock']/div/h3/a//text()")
 
     def wishlists_details(self):
         """
@@ -191,13 +191,13 @@ class Profile():
         >>> details = person.wishlists_details()
         """
         retcodes = []
-        retsizes = []
-        codes = self.page.xpath("//div[@id='profile']/div[@id='regListpublicBlock']/div/@id")
-        for code in codes:
+        for code in self.page.xpath("//div[@id='profile']/div[@id='regListpublicBlock']/div/@id"):
             retcodes.append(_stripper(code.replace('regListsList', '')))
-        sizes = self.page.xpath("//div[@id='profile']/div[@id='regListpublicBlock']/div/div/span[1]")
-        for size in sizes:
-            retsizes.append(_stripper(size.text))
+
+        retsizes = []
+        for size in self.page.xpath("//div[@id='profile']/div[@id='regListpublicBlock']/div/div/span[1]//text()"):
+            retsizes.append(_stripper(size))
+
         return retcodes, retsizes
 
 
@@ -244,10 +244,9 @@ class Wishlist():
 
         >>> authors = wishlist.authors()
         """
-        authors = self.page.xpath("//div[@class='pTitle']")
-        attr = ('de ', 'di ', 'by ', 'von ')
         ret = []
-        for author in authors:
+        attr = ('de ', 'di ', 'by ', 'von ')
+        for author in self.page.xpath("//div[@class='pTitle']"):
             subtree = tostring(author, encoding='unicode', method='html', pretty_print=True)
             if 'span' in subtree:
                 parser = etree.HTMLParser()
@@ -275,9 +274,8 @@ class Wishlist():
 
         >>> titles = wishlist.titles()
         """
-        titles = self.page.xpath("//div[@class='pTitle']/strong//text()")
         ret = []
-        for title in titles:
+        for title in self.page.xpath("//div[@class='pTitle']/strong//text()"):
             ret.append(_stripper(title))
         return ret
 
@@ -328,10 +326,9 @@ class Wishlist():
 
         >>> via = wishlist.via()
         """
-        sources = self.page.xpath("//div/form/table/tbody[*]/tr[*]/td[*]/strong[2]")
         ret = []
-        for url in sources:
-            ret.append(_stripper(url.text))
+        for url in self.page.xpath("//div/form/table/tbody[*]/tr[*]/td[*]/strong[2]//text()"):
+            ret.append(_stripper(url))
         ret = sorted(list(set(ret)))
         return ret
 
@@ -340,9 +337,8 @@ class Wishlist():
 
         >>> covers = wishlist.covers()
         """
-        covers = self.page.xpath("//div/form/table/tbody[*]/tr[*]/td[*]/div[@class='pImage']/img/@src")
         ret = []
-        for filename in covers:
+        for filename in self.page.xpath("//div/form/table/tbody[*]/tr[*]/td[*]/div[@class='pImage']/img/@src"):
             filename = filename.split('.')
             filename = '.'.join(filename[:-2]) + '.' + filename[-1]
             ret.append(_stripper(filename))
@@ -353,9 +349,8 @@ class Wishlist():
 
         >>> urls = wishlist.urls()
         """
-        urls = self.page.xpath("//tbody[@class='itemWrapper']//@name")
         ret = []
-        for url in urls:
+        for url in self.page.xpath("//tbody[@class='itemWrapper']//@name"):
             if 'item' in url:
                 code = url.split('.')[3]
                 if code:
@@ -371,10 +366,7 @@ class Wishlist():
         >>> ideas = wishlist.ideas()
         """
         ret = []
-        titles = self.titles()
-        prices = self.prices()
-        rows = zip(titles, prices)
-        for row in rows:
+        for row in zip(self.titles(), self.prices):
             if "Idea" in row[1]:
                 ret.append(_stripper(row[0]))
         return ret
