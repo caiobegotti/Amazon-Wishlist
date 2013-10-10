@@ -13,7 +13,7 @@ import optparse
 from amazonwish.amazonwish import Search
 
 
-def search():
+def app():
     parser = optparse.OptionParser("Usage: %prog [options]")
     parser.add_option("-q", "--query", dest="query", type="string", help="query someone's info (i.e. caio1982@gmail.com)")
     parser.add_option("-s", "--store", dest="store", type="string", help="store domain [us, uk, ca, fr, es, it, de, jp, cn, br, mx, in]")
@@ -23,15 +23,15 @@ def search():
         print 'You must input at least a valid query string, name or e-mail address, store will default to the main one'
         parser.print_help()
     else:
-        tests(options.query, options.store)
+        search(options.query, options.store)
 
 
-def tests(query, store):
-    s = Search(query, country=store)
-    matches = s.list()
+def search(query, store):
+    res = Search(query, country=store)
+    matches = res.list()
 
-    for m in matches:
-        print m
+    for match in matches:
+        print match
 
 if __name__ == "__main__":
-    search()
+    app()

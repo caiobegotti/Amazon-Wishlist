@@ -14,74 +14,73 @@ from amazonwish.amazonwish import Wishlist
 from amazonwish.amazonwish import Profile
 
 
-def basin():
+def app():
     parser = optparse.OptionParser("Usage: %prog [options]")
-    parser.add_option("-i", "--id", dest="id", type="string", help="wishlist ID (i.e. 3MCYFXCFDH4FA)")
+    parser.add_option("-i", "--id", dest="userid", type="string", help="wishlist ID (i.e. 3MCYFXCFDH4FA)")
     parser.add_option("-s", "--store", dest="store", type="string", help="store domain [us, uk, ca, fr, es, it, de, jp, cn, br, mx, in]")
 
     (options, args) = parser.parse_args()
-    if options.id is None:
+    if options.userid is None:
         print 'At least the wishlist ID is necessary, store will default to the US one'
         parser.print_help()
     else:
-        tests(options.id, options.store)
+        retrieve(options.userid, options.store)
 
 
-def tests(id, store):
-    wl = Wishlist(id, country=store)
+def retrieve(userid, store):
+    wishlist = Wishlist(userid, country=store)
 
     print 'Authors or manufacturers:'
-    authors = wl.authors()
+    authors = wishlist.authors()
     for entry in authors:
         print '\t=' + entry
 
     print 'Items titles:'
-    titles = wl.titles()
+    titles = wishlist.titles()
     for entry in titles:
         print '\t=' + entry
 
     print 'Items covers:'
-    covers = wl.covers()
+    covers = wishlist.covers()
     for entry in covers:
         print '\t=' + entry
 
     print 'Items URLs:'
-    urls = wl.urls()
+    urls = wishlist.urls()
     for entry in urls:
         print '\t=' + entry
 
     print 'Items prices:'
-    prices = wl.prices()
+    prices = wishlist.prices()
     for entry in prices:
         print '\t=' + entry
-        # for c in entry:
-        #    print '[%s]' % c, repr(c), type(c)
 
     print 'Universal wishlist sources:'
-    via = wl.via()
+    via = wishlist.via()
     for entry in via:
         print '\t=' + entry
 
-    ideas = wl.ideas()
+    ideas = wishlist.ideas()
     print 'Ideas you saved for later:'
-    print ideas
+    for entry in ideas:
+        print '\t=' + entry
 
-    total = wl.total_expenses()
-    print 'In %s your wishlist is worth %s%s' % (wl.currency, wl.symbol, total)
+    total = wishlist.total_expenses()
+    print 'In %s your wishlist is worth %s%s' % (wishlist.currency, wishlist.symbol, total)
 
-    p = Profile(id, country=store)
+    profile = Profile(userid, country=store)
 
-    info = p.basic_info()
+    info = profile.basic_info()
     print 'Your name and avatar:'
     print info
 
-    lists = p.wishlists()
+    lists = profile.wishlists()
     print 'Your lists data:'
     print lists
 
-    details = p.wishlists_details()
+    details = profile.wishlists_details()
     print 'Your lists and their sizes:'
     print details
 
 if __name__ == "__main__":
-    basin()
+    app()
