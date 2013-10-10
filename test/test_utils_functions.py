@@ -1,3 +1,5 @@
+import re
+
 URL = "^http://.*amazon.*/images/.*\..*$"
 WISHLIST = "^[0-9A-Z]{13}$"
 NAME = "^[\w ']{1,}"
