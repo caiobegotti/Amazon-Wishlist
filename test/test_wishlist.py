@@ -6,6 +6,9 @@
 import sys
 import os.path
 
+# generic test helpers 
+from test_utils_functions import *
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from amazonwish.amazonwish import Wishlist
@@ -19,7 +22,7 @@ class TestWishlistUS:
 
     def test_ideas(self):
         ideas = wishlist.ideas()
-        assert ideas[0] == 'Backpack & travel stuff'
+        assert is_match_for(TITLE, ideas[0]) == True
 
     def test_prices(self):
         prices = wishlist.prices()
@@ -32,50 +35,48 @@ class TestWishlistUS:
 
     def test_via(self):
         via = wishlist.via()
-        assert via[-1] == 'xkcd.com'
-        assert via[-2] == 'submarino.com.br'
-        assert via[-3] == 'saraivauni.com.br'
+        assert is_match_for(VIA, via[0]) == True
+        assert is_match_for(VIA, via[1]) == True
+        assert is_match_for(VIA, via[2]) == True
 
     def test_urls(self):
         urls = wishlist.urls()
-        assert urls[-5] == 'http://www.amazon.com/dp/1405116927'
-        assert urls[-20] == 'http://www.amazon.com/dp/0631232702'
-        assert urls[-40] == ''
+        assert is_match_for(DP, urls[5]) == True
+        assert is_match_for(DP, urls[25]) == True
+        assert is_match_for(DP, urls[50]) == True
 
     def test_currency(self):
-        currency = wishlist.currency
-        symbol = wishlist.symbol
-        assert currency == 'USD'
-        assert symbol == '$'
+        assert wishlist.currency == 'USD'
+        assert wishlist.symbol == ur'\u0024'
 
     def test_covers(self):
         covers = wishlist.covers()
-        assert covers[6] == 'http://g-ecx.images-amazon.com/images/G/01/gifts/registries/wishlist/note01.png'
-        assert covers[219] == 'http://ecx.images-amazon.com/images/I/71SH2KAXPHL.gif'
-        assert covers[171] == 'http://g-ecx.images-amazon.com/images/G/01/x-locale/detail/thumb-no-image.gif'
-        assert covers[181] == 'http://ecx.images-amazon.com/images/I/019%2BQ0fbhrL.jpg'
+        assert is_match_for(URL, covers[0]) == True
+        assert is_match_for(URL, covers[55]) == True
+        assert is_match_for(URL, covers[175]) == True
+        assert is_match_for(URL, covers[200]) == True
+        assert is_match_for(URL, covers[225]) == True
 
     def test_titles(self):
         titles = wishlist.titles()
-        assert titles[-5] == 'The Handbook of Language Variation and Change (Blackwell Handbooks in Linguistics)'
-        assert titles[-7] == 'The World\'s Major Languages'
-        assert titles[-9] == 'Three is a Crowd?: Acquiring Portuguese in a Trilingual Environment (Child Language and Child Development)'
-        assert titles[-10] == 'Computational Processing of the Portuguese Language: 7th International Workshop, PROPOR 2006, Itatiaia, Brazil, May 13-17, 2006, Proceedings (Lecture ... / Lecture Notes in Artificial Intelligence)'
-        assert titles[-13] == u'The Posthumous Memoirs of Brás Cubas (Library of Latin America)'
-        assert titles[-35] == 'Dilbert 2.0: 20 Years of Dilbert'
-        assert titles[-43] == 'A Ditadura Encurralada'
-        #assert unicode(titles[-50]) == u'As Cem Melhores Cr\u0244nicas Brasileiras'
-        assert titles[-53] == 'Punk'
-        #assert titles[-67] == 'Law \& Order: Crime Scenes'
+        assert is_match_for(TITLE, titles[0]) == True
+        assert is_match_for(TITLE, titles[5]) == True
+        assert is_match_for(TITLE, titles[10]) == True
+        assert is_match_for(TITLE, titles[35]) == True
+        assert is_match_for(TITLE, titles[45]) == True
+        assert is_match_for(TITLE, titles[95]) == True
+        assert is_match_for(TITLE, titles[110]) == True
+        assert is_match_for(TITLE, titles[140]) == True
+        assert is_match_for(TITLE, titles[160]) == True
+        assert is_match_for(TITLE, titles[200]) == True
 
     def test_authors(self):
         authors = wishlist.authors()
-        assert authors[-1] == 'Paul Brians (Author)'
-        assert authors[-5] == 'J. K. Chambers (Editor), et al.'
-        assert authors[-6] == 'Walt Wolfram'
-        assert authors[-17] == 'Rosina Lippi-Green'
-        assert authors[-30] == 'Frans De Waal, F. B. M. De Waal'
-        assert authors[-45] == ''
+        assert is_match_for(TITLE, authors[0]) == True
+        assert is_match_for(TITLE, authors[1]) == True
+        assert is_match_for(TITLE, authors[5]) == True
+        assert is_match_for(TITLE, authors[10]) == True
+        assert is_match_for(TITLE, authors[45]) == True
 
 
 class TestWishlistUK:
@@ -95,37 +96,35 @@ class TestWishlistUK:
 
     def test_urls(self):
         urls = wishlist.urls()
-        assert urls[0] == 'http://www.amazon.co.uk/dp/B005890FUI'
-        assert urls[1] == 'http://www.amazon.co.uk/dp/B008ETX1C8'
-        assert urls[2] == 'http://www.amazon.co.uk/dp/B005UYF6DW'
-        assert urls[3] == 'http://www.amazon.co.uk/dp/B003R0KOUQ'
+        assert is_match_for(DP, urls[0]) == True
+        assert is_match_for(DP, urls[1]) == True
+        assert is_match_for(DP, urls[2]) == True
+        assert is_match_for(DP, urls[3]) == True
 
     def test_currency(self):
-        currency = wishlist.currency
-        symbol = wishlist.symbol
-        assert currency == 'GBP'
-        assert symbol == ur'\u00a3'
+        assert wishlist.currency == 'GBP'
+        assert wishlist.symbol == ur'\u00a3'
 
     def test_covers(self):
         covers = wishlist.covers()
-        assert covers[0] == 'http://ecx.images-amazon.com/images/I/41JpsttW8CL.jpg'
-        assert covers[1] == 'http://ecx.images-amazon.com/images/I/41witgYTdsL.jpg'
-        assert covers[2] == 'http://ecx.images-amazon.com/images/I/311M2ljl9kL.jpg'
-        assert covers[3] == 'http://ecx.images-amazon.com/images/I/514nO64FYTL.jpg'
+        assert is_match_for(URL, covers[0]) == True
+        assert is_match_for(URL, covers[1]) == True
+        assert is_match_for(URL, covers[2]) == True
+        assert is_match_for(URL, covers[3]) == True
 
     def test_titles(self):
         titles = wishlist.titles()
-        assert titles[0] == 'Kindle Touch, Wi-Fi, 6" E Ink Touch Screen Display'
-        assert titles[1] == 'Official Team GB Cycling Duck'
-        assert titles[2] == "Rockport Men's Charlesview Black Lace Up K71053  12.5 UK, 13 US"
-        assert titles[3] == 'Avatar with Limited Edition Lenticular Artwork (Blu-ray 3D + Blu-ray + DVD)[Region Free]'
+        assert is_match_for(TITLE, titles[0]) == True
+        assert is_match_for(TITLE, titles[1]) == True
+        assert is_match_for(TITLE, titles[2]) == True
+        assert is_match_for(TITLE, titles[3]) == True
 
     def test_authors(self):
         authors = wishlist.authors()
-        assert authors[0] == ''
-        assert authors[1] == ''
-        assert authors[2] == ''
-        assert authors[3] == 'Sam Worthington'
+        assert is_match_for(TITLE, authors[0]) == True
+        assert is_match_for(TITLE, authors[1]) == True
+        assert is_match_for(TITLE, authors[2]) == True
+        assert is_match_for(TITLE, authors[3]) == True
 
 
 class TestWishlistFrance:
@@ -145,35 +144,34 @@ class TestWishlistFrance:
 
     def test_urls(self):
         urls = wishlist.urls()
-        assert urls[0] == 'http://www.amazon.fr/dp/B008384GHE'
-        assert urls[1] == 'http://www.amazon.fr/dp/2350761231'
-        assert urls[2] == 'http://www.amazon.fr/dp/2315002885'
-        assert urls[3] == 'http://www.amazon.fr/dp/2020537966'
+        assert is_match_for(DP, urls[0]) == True
+        assert is_match_for(DP, urls[1]) == True
+        assert is_match_for(DP, urls[2]) == True
+        assert is_match_for(DP, urls[3]) == True
 
     def test_currency(self):
-        currency = wishlist.currency
-        symbol = wishlist.symbol
-        assert currency == 'EUR'
-        assert symbol == ur'\u20ac'
+        assert wishlist.currency == 'EUR'
+        assert wishlist.symbol == ur'\u20ac'
 
     def test_covers(self):
         covers = wishlist.covers()
-        assert covers[0] == 'http://ecx.images-amazon.com/images/I/51rKu1rvV8L.jpg'
-        assert covers[1] == 'http://ecx.images-amazon.com/images/I/41FcoyEUXBL.jpg'
-        assert covers[2] == 'http://ecx.images-amazon.com/images/I/513-V9oAo0L.jpg'
-        assert covers[3] == 'http://ecx.images-amazon.com/images/I/51WKWFVF81L.jpg'
+        assert is_match_for(URL, covers[0]) == True
+        assert is_match_for(URL, covers[1]) == True
+        assert is_match_for(URL, covers[2]) == True
+        assert is_match_for(URL, covers[3]) == True
 
     def test_titles(self):
         titles = wishlist.titles()
-        assert titles[0] == u'Les dents de la mer - Bo\xeetier m\xe9tal [Blu-ray]'
-        assert titles[1] == "L'Agenda VDM 2012-2013"
-        assert titles[2] == "Shakespeare, c'est moi: La confession d'Edward de Vere"
-        assert titles[3] == u"Moi j'adore, la ma\xeetresse d\xe9teste"
+        assert is_match_for(TITLE, titles[0]) == True
+        assert is_match_for(TITLE, titles[1]) == True
+        assert is_match_for(TITLE, titles[2]) == True
+        assert is_match_for(TITLE, titles[3]) == True
 
     def test_authors(self):
         authors = wishlist.authors()
-        assert authors[0] == ''
-        assert authors[1] == 'Roy Scheider'
-        assert authors[2] == 'Didier Guedj (Auteur), et al.'
-        assert authors[3] == u'Jouannic Br\xfcnhilde (Auteur)'
-        assert authors[4] == u'Elisabeth Brami (Auteur), Lionel Le N\xe9ouanic (Illustrations)'
+        assert is_match_for(TITLE, authors[0]) == True
+        assert is_match_for(TITLE, authors[1]) == True
+        assert is_match_for(TITLE, authors[2]) == True
+        assert is_match_for(TITLE, authors[3]) == True
+        assert is_match_for(TITLE, authors[4]) == True
+        assert is_match_for(TITLE, authors[5]) == True
