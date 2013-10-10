@@ -6,23 +6,12 @@
 import sys
 import os.path
 
+# generic test helpers 
+from test_utils_functions import *
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from amazonwish.amazonwish import Search
-
-# kindle-only for the moment, no wishlists
-#
-# class TestSearchBrazilMultiple:
-#    def test_search(self):
-#        search = Search('caio1982@gmail.com', country='br')
-#        matches = search.list()[0]
-#        assert matches[0] == 'Caio Begotti'
-#
-# class TestSearchMexicoMultiple:
-#    def test_search(self):
-#        search = Search('caio1982@gmail.com', country='mx')
-#        matches = search.list()[0]
-#        assert matches[0] == 'Caio Begotti'
 
 
 class TestSearchUSMultiple:
@@ -30,8 +19,10 @@ class TestSearchUSMultiple:
     def test_search(self):
         search = Search('begotti', country='us')
         matches = search.list()
-        assert matches[0][0] == 'Caio Begotti'
-        assert matches[1][0] == 'Pedro Ivo de Brito Begotti'
+        assert is_match_for(NAME, matches[0[0]]) == True
+        assert is_match_for(NAME, matches[1[0]]) == True
+        assert is_match_for(WISHLIST, matches[0][1]) == True
+        assert is_match_for(WISHLIST, matches[1][1]) == True
 
 
 class TestSearchCAMultiple:
@@ -39,8 +30,10 @@ class TestSearchCAMultiple:
     def test_search(self):
         search = Search('santos', country='ca')
         matches = search.list()
-        assert matches[0][0] == "Wayne Santos'"
-        assert matches[1][0] == "Catia Santos'"
+        assert is_match_for(NAME, matches[0[0]]) == True
+        assert is_match_for(NAME, matches[1[0]]) == True
+        assert is_match_for(WISHLIST, matches[0][1]) == True
+        assert is_match_for(WISHLIST, matches[1][1]) == True
 
 
 class TestSearchUKMultiple:
@@ -48,8 +41,10 @@ class TestSearchUKMultiple:
     def test_search(self):
         search = Search('santos', country='uk')
         matches = search.list()
-        assert matches[0][0] == "Pedro Santos'"
-        assert matches[1][0] == "paulo santos'"
+        assert is_match_for(NAME, matches[0[0]]) == True
+        assert is_match_for(NAME, matches[1[0]]) == True
+        assert is_match_for(WISHLIST, matches[0][1]) == True
+        assert is_match_for(WISHLIST, matches[1][1]) == True
 
 
 class TestSearchESMultiple:
@@ -57,8 +52,10 @@ class TestSearchESMultiple:
     def test_search(self):
         search = Search('santos', country='es')
         matches = search.list()
-        assert matches[0][0] == "Santos Merino's"
-        assert matches[1][0] == "santos'"
+        assert is_match_for(NAME, matches[0[0]]) == True
+        assert is_match_for(NAME, matches[1[0]]) == True
+        assert is_match_for(WISHLIST, matches[0][1]) == True
+        assert is_match_for(WISHLIST, matches[1][1]) == True
 
 
 class TestSearchITMultiple:
@@ -66,8 +63,10 @@ class TestSearchITMultiple:
     def test_search(self):
         search = Search('santos', country='it')
         matches = search.list()
-        assert matches[0][0] == 'Silvia Santos'
-        assert matches[1][0] == 'Santos'
+        assert is_match_for(NAME, matches[0[0]]) == True
+        assert is_match_for(NAME, matches[1[0]]) == True
+        assert is_match_for(WISHLIST, matches[0][1]) == True
+        assert is_match_for(WISHLIST, matches[1][1]) == True
 
 
 class TestSearchFRMultiple:
@@ -75,8 +74,10 @@ class TestSearchFRMultiple:
     def test_search(self):
         search = Search('santos', country='fr')
         matches = search.list()
-        assert matches[0][0] == 'Santos'
-        assert matches[1][0] == 'santos'
+        assert is_match_for(NAME, matches[0[0]]) == True
+        assert is_match_for(NAME, matches[1[0]]) == True
+        assert is_match_for(WISHLIST, matches[0][1]) == True
+        assert is_match_for(WISHLIST, matches[1][1]) == True
 
 
 class TestSearchDEMultiple:
@@ -84,8 +85,10 @@ class TestSearchDEMultiple:
     def test_search(self):
         search = Search('santos', country='de')
         matches = search.list()
-        assert matches[0][0] == "Sandra DOS SANTOS'"
-        assert matches[1][0] == "Julia Santos'"
+        assert is_match_for(NAME, matches[0[0]]) == True
+        assert is_match_for(NAME, matches[1[0]]) == True
+        assert is_match_for(WISHLIST, matches[0][1]) == True
+        assert is_match_for(WISHLIST, matches[1][1]) == True
 
 
 class TestSearchJPMultiple:
@@ -93,8 +96,10 @@ class TestSearchJPMultiple:
     def test_search(self):
         search = Search('santos', country='jp')
         matches = search.list()
-        assert matches[0][0] == 'Sebastien Santos'
-        assert matches[1][0] == 'Joao Santos'
+        assert is_match_for(NAME, matches[0[0]]) == True
+        assert is_match_for(NAME, matches[1[0]]) == True
+        assert is_match_for(WISHLIST, matches[0][1]) == True
+        assert is_match_for(WISHLIST, matches[1][1]) == True
 
 
 class TestSearchCNMultiple:
@@ -102,8 +107,10 @@ class TestSearchCNMultiple:
     def test_search(self):
         search = Search('santos', country='cn')
         matches = search.list()
-        assert matches[0][0] == 'santos chia'
-        assert matches[1][0] == 'Victor Santos'
+        assert is_match_for(NAME, matches[0[0]]) == True
+        assert is_match_for(NAME, matches[1[0]]) == True
+        assert is_match_for(WISHLIST, matches[0][1]) == True
+        assert is_match_for(WISHLIST, matches[1][1]) == True
 
 
 class TestSearchINMultiple:
@@ -111,5 +118,27 @@ class TestSearchINMultiple:
     def test_search(self):
         search = Search('rajesh', country='in')
         matches = search.list()
-        assert matches[0][0] == "rajesh's"
-        assert matches[1][0] == "Rajesh's"
+        assert is_match_for(NAME, matches[0[0]]) == True
+        assert is_match_for(NAME, matches[1[0]]) == True
+        assert is_match_for(WISHLIST, matches[0][1]) == True
+        assert is_match_for(WISHLIST, matches[1][1]) == True
+
+
+# class TestSearchBrazilMultiple:
+#    def test_search(self):
+#        search = Search('caio1982@gmail.com', country='br')
+#        matches = search.list()[0]
+#        assert is_match_for(NAME, matches[0[0]]) == True
+#        assert is_match_for(NAME, matches[1[0]]) == True
+#        assert is_match_for(WISHLIST, matches[0][1]) == True
+#        assert is_match_for(WISHLIST, matches[1][1]) == True
+#
+#
+# class TestSearchMexicoMultiple:
+#    def test_search(self):
+#        search = Search('caio1982@gmail.com', country='mx')
+#        matches = search.list()[0]
+#        assert is_match_for(NAME, matches[0[0]]) == True
+#        assert is_match_for(NAME, matches[1[0]]) == True
+#        assert is_match_for(WISHLIST, matches[0][1]) == True
+#        assert is_match_for(WISHLIST, matches[1][1]) == True
