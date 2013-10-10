@@ -80,7 +80,9 @@ class Search():
     >>> search = Search('begotti', country='it')
     """
 
-    def __init__(self, name, country='us'):
+    def __init__(self, name, country):
+        if country is None:
+            country = 'us'
         params = _read_config(country)
         self.currency = params['currency']
         self.domain = params['domain']
@@ -137,7 +139,9 @@ class Profile():
     >>> person = Profile('3MCYFXCFDH4FA', country='us')
     """
 
-    def __init__(self, userid, country='us'):
+    def __init__(self, userid, country):
+        if country is None:
+            country = 'us'
         params = _read_config(country)
         self.currency = params['currency']
         self.domain = params['domain']
@@ -218,7 +222,9 @@ class Wishlist():
     >>> wishlist = Wishlist('3MCYFXCFDH4FA', country='us')
     """
 
-    def __init__(self, userid, country='us'):
+    def __init__(self, userid, country):
+        if country is None:
+            country = 'us'
         params = _read_config(country)
         self.currency = params['currency']
         self.domain = params['domain']
@@ -366,7 +372,7 @@ class Wishlist():
         >>> ideas = wishlist.ideas()
         """
         ret = []
-        for row in zip(self.titles(), self.prices):
+        for row in zip(self.titles(), self.prices()):
             if "Idea" in row[1]:
                 ret.append(_stripper(row[0]))
         return ret
