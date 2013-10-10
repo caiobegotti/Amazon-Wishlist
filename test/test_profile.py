@@ -3,13 +3,16 @@
 # Copyright (C) 2012 - Caio Begotti <caio1982@gmail.com>
 # Distributed under the GPLv2, see the LICENSE file.
 
+import re
 import sys
 import os.path
+
+# generic test helpers
+from test_utils_functions import *
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from amazonwish.amazonwish import Profile
-
 
 class TestUS:
 
@@ -19,25 +22,25 @@ class TestUS:
 
     def test_basic_info(self):
         info = person.basic_info()
-        assert info[0] == 'Caio Begotti'
-        assert info[1] == 'http://ecx.images-amazon.com/images/I/51-aMSvDbhL.jpg'
+        assert is_match_for(NAME, info[0]) == True
+        assert is_match_for(URL, info[1]) == True
 
     def test_wishlists(self):
         lists = person.wishlists()
-        assert lists[0] == 'Stuff'
-        assert lists[1] == 'Test'
-        assert lists[2] == 'Wish List'
+        assert is_match_for(NAME, lists[0]) == True
+        assert is_match_for(NAME, lists[1]) == True
+        assert is_match_for(NAME, lists[2]) == True
 
     def test_wishlists_details(self):
         details = person.wishlists_details()
         codes = details[0]
         sizes = details[1]
-        assert codes[0] == '22LLDFNTWM5J7'
-        assert codes[1] == '3K7YA6YZVXG9J'
-        assert codes[2] == '3MCYFXCFDH4FA'
-        assert sizes[0] == '10'
-        assert sizes[1] == '1'
-        assert sizes[2] >= '200'
+        assert is_match_for(WISHLIST, codes[0]) == True
+        assert is_match_for(WISHLIST, codes[1]) == True
+        assert is_match_for(WISHLIST, codes[2]) == True
+        assert is_match_for(NUMBER, sizes[0]) == True
+        assert is_match_for(NUMBER, sizes[1]) == True
+        assert is_match_for(NUMBER, sizes[2]) == True
 
 
 class TestUK:
@@ -48,18 +51,19 @@ class TestUK:
 
     def test_basic_info(self):
         info = person.basic_info()
-        assert info[0] == 'Caio Begotti'
+        assert is_match_for(NAME, info[0]) == True
+        assert is_match_for(URL, info[1]) == True
 
     def test_wishlists(self):
         lists = person.wishlists()
-        assert lists[0] == 'Wish List'
+        assert is_match_for(NAME, lists[0]) == True
 
     def test_wishlists_details(self):
         details = person.wishlists_details()
         codes = details[0]
         sizes = details[1]
-        assert codes[0] == 'MBI8TEEYJS10'
-        assert sizes[0] == '4'
+        assert is_match_for(WISHLIST, codes[0]) == True
+        assert is_match_for(NUMBER, sizes[0]) == True
 
 
 class TestJapan:
@@ -70,7 +74,8 @@ class TestJapan:
 
     def test_basic_info(self):
         info = person.basic_info()
-        assert info[0] == 'Caio Begotti'
+        assert is_match_for(NAME, info[0]) == True
+        assert is_match_for(URL, info[1]) == True
 
     def test_wishlists(self):
         lists = person.wishlists()
@@ -80,8 +85,8 @@ class TestJapan:
         details = person.wishlists_details()
         codes = details[0]
         sizes = details[1]
-        assert codes[0] == '13RB1XNS2VF62'
-        assert sizes[0] == '1'
+        assert is_match_for(WISHLIST, codes[0]) == True
+        assert is_match_for(NUMBER, sizes[0]) == True
 
 
 class TestChina:
@@ -92,7 +97,8 @@ class TestChina:
 
     def test_basic_info(self):
         info = person.basic_info()
-        assert info[0] == 'Caio Begotti'
+        assert is_match_for(NAME, info[0]) == True
+        assert is_match_for(URL, info[1]) == True
 
     def test_wishlists(self):
         lists = person.wishlists()
@@ -102,8 +108,8 @@ class TestChina:
         details = person.wishlists_details()
         codes = details[0]
         sizes = details[1]
-        assert codes[0] == '3BFG9M3CL83QR'
-        assert sizes[0] == '1'
+        assert is_match_for(WISHLIST, codes[0]) == True
+        assert is_match_for(NUMBER, sizes[0]) == True
 
 
 class TestFrance:
@@ -114,18 +120,19 @@ class TestFrance:
 
     def test_basic_info(self):
         info = person.basic_info()
-        assert info[0] == 'Caio Begotti'
+        assert is_match_for(NAME, info[0]) == True
+        assert is_match_for(URL, info[1]) == True
 
     def test_wishlists(self):
         lists = person.wishlists()
-        assert lists[0] == 'Wish FRANCE'
+        assert is_match_for(NAME, lists[0]) == True
 
     def test_wishlists_details(self):
         details = person.wishlists_details()
         codes = details[0]
         sizes = details[1]
-        assert codes[0] == '2POKVB3027QIK'
-        assert sizes[0] == '4'
+        assert is_match_for(WISHLIST, codes[0]) == True
+        assert is_match_for(NUMBER, sizes[0]) == True
 
 
 class TestCanada:
@@ -136,18 +143,19 @@ class TestCanada:
 
     def test_basic_info(self):
         info = person.basic_info()
-        assert info[0] == 'Caio Begotti'
+        assert is_match_for(NAME, info[0]) == True
+        assert is_match_for(URL, info[1]) == True
 
     def test_wishlists(self):
         lists = person.wishlists()
-        assert lists[0] == 'Wish Canada'
+        assert is_match_for(NAME, lists[0]) == True
 
     def test_wishlists_details(self):
         details = person.wishlists_details()
         codes = details[0]
         sizes = details[1]
-        assert codes[0] == 'PEK9J1M112UK'
-        assert sizes[0] == '2'
+        assert is_match_for(WISHLIST, codes[0]) == True
+        assert is_match_for(NUMBER, sizes[0]) == True
 
 
 class TestGermany:
@@ -158,18 +166,19 @@ class TestGermany:
 
     def test_basic_nfo(self):
         info = person.basic_info()
-        assert info[0] == 'Caio Begotti'
+        assert is_match_for(NAME, info[0]) == True
+        assert is_match_for(URL, info[1]) == True
 
     def test_wishlists(self):
         lists = person.wishlists()
-        assert lists[0] == 'WL germany'
+        assert is_match_for(NAME, lists[0]) == True
 
     def test_wishlists_details(self):
         details = person.wishlists_details()
         codes = details[0]
         sizes = details[1]
-        assert codes[0] == '2ZPN6SBGBP4X8'
-        assert sizes[0] == '3'
+        assert is_match_for(WISHLIST, codes[0]) == True
+        assert is_match_for(NUMBER, sizes[0]) == True
 
 
 class TestItaly:
@@ -180,18 +189,19 @@ class TestItaly:
 
     def test_basic_info(self):
         info = person.basic_info()
-        assert info[0] == 'Caio Begotti'
+        assert is_match_for(NAME, info[0]) == True
+        assert is_match_for(URL, info[1]) == True
 
     def test_wishlists(self):
         lists = person.wishlists()
-        assert lists[0] == 'Desideri IT'
+        assert is_match_for(NAME, lists[0]) == True
 
     def test_wishlists_details(self):
         details = person.wishlists_details()
         codes = details[0]
         sizes = details[1]
-        assert codes[0] == '3W1RQNDJTCQC'
-        assert sizes[0] == '4'
+        assert is_match_for(WISHLIST, codes[0]) == True
+        assert is_match_for(NUMBER, sizes[0]) == True
 
 
 class TestSpain:
@@ -202,18 +212,20 @@ class TestSpain:
 
     def test_basic_info(self):
         info = person.basic_info()
-        assert info[0] == 'Caio Begotti'
+        assert is_match_for(NAME, info[0]) == True
+        assert is_match_for(URL, info[1]) == True
 
     def test_wishlists(self):
         lists = person.wishlists()
-        assert lists[0] == 'Lista de deseos'
+        assert is_match_for(NAME, lists[0]) == True
 
     def test_wishlists_details(self):
         details = person.wishlists_details()
         codes = details[0]
         sizes = details[1]
-        assert codes[0] == '1LJ10M7BWAICD'
-        assert sizes[0] == '3'
+        assert is_match_for(WISHLIST, codes[0]) == True
+        assert is_match_for(NUMBER, sizes[0]) == True
+
 
 # class TestBrazil:
 #    def setup_method(self, method):
@@ -222,15 +234,38 @@ class TestSpain:
 #
 #    def test_basic_info(self):
 #        info = person.basic_info()
-#        assert info[0] == 'Caio Begotti'
+#        assert is_match_for(NAME, info[0]) == True
+#        assert is_match_for(URL, info[1]) == True
 #
 #    def test_wishlists(self):
 #        lists = person.wishlists()
-#        assert lists[0] == 'Lista de desejos'
+#        assert is_match_for(NAME, lists[0]) == True
 #
 #    def test_wishlists_details(self):
 #        details = person.wishlists_details()
 #        codes = details[0]
 #        sizes = details[1]
-#        assert codes[0] == ''
-#        assert sizes[0] == ''
+#        assert is_match_for(WISHLIST, codes[0]) == True
+#        assert is_match_for(NUMBER, sizes[0]) == True
+#
+#
+# class TestMexico:
+#    def setup_method(self, method):
+#        global person
+#        person = Profile('', country='mx')
+#
+#    def test_basic_info(self):
+#        info = person.basic_info()
+#        assert is_match_for(NAME, info[0]) == True
+#        assert is_match_for(URL, info[1]) == True
+#
+#    def test_wishlists(self):
+#        lists = person.wishlists()
+#        assert is_match_for(NAME, lists[0]) == True
+#
+#    def test_wishlists_details(self):
+#        details = person.wishlists_details()
+#        codes = details[0]
+#        sizes = details[1]
+#        assert is_match_for(WISHLIST, codes[0]) == True
+#        assert is_match_for(NUMBER, sizes[0]) == True

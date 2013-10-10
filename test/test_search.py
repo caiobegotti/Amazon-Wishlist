@@ -6,6 +6,9 @@
 import sys
 import os.path
 
+# generic test helpers 
+from test_utils_functions import *
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from amazonwish.amazonwish import Search
@@ -16,17 +19,17 @@ class TestSearchUS:
     def test_search(self):
         search = Search('caio1982@gmail.com', country='us')
         matches = search.list()[0]
-        assert matches[0] == 'Caio Begotti'
-        assert matches[1] == '3MCYFXCFDH4FA'
-
+        assert is_match_for(NAME, matches[0]) == True
+        assert is_match_for(WISHLIST, matches[1]) == True
+ 
 
 class TestSearchCanada:
 
     def test_search(self):
         search = Search('caio1982@gmail.com', country='ca')
         matches = search.list()[0]
-        assert matches[0] == 'Caio Begotti'
-        assert matches[1] == 'PEK9J1M112UK'
+        assert is_match_for(NAME, matches[0]) == True
+        assert is_match_for(WISHLIST, matches[1]) == True
 
 
 class TestSearchUK:
@@ -34,8 +37,8 @@ class TestSearchUK:
     def test_search(self):
         search = Search('caio1982@gmail.com', country='uk')
         matches = search.list()[0]
-        assert matches[0] == 'Caio Begotti'
-        assert matches[1] == 'MBI8TEEYJS10'
+        assert is_match_for(NAME, matches[0]) == True
+        assert is_match_for(WISHLIST, matches[1]) == True
 
 
 class TestSearchGermany:
@@ -43,8 +46,8 @@ class TestSearchGermany:
     def test_search(self):
         search = Search('caio1982@gmail.com', country='de')
         matches = search.list()[0]
-        assert matches[0] == 'Caio Begotti'
-        assert matches[1] == '2ZPN6SBGBP4X8'
+        assert is_match_for(NAME, matches[0]) == True
+        assert is_match_for(WISHLIST, matches[1]) == True
 
 
 class TestSearchItaly:
@@ -52,8 +55,8 @@ class TestSearchItaly:
     def test_search(self):
         search = Search('caio1982@gmail.com', country='it')
         matches = search.list()[0]
-        assert matches[0] == 'Caio Begotti'
-        assert matches[1] == '3W1RQNDJTCQC'
+        assert is_match_for(NAME, matches[0]) == True
+        assert is_match_for(WISHLIST, matches[1]) == True
 
 
 class TestSearchFrance:
@@ -61,8 +64,8 @@ class TestSearchFrance:
     def test_search(self):
         search = Search('caio1982@gmail.com', country='fr')
         matches = search.list()[0]
-        assert matches[0] == 'Caio Begotti'
-        assert matches[1] == '2POKVB3027QIK'
+        assert is_match_for(NAME, matches[0]) == True
+        assert is_match_for(WISHLIST, matches[1]) == True
 
 
 class TestSearchSpain:
@@ -70,8 +73,8 @@ class TestSearchSpain:
     def test_search(self):
         search = Search('caio1982@gmail.com', country='es')
         matches = search.list()[0]
-        assert matches[0] == 'Caio Begotti'
-        assert matches[1] == '1LJ10M7BWAICD'
+        assert is_match_for(NAME, matches[0]) == True
+        assert is_match_for(WISHLIST, matches[1]) == True
 
 
 class TestSearchJapan:
@@ -79,8 +82,8 @@ class TestSearchJapan:
     def test_search(self):
         search = Search('caio1982@gmail.com', country='jp')
         matches = search.list()[0]
-        assert matches[0] == 'Caio Begotti'
-        assert matches[1] == '13RB1XNS2VF62'
+        assert is_match_for(NAME, matches[0]) == True
+        assert is_match_for(WISHLIST, matches[1]) == True
 
 
 class TestSearchChina:
@@ -88,24 +91,8 @@ class TestSearchChina:
     def test_search(self):
         search = Search('caio1982@gmail.com', country='cn')
         matches = search.list()[0]
-        assert matches[0] == 'Caio Begotti'
-        assert matches[1] == '3BFG9M3CL83QR'
-
-# kindle-only for the moment, no wishlists
-#
-# class TestSearchBrazil:
-#    def test_search(self):
-#        search = Search('caio1982@gmail.com', country='br')
-#        matches = search.list()[0]
-#        assert matches[0] == 'Caio Begotti'
-#        assert matches[1] == ''
-#
-# class TestSearchMexico:
-#    def test_search(self):
-#        search = Search('caio1982@gmail.com', country='mx')
-#        matches = search.list()[0]
-#        assert matches[0] == 'Caio Begotti'
-#        assert matches[1] == ''
+        assert is_match_for(NAME, matches[0]) == True
+        assert is_match_for(WISHLIST, matches[1]) == True
 
 
 class TestSearchIndia:
@@ -113,8 +100,8 @@ class TestSearchIndia:
     def test_search(self):
         search = Search('caio1982@gmail.com', country='in')
         matches = search.list()[0]
-        assert matches[0] == 'Caio Begotti'
-        assert matches[1] == 'ZVKVJQHOBAT2'
+        assert is_match_for(NAME, matches[0]) == True
+        assert is_match_for(WISHLIST, matches[1]) == True
 
 
 class TestSearchUSMultiple:
@@ -122,5 +109,23 @@ class TestSearchUSMultiple:
     def test_search(self):
         search = Search('begotti', country='us')
         matches = search.list()
-        assert matches[0][0] == 'Caio Begotti'
-        assert matches[1][0] == 'Pedro Ivo de Brito Begotti'
+        assert is_match_for(NAME, matches[0][0]) == True
+        assert is_match_for(WISHLIST, matches[0][1]) == True
+        assert is_match_for(NAME, matches[1][0]) == True
+        assert is_match_for(WISHLIST, matches[1][1]) == True
+
+
+# class TestSearchBrazil:
+#    def test_search(self):
+#        search = Search('caio1982@gmail.com', country='br')
+#        matches = search.list()[0]
+#        assert is_match_for(NAME, matches[0]) == True
+#        assert is_match_for(WISHLIST, matches[1]) == True
+#
+#
+# class TestSearchMexico:
+#    def test_search(self):
+#        search = Search('caio1982@gmail.com', country='mx')
+#        matches = search.list()[0]
+#        assert is_match_for(NAME, matches[0]) == True
+#        assert is_match_for(WISHLIST, matches[1]) == True
