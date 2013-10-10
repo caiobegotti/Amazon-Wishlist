@@ -28,8 +28,6 @@ from lxml.html import tostring, fromstring
 # when lxml is completely shitty in doing that!
 from BeautifulSoup import UnicodeDammit
 
-# that's a nice hack isn't it? i hate it
-
 
 def _decoder(data):
     """Simple helper to enforce a decent charset handling."""
@@ -77,8 +75,10 @@ class Search():
     The Search() class is the one to be used if you don't know an
     user's wishlist ID and need to look them up by e-mail or their name.
 
+    The country parameter is optional, will default to US if not specified.
+
     >>> from amazonwish.amazonwish import Search
-    >>> search = Search('begotti', country='us')
+    >>> search = Search('begotti', country='it')
     """
 
     def __init__(self, name, country='us'):
@@ -131,6 +131,8 @@ class Profile():
     The Profile() class is the one responsible for retrieving
     information about a given user, such as name, profile photo,
     existing wishlists and their names and size.
+
+    The country parameter is optional, will default to US if not specified.
 
     >>> from amazonwish.amazonwish import Profile
     >>> person = Profile('3MCYFXCFDH4FA', country='us')
@@ -205,11 +207,13 @@ class Wishlist():
     """
     The Wishlist() class is the main class of Amazon Wishlist as
     it's here where the magic happens. This class will retrieve
-    through XPATH expressions the titles of all items inside a
+    through XPath expressions the titles of all items inside a
     wishlist, their authors and co-writers, price tags, covers
-    (if books) or items picture, list which external sources your
+    (if books) or items picture, listing which external sources your
     wishlist uses and even the total amount necessary if you were
     to buy all the items at once.
+
+    The country parameter is optional, will default to US if not specified.
 
     >>> from amazonwish.amazonwish import Wishlist
     >>> wishlist = Wishlist('3MCYFXCFDH4FA', country='us')
@@ -226,7 +230,7 @@ class Wishlist():
         self._download()
 
     def _download(self):
-        """Retrieves and stores the printable version of the wishlist for later usage."""
+        """Retrieves and stores the printable version of the wishlist for later parsing."""
         query = ['/ref=cm_wl_act_print_o?',
                  '_encoding=UTF8',
                  '&layout=standard-print',
@@ -237,7 +241,7 @@ class Wishlist():
         self.page = _parser(url)
 
     def authors(self):
-        """Returns the authors names and co-writers for every item.
+        """Returns the authors names, co-writers or manufacturers for every item.
 
         >>> authors = wishlist.authors()
         """
@@ -285,7 +289,7 @@ class Wishlist():
         """
         prices = self.page.xpath("//td[@class='pPrice'][not(text()) and not(strong)] | //td[@class='pPrice']/strong[3] | //td[@class='pPrice']/strong[1] | //td[@class='Price']/span/strong//text()")
 
-        # cleanups
+        # cleanups, every store has different price tag extras
         if 'EUR' in self.currency:
             dust = 'EUR'
         elif 'CDN' in self.currency:
@@ -321,7 +325,7 @@ class Wishlist():
     def via(self):
         """
         Returns the sorted original web pages from which the wished item was
-        pulled, only for Universal items not from Amazon directly.
+        pulled, only for Universal items not sold by Amazon directly.
 
         >>> via = wishlist.via()
         """
@@ -363,7 +367,7 @@ class Wishlist():
         return ret
 
     def ideas(self):
-        """Returs a list of ideas to shop for later, as reminders
+        """Returns a list of ideas to shop for later, as reminders
 
         >>> ideas = wishlist.ideas()
         """
@@ -378,8 +382,8 @@ class Wishlist():
 
     def total_expenses(self):
         """
-        Returns the total sum of all prices, without currency symbols,
-        might excluse unavailable items or items without price tags.
+        Returns the total sum of all prices (without currency symbols),
+        not considering unavailable items or items with no price tags.
 
         >>> total = wishlist.total_expenses()
         """
