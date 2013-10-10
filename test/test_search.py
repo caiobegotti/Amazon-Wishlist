@@ -104,17 +104,6 @@ class TestSearchIndia:
         assert is_match_for(WISHLIST, matches[1]) == True
 
 
-class TestSearchUSMultiple:
-
-    def test_search(self):
-        search = Search('begotti', country='us')
-        matches = search.list()
-        assert is_match_for(NAME, matches[0][0]) == True
-        assert is_match_for(WISHLIST, matches[0][1]) == True
-        assert is_match_for(NAME, matches[1][0]) == True
-        assert is_match_for(WISHLIST, matches[1][1]) == True
-
-
 # class TestSearchBrazil:
 #    def test_search(self):
 #        search = Search('caio1982@gmail.com', country='br')
