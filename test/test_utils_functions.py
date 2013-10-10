@@ -1,6 +1,6 @@
 import re
 
-URL = "^http://.*amazon.*/images/.*\..*$"
+URL = "^http://.*amazon.*/images/.*\.[A-Za-z]{3,5}$"
 WISHLIST = "^[0-9A-Z]{10,}$"
 NAME = "^[\w ']{1,}"
 NUMBER = "^\d{1,}"
