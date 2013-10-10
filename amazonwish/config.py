@@ -10,7 +10,7 @@ COUNTRY_CONFIGS = {
     'us': {
         'currency': 'USD',
         'domain': '.com',
-        'symbol': ur'\u0024',
+        'symbol': ur'\u0024'
     },
     'uk': {
         'currency': 'GBP',
@@ -55,17 +55,17 @@ COUNTRY_CONFIGS = {
     'br': {
         'currency': 'BRL',
         'domain': '.com.br',
-        'symbol': ur'\u0024',
+        'symbol': ur'\u0024'
     },
     'mx': {
         'currency': 'MXN',
         'domain': '.com.mx',
-        'symbol': ur'\u0024',
+        'symbol': ur'\u0024'
     },
     'in': {
         'currency': 'INR',
         'domain': '.in',
-        'symbol': ur'\u20B9',
+        'symbol': ur'\u20B9'
     }
 }
 
