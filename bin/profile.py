@@ -71,7 +71,7 @@ def retrieve(userid, store):
         locale.setlocale(locale.LC_MONETARY, 'de_DE.UTF-8')
     else:
         locale.setlocale(locale.LC_MONETARY, 'en_US.UTF-8')
-    print 'In %s your wishlist is worth %s%s' % (wishlist.currency, wishlist.symbol, 
+    print 'In %s your wishlist is worth %s%s' % (wishlist.currency, wishlist.symbol,
                                                  locale.currency(total, grouping=True, symbol=False))
 
     profile = Profile(userid, country=store)
