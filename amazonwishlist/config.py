@@ -70,6 +70,19 @@ COUNTRY_CONFIGS = {
 }
 
 
+def available():
+    """
+    Returns a list with all the domain codes from stores currently supported.
+    """
+    stores = list(COUNTRY_CONFIGS)
+
+    # as of now kindle-only, no wishlists
+    stores.remove('mx')
+    stores.remove('br')
+
+    return stores
+
+
 def country_params(country):
     """
     Returns a big dictionary with all stores' parameters within each own
