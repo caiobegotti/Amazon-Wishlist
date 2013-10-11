@@ -5,8 +5,8 @@ file = open(path.join(path.dirname(__file__), 'README.markdown'), 'r')
 README = file.read()
 file.close()
 
-setup(name = 'amazon-wishlist',
-      version = '0.5.1',
+setup(name = 'amazonwishlist',
+      version = '0.6',
       description = 'Query and visualize Amazon wishlists information (e.g. total cost, items etc)',
       url = 'https://github.com/caio1982/amazon-wishlist',
       install_requires = ['pytest', 'lxml', 'BeautifulSoup'],

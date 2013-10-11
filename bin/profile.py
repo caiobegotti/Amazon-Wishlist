@@ -11,8 +11,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import optparse
 import locale
 
-from amazonwish.amazonwish import Wishlist
-from amazonwish.amazonwish import Profile
+from amazonwishlist.amazonwishlist import Wishlist
+from amazonwishlist.amazonwishlist import Profile
 
 
 def app():

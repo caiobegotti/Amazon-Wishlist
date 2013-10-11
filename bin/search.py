@@ -10,7 +10,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import optparse
 
-from amazonwish.amazonwish import Search
+from amazonwishlist.amazonwishlist import Search
 
 
 def app():
