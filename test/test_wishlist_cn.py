@@ -11,7 +11,7 @@ from test_utils_functions import *
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from amazonwish.amazonwish import Wishlist
+from amazonwishlist.wishlist import Wishlist
 
 
 class TestWishlistChina:
