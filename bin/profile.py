@@ -5,20 +5,20 @@
 
 import sys
 import os.path
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
 import optparse
 import locale
 
-from amazonwishlist.amazonwishlist import Wishlist
-from amazonwishlist.amazonwishlist import Profile
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+from amazonwishlist.wishlist import Wishlist
+from amazonwishlist.profile import Profile
+from amazonwishlist import config
 
 def app():
+    available = "store domains are %s" % (config.available())
     parser = optparse.OptionParser("Usage: %prog [options]")
     parser.add_option("-i", "--id", dest="userid", type="string", help="wishlist ID (i.e. 3MCYFXCFDH4FA)")
-    parser.add_option("-s", "--store", dest="store", type="string", help="store domain [us, uk, ca, fr, es, it, de, jp, cn, br, mx, in]")
+    parser.add_option("-s", "--store", dest="store", type="string", help=available)
 
     (options, args) = parser.parse_args()
     if options.userid is None:

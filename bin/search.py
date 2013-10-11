@@ -10,13 +10,15 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import optparse
 
-from amazonwishlist.amazonwishlist import Search
+from amazonwishlist.search import Search
+from amazonwishlist import config
 
 
 def app():
+    available = "store domains are %s" % (config.available())
     parser = optparse.OptionParser("Usage: %prog [options]")
-    parser.add_option("-q", "--query", dest="query", type="string", help="query someone's info (i.e. caio1982@gmail.com)")
-    parser.add_option("-s", "--store", dest="store", type="string", help="store domain [us, uk, ca, fr, es, it, de, jp, cn, br, mx, in]")
+    parser.add_option("-q", "--query", dest="query", type="string", help="query someone's info (i.e. friend@service.com)")
+    parser.add_option("-s", "--store", dest="store", type="string", help=available)
 
     (options, args) = parser.parse_args()
     if options.query is None:
@@ -27,6 +29,8 @@ def app():
 
 
 def search(query, store):
+    if store is None:
+        store = 'us'
     res = Search(query, country=store)
     matches = res.list()
 
