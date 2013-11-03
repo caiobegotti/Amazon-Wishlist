@@ -190,11 +190,11 @@ class Query():
         >>> total = wishlist.total_expenses()
         """
         tags = []
-        ideas = [ur'Idea',
-                 ur'Idee',
-                 ur'Id\xc3\xa9e',
+        ideas = [u'Idea',
+                 u'Idee',
+                 u'Id\xe9e',
                  ur'\xe8\xa7\x82\xe5\xbf\xb5',
-                 ur'Id\xc3\xa9ia']
+                 u'Id\xa9ia']
         prices = self.prices()
         for tag in prices:
             if tag in ideas:
