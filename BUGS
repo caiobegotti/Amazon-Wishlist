@@ -1,4 +1,4 @@
-Network error without checking if tostring has actually something to parse?
+Encoding error: output conversion failed due to conv error, bytes 0x92 0x20 0x53 0x70
 
 Traceback (most recent call last):
   File "./profile.py", line 92, in <module>
