@@ -11,13 +11,13 @@ from test_utils_functions import *
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from amazonwishlist.profile import Profile
+from amazonwishlist import profile
 
 class TestUS:
 
     def setup_method(self, method):
         global person
-        person = Profile('3MCYFXCFDH4FA', country='us')
+        person = profile.Query('3MCYFXCFDH4FA', country='us')
 
     def test_basic_info(self):
         info = person.basic_info()
@@ -46,7 +46,7 @@ class TestUK:
 
     def setup_method(self, method):
         global person
-        person = Profile('MBI8TEEYJS10', country='uk')
+        person = profile.Query('MBI8TEEYJS10', country='uk')
 
     def test_basic_info(self):
         info = person.basic_info()
@@ -69,7 +69,7 @@ class TestJapan:
 
     def setup_method(self, method):
         global person
-        person = Profile('13RB1XNS2VF62', country='jp')
+        person = profile.Query('13RB1XNS2VF62', country='jp')
 
     def test_basic_info(self):
         info = person.basic_info()
@@ -92,7 +92,7 @@ class TestChina:
 
     def setup_method(self, method):
         global person
-        person = Profile('3BFG9M3CL83QR', country='cn')
+        person = profile.Query('3BFG9M3CL83QR', country='cn')
 
     def test_basic_info(self):
         info = person.basic_info()
@@ -115,7 +115,7 @@ class TestFrance:
 
     def setup_method(self, method):
         global person
-        person = Profile('2POKVB3027QIK', country='fr')
+        person = profile.Query('2POKVB3027QIK', country='fr')
 
     def test_basic_info(self):
         info = person.basic_info()
@@ -138,7 +138,7 @@ class TestCanada:
 
     def setup_method(self, method):
         global person
-        person = Profile('PEK9J1M112UK', country='ca')
+        person = profile.Query('PEK9J1M112UK', country='ca')
 
     def test_basic_info(self):
         info = person.basic_info()
@@ -161,7 +161,7 @@ class TestGermany:
 
     def setup_method(self, method):
         global person
-        person = Profile('2ZPN6SBGBP4X8', country='de')
+        person = profile.Query('2ZPN6SBGBP4X8', country='de')
 
     def test_basic_nfo(self):
         info = person.basic_info()
@@ -184,7 +184,7 @@ class TestItaly:
 
     def setup_method(self, method):
         global person
-        person = Profile('3W1RQNDJTCQC', country='it')
+        person = profile.Query('3W1RQNDJTCQC', country='it')
 
     def test_basic_info(self):
         info = person.basic_info()
@@ -207,7 +207,7 @@ class TestSpain:
 
     def setup_method(self, method):
         global person
-        person = Profile('1LJ10M7BWAICD', country='es')
+        person = profile.Query('1LJ10M7BWAICD', country='es')
 
     def test_basic_info(self):
         info = person.basic_info()

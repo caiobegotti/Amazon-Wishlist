@@ -8,7 +8,7 @@ Python improved version of the old, buggy Perl module WWW::Amazon::Wishlist.
 
 import helpers
 
-class Search():
+class Query():
 
     """
     The Search() class is the one to be used if you don't know an

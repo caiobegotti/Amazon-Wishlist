@@ -11,14 +11,14 @@ from test_utils_functions import *
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from amazonwishlist.search import Search
+from amazonwishlist import search
 
 
 class TestSearchUSMultiple:
 
     def test_search(self):
-        search = Search('begotti', country='us')
-        matches = search.list()
+        res = search.Query('begotti', country='us')
+        matches = res.list()
         assert is_match_for(NAME, matches[0][0]) == True
         assert is_match_for(NAME, matches[1][0]) == True
         assert is_match_for(WISHLIST, matches[0][1]) == True
@@ -28,8 +28,8 @@ class TestSearchUSMultiple:
 class TestSearchCAMultiple:
 
     def test_search(self):
-        search = Search('santos', country='ca')
-        matches = search.list()
+        res = search.Query('santos', country='ca')
+        matches = res.list()
         assert is_match_for(NAME, matches[0][0]) == True
         assert is_match_for(NAME, matches[1][0]) == True
         assert is_match_for(WISHLIST, matches[0][1]) == True
@@ -39,8 +39,8 @@ class TestSearchCAMultiple:
 class TestSearchUKMultiple:
 
     def test_search(self):
-        search = Search('santos', country='uk')
-        matches = search.list()
+        res = search.Query('santos', country='uk')
+        matches = res.list()
         assert is_match_for(NAME, matches[0][0]) == True
         assert is_match_for(NAME, matches[1][0]) == True
         assert is_match_for(WISHLIST, matches[0][1]) == True
@@ -50,8 +50,8 @@ class TestSearchUKMultiple:
 class TestSearchESMultiple:
 
     def test_search(self):
-        search = Search('santos', country='es')
-        matches = search.list()
+        res = search.Query('santos', country='es')
+        matches = res.list()
         assert is_match_for(NAME, matches[0][0]) == True
         assert is_match_for(NAME, matches[1][0]) == True
         assert is_match_for(WISHLIST, matches[0][1]) == True
@@ -61,8 +61,8 @@ class TestSearchESMultiple:
 class TestSearchITMultiple:
 
     def test_search(self):
-        search = Search('santos', country='it')
-        matches = search.list()
+        res = search.Query('santos', country='it')
+        matches = res.list()
         assert is_match_for(NAME, matches[0][0]) == True
         assert is_match_for(NAME, matches[1][0]) == True
         assert is_match_for(WISHLIST, matches[0][1]) == True
@@ -72,8 +72,8 @@ class TestSearchITMultiple:
 class TestSearchFRMultiple:
 
     def test_search(self):
-        search = Search('santos', country='fr')
-        matches = search.list()
+        res = search.Query('santos', country='fr')
+        matches = res.list()
         assert is_match_for(NAME, matches[0][0]) == True
         assert is_match_for(NAME, matches[1][0]) == True
         assert is_match_for(WISHLIST, matches[0][1]) == True
@@ -83,8 +83,8 @@ class TestSearchFRMultiple:
 class TestSearchDEMultiple:
 
     def test_search(self):
-        search = Search('santos', country='de')
-        matches = search.list()
+        res = search.Query('santos', country='de')
+        matches = res.list()
         assert is_match_for(NAME, matches[0][0]) == True
         assert is_match_for(NAME, matches[1][0]) == True
         assert is_match_for(WISHLIST, matches[0][1]) == True
@@ -94,8 +94,8 @@ class TestSearchDEMultiple:
 class TestSearchJPMultiple:
 
     def test_search(self):
-        search = Search('santos', country='jp')
-        matches = search.list()
+        res = search.Query('santos', country='jp')
+        matches = res.list()
         assert is_match_for(NAME, matches[0][0]) == True
         assert is_match_for(NAME, matches[1][0]) == True
         assert is_match_for(WISHLIST, matches[0][1]) == True
@@ -105,8 +105,8 @@ class TestSearchJPMultiple:
 class TestSearchCNMultiple:
 
     def test_search(self):
-        search = Search('santos', country='cn')
-        matches = search.list()
+        res = search.Query('santos', country='cn')
+        matches = res.list()
         assert is_match_for(NAME, matches[0][0]) == True
         assert is_match_for(NAME, matches[1][0]) == True
         assert is_match_for(WISHLIST, matches[0][1]) == True
@@ -116,8 +116,8 @@ class TestSearchCNMultiple:
 class TestSearchINMultiple:
 
     def test_search(self):
-        search = Search('rajesh', country='in')
-        matches = search.list()
+        res = search.Query('rajesh', country='in')
+        matches = res.list()
         assert is_match_for(NAME, matches[0][0]) == True
         assert is_match_for(NAME, matches[1][0]) == True
         assert is_match_for(WISHLIST, matches[0][1]) == True

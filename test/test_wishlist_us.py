@@ -11,21 +11,21 @@ from test_utils_functions import *
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from amazonwishlist.wishlist import Wishlist
+from amazonwishlist import wishlist
 
 
 class TestWishlistUS:
 
     def setup_method(self, method):
-        global wishlist
-        wishlist = Wishlist('3MCYFXCFDH4FA', country='us')
+        global res
+        res = wishlist.Query('3MCYFXCFDH4FA', country='us')
 
     def test_ideas(self):
-        ideas = wishlist.ideas()
+        ideas = res.ideas()
         assert is_match_for(TITLE, ideas[0]) == True
 
     def test_prices(self):
-        prices = wishlist.prices()
+        prices = res.prices()
         for price in prices:
             try:
                 float(price)
@@ -34,23 +34,23 @@ class TestWishlistUS:
                     assert price
 
     def test_via(self):
-        via = wishlist.via()
+        via = res.via()
         assert is_match_for(VIA, via[0]) == True
         assert is_match_for(VIA, via[1]) == True
         assert is_match_for(VIA, via[2]) == True
 
     def test_urls(self):
-        urls = wishlist.urls()
+        urls = res.urls()
         assert is_match_for(DP, urls[5]) == True
         assert is_match_for(DP, urls[25]) == True
         assert is_match_for(DP, urls[50]) == True
 
     def test_currency(self):
-        assert wishlist.currency == 'USD'
-        assert wishlist.symbol == ur'\u0024'
+        assert res.currency == 'USD'
+        assert res.symbol == ur'\u0024'
 
     def test_covers(self):
-        covers = wishlist.covers()
+        covers = res.covers()
         assert is_match_for(URL, covers[0]) == True
         assert is_match_for(URL, covers[55]) == True
         assert is_match_for(URL, covers[175]) == True
@@ -58,7 +58,7 @@ class TestWishlistUS:
         assert is_match_for(URL, covers[225]) == True
 
     def test_titles(self):
-        titles = wishlist.titles()
+        titles = res.titles()
         assert is_match_for(TITLE, titles[0]) == True
         assert is_match_for(TITLE, titles[5]) == True
         assert is_match_for(TITLE, titles[10]) == True
@@ -71,7 +71,7 @@ class TestWishlistUS:
         assert is_match_for(TITLE, titles[200]) == True
 
     def test_authors(self):
-        authors = wishlist.authors()
+        authors = res.authors()
         assert is_match_for(TITLE, authors[0]) == True
         assert is_match_for(TITLE, authors[1]) == True
         assert is_match_for(TITLE, authors[5]) == True

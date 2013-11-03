@@ -10,11 +10,11 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import optparse
 
-from amazonwishlist.search import Search
+from amazonwishlist import search
 from amazonwishlist import config
 
 
-def app():
+def main():
     available = "store domains are %s" % (config.available())
     parser = optparse.OptionParser("Usage: %prog [options]")
     parser.add_option("-q", "--query", dest="query", type="string", help="query someone's info (i.e. friend@service.com)")
@@ -25,17 +25,17 @@ def app():
         print 'You must input at least a valid query string, name or e-mail address, store will default to the main one'
         parser.print_help()
     else:
-        search(options.query, options.store)
+        app(options.query, options.store)
 
 
-def search(query, store):
+def app(query, store):
     if store is None:
         store = 'us'
-    res = Search(query, country=store)
+    res = search.Query(query, country=store)
     matches = res.list()
 
     for match in matches:
         print match
 
 if __name__ == "__main__":
-    app()
+    main()

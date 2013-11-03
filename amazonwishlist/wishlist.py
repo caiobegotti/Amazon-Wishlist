@@ -9,7 +9,7 @@ Python improved version of the old, buggy Perl module WWW::Amazon::Wishlist.
 import helpers
 
 
-class Wishlist():
+class Query():
 
     """
     The Wishlist() class is the main class of Amazon Wishlist as

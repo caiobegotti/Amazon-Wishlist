@@ -10,7 +10,7 @@ Python improved version of the old, buggy Perl module WWW::Amazon::Wishlist.
 import helpers
 
 
-class Profile():
+class Query():
 
     """
     The Profile() class is the one responsible for retrieving

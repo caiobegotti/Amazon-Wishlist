@@ -11,17 +11,17 @@ from test_utils_functions import *
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from amazonwishlist.wishlist import Wishlist
+from amazonwishlist import wishlist
 
 
 class TestWishlistGermany:
 
     def setup_method(self, method):
-        global wishlist
-        wishlist = Wishlist('2ZPN6SBGBP4X8', country='de')
+        global res
+        res = wishlist.Query('2ZPN6SBGBP4X8', country='de')
 
     def test_prices(self):
-        prices = wishlist.prices()
+        prices = res.prices()
         for price in prices:
             try:
                 float(price)
@@ -30,32 +30,32 @@ class TestWishlistGermany:
                     assert price
 
     def test_urls(self):
-        urls = wishlist.urls()
+        urls = res.urls()
         assert is_match_for(DP, urls[0]) == True
         assert is_match_for(DP, urls[1]) == True
         assert is_match_for(DP, urls[2]) == True
         assert is_match_for(DP, urls[3]) == True
 
     def test_currency(self):
-        assert wishlist.currency == 'EUR'
-        assert wishlist.symbol == ur'\u20ac'
+        assert res.currency == 'EUR'
+        assert res.symbol == ur'\u20ac'
 
     def test_covers(self):
-        covers = wishlist.covers()
+        covers = res.covers()
         assert is_match_for(URL, covers[0]) == True
         assert is_match_for(URL, covers[1]) == True
         assert is_match_for(URL, covers[2]) == True
         assert is_match_for(URL, covers[3]) == True
 
     def test_titles(self):
-        titles = wishlist.titles()
+        titles = res.titles()
         assert is_match_for(TITLE, titles[0]) == True
         assert is_match_for(TITLE, titles[1]) == True
         assert is_match_for(TITLE, titles[2]) == True
         assert is_match_for(TITLE, titles[3]) == True
 
     def test_authors(self):
-        authors = wishlist.authors()
+        authors = res.authors()
         assert is_match_for(TITLE, authors[0]) == True
         assert is_match_for(TITLE, authors[1]) == True
         assert is_match_for(TITLE, authors[2]) == True

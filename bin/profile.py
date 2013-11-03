@@ -10,11 +10,11 @@ import locale
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from amazonwishlist.wishlist import Wishlist
-from amazonwishlist.profile import Profile
+from amazonwishlist import wishlist
+from amazonwishlist import profile
 from amazonwishlist import config
 
-def app():
+def main():
     available = "store domains are %s" % (config.available())
     parser = optparse.OptionParser("Usage: %prog [options]")
     parser.add_option("-i", "--id", dest="userid", type="string", help="wishlist ID (i.e. 3MCYFXCFDH4FA)")
@@ -25,68 +25,61 @@ def app():
         print 'At least the wishlist ID is necessary, store will default to the US one'
         parser.print_help()
     else:
-        retrieve(options.userid, options.store)
+        app(options.userid, options.store)
 
 
-def retrieve(userid, store):
-    wishlist = Wishlist(userid, country=store)
+def app(userid, store):
+    data = wishlist.Query(userid, country=store)
 
     print 'Authors or manufacturers:'
-    authors = wishlist.authors()
-    for entry in authors:
+    for entry in data.authors():
         print '\t=' + entry
 
     print 'Items titles:'
-    titles = wishlist.titles()
-    for entry in titles:
+    for entry in data.titles():
         print '\t=' + entry
 
     print 'Items covers:'
-    covers = wishlist.covers()
-    for entry in covers:
+    for entry in data.covers():
         print '\t=' + entry
 
     print 'Items URLs:'
-    urls = wishlist.urls()
-    for entry in urls:
+    for entry in data.urls():
         print '\t=' + entry
 
     print 'Items prices:'
-    prices = wishlist.prices()
-    for entry in prices:
+    for entry in data.prices():
         print '\t=' + entry
 
     print 'Universal wishlist sources:'
-    via = wishlist.via()
-    for entry in via:
+    for entry in data.via():
         print '\t=' + entry
 
-    ideas = wishlist.ideas()
     print 'Ideas you saved for later:'
-    for entry in ideas:
+    for entry in data.ideas():
         print '\t=' + entry
 
-    total = wishlist.total_expenses()
-    if 'EUR' in wishlist.currency or 'BRL' in wishlist.currency:
+    if 'EUR' in data.currency or 'BRL' in data.currency:
         locale.setlocale(locale.LC_MONETARY, 'de_DE.UTF-8')
     else:
         locale.setlocale(locale.LC_MONETARY, 'en_US.UTF-8')
-    print 'In %s your wishlist is worth %s%s' % (wishlist.currency, wishlist.symbol,
-                                                 locale.currency(total, grouping=True, symbol=False))
 
-    profile = Profile(userid, country=store)
+    print 'In %s your wishlist is worth %s%s' % (data.currency,
+                                                 data.symbol,
+                                                 locale.currency(data.total_expenses(),
+                                                                 grouping=True,
+                                                                 symbol=False))
 
-    info = profile.basic_info()
+    data = profile.Query(userid, country=store)
+
     print 'Your name and avatar:'
-    print info
+    print data.basic_info()
 
-    lists = profile.wishlists()
     print 'Your lists data:'
-    print lists
+    print data.wishlists()
 
-    details = profile.wishlists_details()
     print 'Your lists and their sizes:'
-    print details
+    print data.wishlists_details()
 
 if __name__ == "__main__":
-    app()
+    main()
