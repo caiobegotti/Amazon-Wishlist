@@ -6,7 +6,7 @@ README = file.read()
 file.close()
 
 setup(name = 'amazonwishlist',
-      version = '0.6',
+      version = '0.6.1',
       description = 'Query and visualize Amazon wishlists information (e.g. total cost, items etc)',
       url = 'https://github.com/caio1982/amazon-wishlist',
       install_requires = ['pytest', 'lxml', 'BeautifulSoup'],
