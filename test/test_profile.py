@@ -226,28 +226,29 @@ class TestSpain:
         assert is_match_for(NUMBER, sizes[0]) == True
 
 
-# class TestBrazil:
-#    def setup_method(self, method):
-#        global person
-#        person = Profile('', country='br')
-#
-#    def test_basic_info(self):
-#        info = person.basic_info()
-#        assert is_match_for(NAME, info[0]) == True
-#        assert is_match_for(URL, info[1]) == True
-#
-#    def test_wishlists(self):
-#        lists = person.wishlists()
-#        assert is_match_for(NAME, lists[0]) == True
-#
-#    def test_wishlists_details(self):
-#        details = person.wishlists_details()
-#        codes = details[0]
-#        sizes = details[1]
-#        assert is_match_for(WISHLIST, codes[0]) == True
-#        assert is_match_for(NUMBER, sizes[0]) == True
-#
-#
+class TestBrazil:
+
+   def setup_method(self, method):
+       global person
+       person = profile.Query('2S73P06DMTAL6', country='br')
+
+   def test_basic_info(self):
+       info = person.basic_info()
+       assert is_match_for(NAME, info[0]) == True
+       assert is_match_for(URL, info[1]) == True
+
+   def test_wishlists(self):
+       lists = person.wishlists()
+       assert is_match_for(NAME, lists[0]) == True
+
+   def test_wishlists_details(self):
+       details = person.wishlists_details()
+       codes = details[0]
+       sizes = details[1]
+       assert is_match_for(WISHLIST, codes[0]) == True
+       assert is_match_for(NUMBER, sizes[0]) == True
+
+
 # class TestMexico:
 #    def setup_method(self, method):
 #        global person
