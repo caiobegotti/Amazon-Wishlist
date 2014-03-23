@@ -6,7 +6,7 @@
 import sys
 import os.path
 
-# generic test helpers 
+# generic test helpers
 from test_utils_functions import *
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -21,7 +21,7 @@ class TestSearchUS:
         matches = res.list()[0]
         assert is_match_for(NAME, matches[0]) == True
         assert is_match_for(WISHLIST, matches[1]) == True
- 
+
 
 class TestSearchCanada:
 
@@ -104,14 +104,15 @@ class TestSearchIndia:
         assert is_match_for(WISHLIST, matches[1]) == True
 
 
-# class TestSearchBrazil:
-#    def test_search(self):
-#        res = search.Query('caio1982@gmail.com', country='br')
-#        matches = res.list()[0]
-#        assert is_match_for(NAME, matches[0]) == True
-#        assert is_match_for(WISHLIST, matches[1]) == True
-#
-#
+class TestSearchBrazil:
+
+   def test_search(self):
+       res = search.Query('caio1982@gmail.com', country='br')
+       matches = res.list()[0]
+       assert is_match_for(NAME, matches[0]) == True
+       assert is_match_for(WISHLIST, matches[1]) == True
+
+
 # class TestSearchMexico:
 #    def test_search(self):
 #        res = search.Query('caio1982@gmail.com', country='mx')
