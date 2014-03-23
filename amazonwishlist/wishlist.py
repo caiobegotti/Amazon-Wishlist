@@ -96,9 +96,7 @@ class Query():
         if 'EUR' in self.currency:
             dust = 'EUR'
         elif 'CDN' in self.currency:
-            dust = 'CDN' + ur'\u0024'
-        elif 'GBP' in self.currency:
-            dust = ur'\u00a3'
+            dust = 'CDN%s' % self.symbol
         elif 'INR' in self.currency:
             dust = 'Rs. '
         elif 'CNY' in self.currency:
