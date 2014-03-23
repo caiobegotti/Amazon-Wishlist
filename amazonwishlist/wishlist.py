@@ -103,6 +103,8 @@ class Query():
             dust = 'Rs. '
         elif 'CNY' in self.currency:
             dust = u'\xa5'
+        elif 'BRL' in self.currency:
+            dust = 'R%s ' % self.symbol
         elif 'JPY' in self.currency:
             dust = u'\x81\x8f'
         else:

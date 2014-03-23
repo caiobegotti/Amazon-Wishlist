@@ -78,7 +78,6 @@ def available():
 
     # as of now kindle-only, no wishlists
     stores.remove('mx')
-    stores.remove('br')
 
     return stores
 
