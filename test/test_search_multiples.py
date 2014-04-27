@@ -6,7 +6,7 @@
 import sys
 import os.path
 
-# generic test helpers 
+# generic test helpers
 from test_utils_functions import *
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -124,20 +124,22 @@ class TestSearchINMultiple:
         assert is_match_for(WISHLIST, matches[1][1]) == True
 
 
-# class TestSearchBrazilMultiple:
-#    def test_search(self):
-#        search = Search('caio1982@gmail.com', country='br')
-#        matches = search.list()[0]
-#        assert is_match_for(NAME, matches[0][0]) == True
-#        assert is_match_for(NAME, matches[1][0]) == True
-#        assert is_match_for(WISHLIST, matches[0][1]) == True
-#        assert is_match_for(WISHLIST, matches[1][1]) == True
-#
-#
+class TestSearchBrazilMultiple:
+
+   def test_search(self):
+       res = search.Query('silva', country='br')
+       matches = res.list()
+       assert is_match_for(NAME, matches[0][0]) == True
+       assert is_match_for(NAME, matches[1][0]) == True
+       assert is_match_for(WISHLIST, matches[0][1]) == True
+       assert is_match_for(WISHLIST, matches[1][1]) == True
+
+
 # class TestSearchMexicoMultiple:
+#
 #    def test_search(self):
-#        search = Search('caio1982@gmail.com', country='mx')
-#        matches = search.list()[0]
+#        search = search.Query('caio1982@gmail.com', country='mx')
+#        matches = search.list()
 #        assert is_match_for(NAME, matches[0][0]) == True
 #        assert is_match_for(NAME, matches[1][0]) == True
 #        assert is_match_for(WISHLIST, matches[0][1]) == True
