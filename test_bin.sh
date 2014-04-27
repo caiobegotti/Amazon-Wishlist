@@ -12,8 +12,8 @@ bin/profile.py -i 3W1RQNDJTCQC -s it
 bin/profile.py -i MBI8TEEYJS10 -s uk
 bin/profile.py -i PEK9J1M112UK -s ca
 bin/profile.py -i ZVKVJQHOBAT2 -s in
+bin/profile.py -i 2S73P06DMTAL6 -s br
 # bin/profile.py -i -s mx
-# bin/profile.py -i -s br
 
 bin/search.py -q begotti -s jp
 bin/search.py -q begotti -s es
@@ -25,5 +25,5 @@ bin/search.py -q begotti -s it
 bin/search.py -q begotti -s uk
 bin/search.py -q begotti -s ca
 bin/search.py -q begotti -s in
+bin/search.py -q begotti -s br
 # bin/search.py -q begotti -s mx
-# bin/search.py -q begotti -s br
