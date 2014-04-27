@@ -10,7 +10,7 @@ VIA = "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?"
 TITLE = "^[\w\W\s]+$|^$"
 
 def is_match_for(pattern, string):
-    regex = re.compile(pattern)
+    regex = re.compile(pattern, re.UNICODE)
     if regex.search(string):
         return True
     else:
