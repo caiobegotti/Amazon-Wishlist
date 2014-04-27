@@ -78,7 +78,7 @@ class TestJapan:
 
     def test_wishlists(self):
         lists = person.wishlists()
-        assert lists[0] == u'\u65b0\u3057\u3044\u307b\u3057\u3044\u7269\u200b\u30ea\u30b9\u30c8'
+        assert is_match_for(NAME, lists[0]) == True
 
     def test_wishlists_details(self):
         details = person.wishlists_details()
@@ -101,7 +101,7 @@ class TestChina:
 
     def test_wishlists(self):
         lists = person.wishlists()
-        assert lists[0] == u'\u5fc3\u613f\u5355'
+        assert is_match_for(NAME, lists[0]) == True
 
     def test_wishlists_details(self):
         details = person.wishlists_details()
