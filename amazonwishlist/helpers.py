@@ -34,7 +34,7 @@ def _parser(url):
         raise IOError("Failed to download page data, check your connection")
 
     try:
-        stringfied = tostring(page)
+        stringfied = tostring(page, method='html', encoding='utf-8')
     except:
         raise BaseException("LXML failed to serialise the ElementTree into a string!")
 
